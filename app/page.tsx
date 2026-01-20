@@ -1,65 +1,195 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-blue-950">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">V</span>
+              </div>
+              <span className="text-white font-bold text-xl">VisionX</span>
+            </div>
+            
+            {/* Menu Items */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">Products</a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">Solutions</a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">Resources</a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors">Community</a>
+            </div>
+            
+            {/* Action Buttons */}
+            <div className="flex items-center space-x-4">
+              <button className="hidden md:block text-gray-300 hover:text-white transition-colors">Sign In</button>
+              <button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2">
+                <span>Get Started</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </nav>
+
+      {/* Hero Section */}
+      <main className="pt-32 pb-20 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="space-y-8">
+              <div className="inline-block px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full">
+                <span className="text-purple-300 text-sm font-medium">✨ Next-Gen Visual Platform</span>
+              </div>
+              
+              <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight">
+                Intelligent
+                <span className="block bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  Computer Vision
+                </span>
+                Platform
+              </h1>
+              
+              <p className="text-xl text-gray-300 leading-relaxed max-w-xl">
+                Transform your visual data into actionable insights with our cutting-edge AI-powered annotation and analysis tools. Built for teams of any scale.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="group px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl transition-all duration-300 font-semibold flex items-center justify-center space-x-2 shadow-lg shadow-purple-500/50">
+                  <span>Start Free Trial</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </button>
+                
+                <button className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all duration-300 font-semibold border border-white/20 backdrop-blur-sm">
+                  Watch Demo
+                </button>
+              </div>
+              
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
+                <div>
+                  <div className="text-3xl font-bold text-white">50K+</div>
+                  <div className="text-sm text-gray-400">Active Users</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-white">1M+</div>
+                  <div className="text-sm text-gray-400">Annotations</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-white">99.9%</div>
+                  <div className="text-sm text-gray-400">Uptime</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Content - Demo Visual */}
+            <div className="relative">
+              <div className="relative bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10 shadow-2xl">
+                {/* Toolbar */}
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 backdrop-blur-md rounded-xl p-3 space-y-4 border border-white/10">
+                  <button className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                  </button>
+                  <button className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                  </button>
+                  <button className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                    </svg>
+                  </button>
+                </div>
+                
+                {/* Main Content Area */}
+                <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-xl aspect-[4/3] relative overflow-hidden border border-white/10">
+                  {/* Placeholder for demo image/visualization */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative w-full h-full bg-gradient-to-br from-purple-600/20 to-blue-600/20">
+                      {/* Simulated bounding boxes */}
+                      <div className="absolute top-[20%] left-[15%] w-[30%] h-[40%] border-2 border-purple-400 rounded-lg">
+                        <div className="absolute -top-6 left-0 bg-purple-500 px-2 py-1 rounded text-xs text-white">Object 1</div>
+                      </div>
+                      <div className="absolute top-[40%] right-[20%] w-[35%] h-[35%] border-2 border-blue-400 rounded-lg">
+                        <div className="absolute -top-6 left-0 bg-blue-500 px-2 py-1 rounded text-xs text-white">Object 2</div>
+                      </div>
+                      
+                      {/* Grid overlay effect */}
+                      <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Bottom control bar */}
+                <div className="mt-4 flex items-center justify-between bg-black/40 backdrop-blur-md rounded-lg px-4 py-3 border border-white/10">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-300">Processing...</span>
+                  </div>
+                  <div className="text-sm text-gray-400">Frame 1 / 100</div>
+                </div>
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-purple-500/30 rounded-full blur-2xl animate-pulse"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-500/30 rounded-full blur-2xl animate-pulse delay-1000"></div>
+            </div>
+          </div>
         </div>
       </main>
+
+      {/* Features Section */}
+      <section className="py-20 px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-white mb-4">Powerful Features</h2>
+            <p className="text-gray-400 text-lg">Everything you need for professional computer vision work</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Lightning Fast</h3>
+              <p className="text-gray-400">Process thousands of images with optimized performance and real-time collaboration.</p>
+            </div>
+            
+            {/* Feature 2 */}
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Secure & Private</h3>
+              <p className="text-gray-400">Enterprise-grade security with data encryption and compliance standards.</p>
+            </div>
+            
+            {/* Feature 3 */}
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Smart Annotation</h3>
+              <p className="text-gray-400">AI-assisted tools that speed up your workflow with intelligent suggestions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
