@@ -1,101 +1,80 @@
+import Footer from "@/components/Footer";
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#fcfaf7] text-stone-900">
-      {/* Hero Section */}
-      <main className="pt-32 pb-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+      {/* Slide 1 - Hero */}
+      <section className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 right-20 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-stone-200/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto w-full z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Content */}
             <div className="space-y-8">
-              <div className="inline-block px-4 py-2 bg-orange-100 border border-orange-200 rounded-full">
+              <div className="inline-block mt-8 px-4 py-2 bg-orange-100 border border-orange-200 rounded-full">
                 <span className="text-orange-700 text-sm font-medium">✨ Next-Gen Visual Platform</span>
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-bold leading-tight animate-fade-in-up">
-                <span className="bg-[#E66700] bg-clip-text text-transparent animate-pulse">
+              <h1 className="text-6xl lg:text-8xl font-bold leading-tight text-stone-900">
+                <span className="bg-gradient-to-r from-[#E66700] via-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
                   Intelligent Computer Vision Platform
                 </span>
               </h1>
 
-              <p className="text-xl text-stone-600 leading-relaxed max-w-xl">
-                Transform your visual data into actionable insights with our cutting-edge AI-powered annotation and analysis tools. Built for teams of any scale.
+              <p className="text-2xl text-stone-600 leading-relaxed max-w-xl">
+                Transform your visual data into actionable insights with our cutting-edge AI-powered annotation and analysis tools.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="group w-full sm:w-52 h-14 px-6 bg-gradient-to-r from-[#FF7300] to-[#F1A222] hover:from-[#E66700] hover:to-[#D9911C] hover:scale-105 active:scale-95 text-white rounded-xl transition-all duration-300 font-semibold flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <button className="group w-full sm:w-56 h-16 px-8 bg-gradient-to-r from-[#FF7300] to-[#F1A222] hover:scale-105 active:scale-95 text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex items-center justify-center gap-2 shadow-xl shadow-orange-500/30 animate-hue">
                   <span>Start Free Trial</span>
-                  <svg
-                    className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
+                  <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </button>
 
-                <button className="w-full sm:w-52 h-14 px-6 bg-stone-100 hover:bg-stone-200 hover:scale-105 active:scale-95 text-stone-900 rounded-xl transition-all duration-300 font-semibold border border-stone-200 backdrop-blur-sm flex items-center justify-center">
+                <button className="w-full sm:w-56 h-16 px-8 bg-white hover:bg-stone-50 hover:scale-105 active:scale-95 text-stone-900 rounded-2xl transition-all duration-300 font-semibold text-lg border-2 border-stone-200 backdrop-blur-sm">
                   Watch Demo
                 </button>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-stone-200">
-                <div>
-                  <div className="text-3xl font-bold text-stone-900">50K+</div>
-                  <div className="text-sm text-stone-500">Active Users</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-stone-900">1M+</div>
-                  <div className="text-sm text-stone-500">Annotations</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-stone-900">99.9%</div>
-                  <div className="text-sm text-stone-500">Uptime</div>
-                </div>
               </div>
             </div>
 
             {/* Right Content - Demo Visual */}
             <div className="relative">
-              <div className="relative bg-white rounded-2xl p-8 border border-stone-200 shadow-xl">
+              <div className="relative bg-white rounded-3xl p-8 border-2 border-stone-200 shadow-2xl">
                 {/* Toolbar */}
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-md rounded-xl p-3 space-y-4 border border-stone-200 shadow-lg">
-                  <button className="w-10 h-10 bg-[#FF7300] rounded-lg flex items-center justify-center hover:bg-[#E66700] transition-colors">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/95 backdrop-blur-xl rounded-2xl p-4 space-y-4 border-2 border-stone-200 shadow-xl">
+                  <button className="w-12 h-12 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-xl flex items-center justify-center hover:scale-110 transition-transform shadow-lg">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                     </svg>
                   </button>
-                  <button className="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center hover:bg-stone-200 transition-colors">
-                    <svg className="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button className="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center hover:bg-stone-200 hover:scale-110 transition-all">
+                    <svg className="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                     </svg>
                   </button>
-                  <button className="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center hover:bg-stone-200 transition-colors">
-                    <svg className="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button className="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center hover:bg-stone-200 hover:scale-110 transition-all">
+                    <svg className="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                     </svg>
                   </button>
                 </div>
 
                 {/* Main Content Area */}
-                <div className="bg-stone-100 rounded-xl aspect-[4/3] relative overflow-hidden border border-stone-200">
-                  {/* Placeholder for demo image/visualization */}
+                <div className="bg-stone-100 rounded-2xl aspect-[4/3] relative overflow-hidden border-2 border-stone-200">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative w-full h-full bg-gradient-to-br from-purple-600/20 to-blue-600/20">
-                      {/* Simulated bounding boxes */}
-                      <div className="absolute top-[20%] left-[15%] w-[30%] h-[40%] border-2 border-[#FF7300] rounded-lg">
-                        <div className="absolute -top-6 left-0 bg-[#FF7300] px-2 py-1 rounded text-xs text-white">Object 1</div>
+                      {/* Simulated bounding boxes with animation */}
+                      <div className="absolute top-[20%] left-[15%] w-[30%] h-[40%] border-3 border-[#FF7300] rounded-2xl animate-pulse">
+                        <div className="absolute -top-8 left-0 bg-[#FF7300] px-3 py-1.5 rounded-lg text-sm text-white font-semibold shadow-lg">Object 1</div>
                       </div>
-                      <div className="absolute top-[40%] right-[20%] w-[35%] h-[35%] border-2 border-[#F1A222] rounded-lg">
-                        <div className="absolute -top-6 left-0 bg-[#F1A222] px-2 py-1 rounded text-xs text-white">Object 2</div>
+                      <div className="absolute top-[40%] right-[20%] w-[35%] h-[35%] border-3 border-[#F1A222] rounded-2xl animate-pulse" style={{ animationDelay: '0.3s' }}>
+                        <div className="absolute -top-8 left-0 bg-[#F1A222] px-3 py-1.5 rounded-lg text-sm text-white font-semibold shadow-lg">Object 2</div>
                       </div>
-
                       {/* Grid overlay effect */}
                       <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
                     </div>
@@ -103,65 +82,243 @@ export default function Home() {
                 </div>
 
                 {/* Bottom control bar */}
-                <div className="mt-4 flex items-center justify-between bg-stone-50 rounded-lg px-4 py-3 border border-stone-200">
+                <div className="mt-6 flex items-center justify-between bg-stone-50 rounded-xl px-6 py-4 border-2 border-stone-200">
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-stone-600">Processing...</span>
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
+                    <span className="text-sm font-medium text-stone-700">Processing...</span>
                   </div>
-                  <div className="text-sm text-stone-500">Frame 1 / 100</div>
+                  <div className="text-sm font-medium text-stone-500">Frame 1 / 100</div>
                 </div>
               </div>
-
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-orange-200/50 rounded-full blur-2xl animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-stone-200/50 rounded-full blur-2xl animate-pulse delay-1000"></div>
             </div>
           </div>
         </div>
-      </main>
 
-      {/* Features Section */}
-      <section className="py-20 px-6 lg:px-8 bg-[#f5f2ed]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-stone-900 mb-4">Powerful Features</h2>
-            <p className="text-stone-600 text-lg">Everything you need for professional computer vision work</p>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+          <span className="text-sm text-stone-500 font-medium">Scroll to explore</span>
+          <svg className="w-6 h-6 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </section>
+
+      {/* Slide 2 - Advanced Capabilities */}
+      <section className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden pt-16">
+        <div className="max-w-7xl mx-auto w-full text-center">
+          <div className="mb-10">
+            <h2 className="text-5xl lg:text-6xl font-bold text-stone-900 mb-3">
+              <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">Powerful</span> Features,
+              <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent"> Advanced</span> Capabilities
+            </h2>
+            <p className="text-stone-600 text-xl font-medium">Everything you need for professional computer vision projects</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-white border border-stone-200 rounded-xl p-6 hover:shadow-xl transition-all duration-300 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Capability 4 */}
+            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-stone-900 mb-2">Lightning Fast</h3>
-              <p className="text-stone-600">Process thousands of images with optimized performance and real-time collaboration.</p>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Lightning Fast</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Process thousands of images with optimized performance and real-time collaboration.</p>
             </div>
 
-            {/* Feature 2 */}
-            <div className="bg-white border border-stone-200 rounded-xl p-6 hover:shadow-xl transition-all duration-300 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Capability 5 */}
+            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-stone-900 mb-2">Secure & Private</h3>
-              <p className="text-stone-600">Enterprise-grade security with data encryption and compliance standards.</p>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Secure & Private</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Enterprise-grade security with data encryption and compliance standards for all data.</p>
             </div>
 
-            {/* Feature 3 */}
-            <div className="bg-white border border-stone-200 rounded-xl p-6 hover:shadow-xl transition-all duration-300 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Capability 6 */}
+            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-stone-900 mb-2">Smart Annotation</h3>
-              <p className="text-stone-600">AI-assisted tools that speed up your workflow with intelligent suggestions.</p>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Smart Annotation</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">AI-assisted tools that speed up your workflow with intelligent suggestions and auto-labeling.</p>
+            </div>
+
+            {/* Capability 1 */}
+            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Real-time Analytics</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Monitor and analyze visual data streams in real-time with ultra-low latency processing.</p>
+            </div>
+
+            {/* Capability 2 */}
+            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Multi-Modal Support</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Seamlessly handle image, video, and 3D point cloud data within a single unified environment.</p>
+            </div>
+
+            {/* Capability 3 */}
+            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Global Scalability</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Architected to support massive datasets and high-concurrency workflows for teams worldwide.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Slide 3 - Stats Impact */}
+      <section className="h-screen snap-start bg-stone-900 flex items-center justify-center px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-transparent"></div>
+        <div className="max-w-6xl mx-auto text-center z-10">
+          <h2 className="text-6xl lg:text-8xl font-bold text-white mb-20">
+            Trusted by teams
+            <br />
+            <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
+              worldwide
+            </span>
+          </h2>
+
+          <div className="grid grid-cols-3 gap-16">
+            <div className="group">
+              <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">50K+</div>
+              <div className="text-xl text-stone-400 font-medium">Active Users</div>
+            </div>
+            <div className="group">
+              <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">1M+</div>
+              <div className="text-xl text-stone-400 font-medium">Annotations</div>
+            </div>
+            <div className="group">
+              <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">99.9%</div>
+              <div className="text-xl text-stone-400 font-medium">Uptime</div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Slide 4 - CTA */}
+      <section className="h-screen snap-start bg-gradient-to-br from-[#FF7300] via-[#E66700] to-[#F1A222] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        </div>
+
+        <div className="max-w-5xl mx-auto text-center z-10">
+          <h2 className="text-7xl lg:text-9xl font-bold text-white mb-8 leading-tight">
+            Ready to
+            <br />
+            get started?
+          </h2>
+          <p className="text-2xl lg:text-3xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Join thousands of teams transforming their visual data into insights
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button className="group w-full sm:w-64 h-20 px-10 bg-white hover:bg-stone-50 hover:scale-110 active:scale-95 text-stone-900 rounded-2xl transition-all duration-300 font-bold text-xl flex items-center justify-center gap-2 shadow-2xl">
+              <span>Start Free Trial</span>
+              <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+            <button className="w-full sm:w-64 h-20 px-10 bg-white/10 hover:bg-white/20 backdrop-blur-lg hover:scale-110 active:scale-95 text-white rounded-2xl transition-all duration-300 font-bold text-xl border-2 border-white/30">
+              Contact Sales
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Slide 5 - Partners + Footer */}
+      <section className="h-screen snap-start bg-[#f5f2ed] flex flex-col pt-16 overflow-hidden">
+        <div className="flex-grow flex items-center justify-center px-6 lg:px-8 overflow-hidden">
+          <div className="max-w-7xl mx-auto w-full py-16 text-center">
+
+            {/* Title */}
+            <div className="mb-14">
+              <h2 className="text-5xl lg:text-6xl font-bold text-stone-900 mb-4">
+                Trusted by{" "}
+                <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
+                  leading partners
+                </span>
+              </h2>
+              <p className="text-stone-600 text-xl font-medium">
+                Powering the next generation of computer vision worldwide
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mb-14" />
+
+            {/* Primary Partners */}
+            <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-20">
+              {[
+                "nvidia",
+                "intel",
+                "apple",
+                "google",
+                "microsoft",
+              ].map((logo) => (
+                <div key={logo} className="group flex items-center justify-center">
+                  <img
+                    src={`/logos/${logo}.svg`}
+                    alt={logo}
+                    className="
+                      h-10 lg:h-12
+                      opacity-60 grayscale
+                      transition-all duration-500
+                      group-hover:opacity-100
+                      group-hover:grayscale-0
+                      group-hover:scale-110
+                    "
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Secondary Partners */}
+            <div className="mt-20 flex flex-wrap justify-center items-center gap-12 lg:gap-16">
+              {[
+                "yaskawa",
+                "siemens",
+                "abb",
+                "bosch",
+              ].map((logo) => (
+                <img
+                  key={logo}
+                  src={`/logos/${logo}.svg`}
+                  alt={logo}
+                  className="
+                    h-8 lg:h-9
+                    opacity-40 grayscale
+                    transition-all duration-500
+                    hover:opacity-90
+                    hover:grayscale-0
+                  "
+                />
+              ))}
+            </div>
+
+          </div>
+        </div>
+
+        <div className="mt-auto">
+          <Footer />
         </div>
       </section>
     </div>

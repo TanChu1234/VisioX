@@ -27,6 +27,8 @@ export default function Header() {
 
     const aboutLinks = [
         { name: "Company", href: "/about/company" },
+        { name: "Blog", href: "/about/blog" },
+        { name: "Contact", href: "/about/contact" },
     ];
 
     const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);

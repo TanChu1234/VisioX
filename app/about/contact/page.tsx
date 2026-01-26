@@ -9,16 +9,16 @@ export default function Page() {
             <span className="text-orange-700 text-sm font-medium">VisionX Solutions</span>
           </div>
           <h1 className="text-5xl font-bold text-stone-900 mb-8 leading-tight">
-            Retail & Commerce
+            Contact
           </h1>
           <div className="bg-white rounded-2xl p-8 border border-stone-200 shadow-xl">
             <p className="text-xl text-stone-600 leading-relaxed max-w-3xl">
-              Explore our Retail & Commerce solutions. VisionX provides cutting-edge AI-powered tools tailored for professional computer vision workflows.
+              Explore our Contact solutions. VisionX provides cutting-edge AI-powered tools tailored for professional computer vision workflows.
             </p>
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">
                 <h3 className="text-xl font-bold text-stone-900 mb-4">Overview</h3>
-                <p className="text-stone-600">Comprehensive features designed to optimize your Retail & Commerce processes with high efficiency and accuracy.</p>
+                <p className="text-stone-600">Comprehensive features designed to optimize your Contact processes with high efficiency and accuracy.</p>
               </div>
               <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">
                 <h3 className="text-xl font-bold text-stone-900 mb-4">Key Benefits</h3>
