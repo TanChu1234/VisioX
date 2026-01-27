@@ -37,9 +37,9 @@ export default function Home() {
       title: "Robotics",
       src: "/demo/robotics.png",
       boxes: [
-        { id: 1, label: "baseball", top: "15%", left: "2%", width: "10%", height: "10%", color: "#FBBF24" },
-        { id: 2, label: "baseball", top: "70%", left: "35%", width: "30%", height: "20%", color: "#FBBF24" },
-        { id: 3, label: "baseball", top: "65%", left: "2%", width: "20%", height: "50%", color: "#FBBF24" }
+        { id: 1, label: "Baseball", top: "48%", left: "51%", width: "17%", height: "23%", color: "#FBBF24" },
+        { id: 2, label: "Baseball", top: "68%", left: "42%", width: "19%", height: "24%", color: "#FBBF24" },
+        { id: 3, label: "Baseball", top: "60%", left: "2%", width: "18%", height: "20%", color: "#FBBF24" }
       ]
     },
     {
@@ -47,8 +47,16 @@ export default function Home() {
       title: "Manufacturing",
       src: "/demo/manufacturing.png",
       boxes: [
-        { id: 1, label: "Assembly Line", top: "30%", left: "5%", width: "90%", height: "40%", color: "#EC4899" },
-        { id: 2, label: "Quality Check", top: "20%", left: "40%", width: "20%", height: "20%", color: "#10B981" }
+        { id: 1, label: "Blister Pack", top: "7%", left: "14%", width: "73%", height: "84%", color: "#4866ecff" },
+        { id: 2, label: "OK", top: "20%", left: "18%", width: "11%", height: "7%", color: "#10B981" },
+        { id: 3, label: "OK", top: "34%", left: "18%", width: "11%", height: "7%", color: "#10B981" },
+        { id: 4, label: "OK", top: "48%", left: "18.7%", width: "11%", height: "7%", color: "#10B981" },
+        { id: 5, label: "OK", top: "62.5%", left: "18.5%", width: "11%", height: "7%", color: "#10B981" },
+        { id: 6, label: "OK", top: "76%", left: "19%", width: "11%", height: "7%", color: "#10B981" },
+        { id: 7, label: "OK", top: "76%", left: "36%", width: "11%", height: "7%", color: "#10B981" },
+        { id: 8, label: "OK", top: "19%", left: "35%", width: "11%", height: "7%", color: "#10B981" },
+        { id: 9, label: "OK", top: "19%", left: "50%", width: "11%", height: "7%", color: "#10B981" },
+
       ]
     },
     {
@@ -507,7 +515,7 @@ export default function Home() {
             </div>
 
             {/* View Applications Button */}
-            <div className="mt-16 flex justify-center">
+            <div className="mt-20 flex justify-center">
               <button className="group w-full sm:w-70 h-16 px-8 
                                   bg-gradient-to-r from-orange-600 to-orange-400 
                                   hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
