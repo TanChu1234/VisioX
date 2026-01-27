@@ -58,7 +58,7 @@ export default function Home() {
                 <span className="text-orange-700 text-sm font-medium">✨ Next-Gen Visual Platform</span>
               </div>
 
-              <h1 className="text-6xl lg:text-8xl font-bold leading-tight text-stone-900">
+              <h1 className="text-6xl lg:text-7xl font-bold leading-tight text-stone-900">
                 <span className="bg-gradient-to-r from-[#E66700] via-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
                   Intelligent Computer Vision Platform
                 </span>
@@ -85,34 +85,16 @@ export default function Home() {
             {/* Right Content - Demo Visual */}
             <div className="relative">
               <div className="relative bg-white rounded-3xl p-8 border-2 border-stone-200 shadow-2xl">
-                {/* Toolbar */}
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/95 backdrop-blur-xl rounded-2xl p-4 space-y-4 border-2 border-stone-200 shadow-xl">
-                  <button className="w-12 h-12 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-xl flex items-center justify-center hover:scale-110 transition-transform shadow-lg">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                    </svg>
-                  </button>
-                  <button className="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center hover:bg-stone-200 hover:scale-110 transition-all">
-                    <svg className="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                    </svg>
-                  </button>
-                  <button className="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center hover:bg-stone-200 hover:scale-110 transition-all">
-                    <svg className="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                    </svg>
-                  </button>
-                </div>
 
                 {/* Main Content Area */}
                 <div className="bg-stone-100 rounded-2xl aspect-[4/3] relative overflow-hidden border-2 border-stone-200">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative w-full h-full bg-gradient-to-br from-purple-600/20 to-blue-600/20">
                       {/* Simulated bounding boxes with animation */}
-                      <div className="absolute top-[20%] left-[15%] w-[30%] h-[40%] border-3 border-[#FF7300] rounded-2xl animate-pulse">
+                      <div className="absolute top-[20%] left-[10%] w-[30%] h-[40%] border-3 border-[#FF7300] rounded-2xl animate-pulse">
                         <div className="absolute -top-8 left-0 bg-[#FF7300] px-3 py-1.5 rounded-lg text-sm text-white font-semibold shadow-lg">Object 1</div>
                       </div>
-                      <div className="absolute top-[40%] right-[20%] w-[35%] h-[35%] border-3 border-[#F1A222] rounded-2xl animate-pulse" style={{ animationDelay: '0.3s' }}>
+                      <div className="absolute top-[40%] right-[10%] w-[35%] h-[35%] border-3 border-[#F1A222] rounded-2xl animate-pulse" style={{ animationDelay: '0.3s' }}>
                         <div className="absolute -top-8 left-0 bg-[#F1A222] px-3 py-1.5 rounded-lg text-sm text-white font-semibold shadow-lg">Object 2</div>
                       </div>
                       {/* Grid overlay effect */}
@@ -125,7 +107,7 @@ export default function Home() {
                 <div className="mt-6 flex items-center justify-between bg-stone-50 rounded-xl px-6 py-4 border-2 border-stone-200">
                   <div className="flex items-center space-x-3">
                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
-                    <span className="text-sm font-medium text-stone-700">Processing...</span>
+                    <span className="text-sm font-medium text-stone-700">Annotation</span>
                   </div>
                   <div className="text-sm font-medium text-stone-500">Frame 1 / 100</div>
                 </div>

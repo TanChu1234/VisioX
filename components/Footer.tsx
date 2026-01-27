@@ -1,16 +1,16 @@
 export default function Footer() {
     return (
-        <footer className="bg-[#f5f2ed] border-t border-stone-200 pt-8 pb-4 px-6 lg:px-8 ml-14">
+        <footer className="bg-[#f5f2ed] border-t border-stone-200 pt-8 pb-4 px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-6">
                     <div className="col-span-2 lg:col-span-2">
                         <div className="flex items-center space-x-3 mb-6">
                             <img
-                                src="/logos/visiox.png"
+                                src="/logos/visiox_text.png"
                                 alt="VisioX Logo"
-                                className="h-10 w-auto object-contain"
+                                className="h-12 w-auto object-contain"
                             />
-                            <span className="text-stone-900 font-bold text-2xl tracking-tight">VisioX</span>
+                            {/* <span className="text-stone-900 font-bold text-2xl tracking-tight">VisioX</span> */}
                         </div>
                         <p className="text-stone-600 max-w-sm mb-4 text-sm">
                             The leading intelligent computer vision platform for high-quality data annotation and visual analysis.

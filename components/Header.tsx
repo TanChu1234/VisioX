@@ -51,12 +51,20 @@ export default function Header() {
                             transition={{ delay: 0.2, duration: 0.5 }}
                             className="flex items-center space-x-3 cursor-pointer"
                         >
-                            <img
-                                src="/logos/visiox.png"
+                            <motion.img
+                                src="/logos/text.png"
                                 alt="VisioX Logo"
-                                className="h-10 w-auto object-contain"
+                                className="h-15 w-auto object-contain"
+                                whileHover={{
+                                    scale: 1.08,
+                                }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 15,
+                                }}
                             />
-                            <span className="text-stone-900 font-bold text-2xl tracking-tight">VisioX</span>
+                            {/* <span className="text-orange-500 font-bold text-2xl tracking-tight">VisioX</span> */}
                         </motion.div>
                     </Link>
 
