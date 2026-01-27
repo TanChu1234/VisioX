@@ -49,12 +49,14 @@ export default function Header() {
                             initial={{ x: -20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: 0.2, duration: 0.5 }}
-                            className="flex items-center space-x-2 cursor-pointer"
+                            className="flex items-center space-x-3 cursor-pointer"
                         >
-                            <div className="w-8 h-8 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-xl">V</span>
-                            </div>
-                            <span className="text-stone-900 font-bold text-xl">VisioX</span>
+                            <img
+                                src="/logos/visiox.png"
+                                alt="VisioX Logo"
+                                className="h-10 w-auto object-contain"
+                            />
+                            <span className="text-stone-900 font-bold text-2xl tracking-tight">VisioX</span>
                         </motion.div>
                     </Link>
 

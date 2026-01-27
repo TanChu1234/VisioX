@@ -40,11 +40,26 @@ function getTemplate(title) {
         '            </p>\n' +
         '            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">\n' +
         '              <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">\n' +
-        '                <h3 className="text-xl font-bold text-stone-900 mb-4">Overview</h3>\n' +
+        '                <div className="flex items-center gap-3 mb-4">\n' +
+        '                  <div className="w-8 h-8 bg-orange-100 text-[#FF7300] rounded-lg flex items-center justify-center">\n' +
+        '                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n' +
+        '                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />\n' +
+        '                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />\n' +
+        '                    </svg>\n' +
+        '                  </div>\n' +
+        '                  <h3 className="text-xl font-bold text-stone-900">Overview</h3>\n' +
+        '                </div>\n' +
         '                <p className="text-stone-600">Comprehensive features designed to optimize your ' + title + ' processes with high efficiency and accuracy.</p>\n' +
         '              </div>\n' +
         '              <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">\n' +
-        '                <h3 className="text-xl font-bold text-stone-900 mb-4">Key Benefits</h3>\n' +
+        '                <div className="flex items-center gap-3 mb-4">\n' +
+        '                  <div className="w-8 h-8 bg-orange-100 text-[#FF7300] rounded-lg flex items-center justify-center">\n' +
+        '                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n' +
+        '                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />\n' +
+        '                    </svg>\n' +
+        '                  </div>\n' +
+        '                  <h3 className="text-xl font-bold text-stone-900">Key Benefits</h3>\n' +
+        '                </div>\n' +
         '                <p className="text-stone-600">Scalable architecture, seamless integration, and advanced AI models tailored for your specific needs.</p>\n' +
         '              </div>\n' +
         '            </div>\n' +

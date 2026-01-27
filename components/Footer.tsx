@@ -4,11 +4,13 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-6">
                     <div className="col-span-2 lg:col-span-2">
-                        <div className="flex items-center space-x-2 mb-4">
-                            <div className="w-8 h-8 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-xl">V</span>
-                            </div>
-                            <span className="text-stone-900 font-bold text-xl">VisioX</span>
+                        <div className="flex items-center space-x-3 mb-6">
+                            <img
+                                src="/logos/visiox.png"
+                                alt="VisioX Logo"
+                                className="h-10 w-auto object-contain"
+                            />
+                            <span className="text-stone-900 font-bold text-2xl tracking-tight">VisioX</span>
                         </div>
                         <p className="text-stone-600 max-w-sm mb-4 text-sm">
                             The leading intelligent computer vision platform for high-quality data annotation and visual analysis.
