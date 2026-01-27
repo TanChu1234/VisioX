@@ -1,11 +1,75 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [demoIndex, setDemoIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const DEMO_IMAGES = [
+    {
+      id: 1,
+      title: "Surveillance",
+      src: "/demo/surveillance.png",
+      boxes: [
+        { id: 1, label: "OK", top: "28%", left: "19%", width: "16%", height: "44%", color: "#00ff4cff" },
+        { id: 2, label: "No PPE", top: "30%", left: "80%", width: "13%", height: "42%", color: "#ff0000ff" }
+      ]
+    },
+    {
+      id: 2,
+      title: "Agriculture",
+      src: "/demo/agriculture.png",
+      boxes: [
+        { id: 1, label: "Apple", top: "4%", left: "22.5%", width: "7%", height: "9%", color: "#4ADE80" },
+        { id: 2, label: "Apple", top: "12%", left: "3%", width: "9%", height: "13%", color: "#4ADE80" },
+        { id: 3, label: "Apple", top: "42%", left: "7%", width: "9%", height: "12%", color: "#4ADE80" },
+        { id: 4, label: "Apple", top: "30%", left: "30%", width: "7%", height: "12%", color: "#4ADE80" },
+        { id: 5, label: "Apple", top: "12%", left: "59%", width: "9%", height: "12%", color: "#4ADE80" },
+        { id: 6, label: "Apple", top: "57%", left: "2%", width: "8%", height: "11%", color: "#4ADE80" },
+      ]
+    },
+    {
+      id: 3,
+      title: "Robotics",
+      src: "/demo/robotics.png",
+      boxes: [
+        { id: 1, label: "baseball", top: "15%", left: "2%", width: "10%", height: "10%", color: "#FBBF24" },
+        { id: 2, label: "baseball", top: "70%", left: "35%", width: "30%", height: "20%", color: "#FBBF24" },
+        { id: 3, label: "baseball", top: "65%", left: "2%", width: "20%", height: "50%", color: "#FBBF24" }
+      ]
+    },
+    {
+      id: 4,
+      title: "Manufacturing",
+      src: "/demo/manufacturing.png",
+      boxes: [
+        { id: 1, label: "Assembly Line", top: "30%", left: "5%", width: "90%", height: "40%", color: "#EC4899" },
+        { id: 2, label: "Quality Check", top: "20%", left: "40%", width: "20%", height: "20%", color: "#10B981" }
+      ]
+    },
+    {
+      id: 5,
+      title: "Transportation",
+      src: "/demo/transportation.png",
+      boxes: [
+        { id: 1, label: "Truck", top: "35%", left: "20%", width: "25%", height: "30%", color: "#3B82F6" },
+        { id: 2, label: "Traffic Light", top: "10%", left: "75%", width: "8%", height: "15%", color: "#EF4444" },
+        { id: 3, label: "Pedestrian", top: "60%", left: "55%", width: "10%", height: "20%", color: "#F59E0B" }
+      ]
+    }
+  ];
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setDemoIndex((prev) => (prev + 1) % DEMO_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [DEMO_IMAGES.length, isPaused]);
 
   const slideNames = ["Hero", "Features", "Impact", "CTA", "Partners"];
 
@@ -50,10 +114,10 @@ export default function Home() {
           <div className="absolute bottom-20 left-20 w-80 h-80 bg-stone-200/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
 
-        <div className="max-w-7xl mx-auto w-full z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-screen-2xl mx-auto w-full z-10 px-4 lg:px-12">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
             {/* Left Content */}
-            <div className="space-y-8">
+            <div className="lg:col-span-5 space-y-8">
               <div className="inline-block mt-8 px-4 py-2 bg-orange-100 border border-orange-200 rounded-full">
                 <span className="text-orange-700 text-sm font-medium">✨ Next-Gen Visual Platform</span>
               </div>
@@ -69,47 +133,116 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="group w-full sm:w-56 h-16 px-8 bg-gradient-to-r from-[#FF7300] to-[#F1A222] hover:scale-105 active:scale-95 text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex items-center justify-center gap-2 shadow-xl shadow-orange-500/30 animate-hue">
+                <button className="group w-full sm:w-56 h-16 px-8 
+                                  bg-gradient-to-r from-orange-600 to-orange-400 
+                                  hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
+                                  text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
+                                  items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
                   <span>Start Free Trial</span>
                   <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </button>
 
-                <button className="w-full sm:w-56 h-16 px-8 bg-white hover:bg-stone-50 hover:scale-105 active:scale-95 text-stone-900 rounded-2xl transition-all duration-300 font-semibold text-lg border-2 border-stone-200 backdrop-blur-sm">
+                <button className="w-full sm:w-56 h-16 px-8 bg-white hover:bg-gray-100 hover:scale-105 active:scale-95 text-stone-900 rounded-2xl transition-all duration-300 font-semibold text-lg border-2 border-stone-200 backdrop-blur-sm">
                   Watch Demo
                 </button>
               </div>
             </div>
 
             {/* Right Content - Demo Visual */}
-            <div className="relative">
-              <div className="relative bg-white rounded-3xl p-8 border-2 border-stone-200 shadow-2xl">
+            <div className="lg:col-span-7 relative">
+              <div className="relative bg-white rounded-3xl p-6 border-2 border-stone-200 shadow-2xl flex gap-6">
 
-                {/* Main Content Area */}
-                <div className="bg-stone-100 rounded-2xl aspect-[4/3] relative overflow-hidden border-2 border-stone-200">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative w-full h-full bg-gradient-to-br from-purple-600/20 to-blue-600/20">
-                      {/* Simulated bounding boxes with animation */}
-                      <div className="absolute top-[20%] left-[10%] w-[30%] h-[40%] border-3 border-[#FF7300] rounded-2xl animate-pulse">
-                        <div className="absolute -top-8 left-0 bg-[#FF7300] px-3 py-1.5 rounded-lg text-sm text-white font-semibold shadow-lg">Object 1</div>
-                      </div>
-                      <div className="absolute top-[40%] right-[10%] w-[35%] h-[35%] border-3 border-[#F1A222] rounded-2xl animate-pulse" style={{ animationDelay: '0.3s' }}>
-                        <div className="absolute -top-8 left-0 bg-[#F1A222] px-3 py-1.5 rounded-lg text-sm text-white font-semibold shadow-lg">Object 2</div>
-                      </div>
-                      {/* Grid overlay effect */}
-                      <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                    </div>
-                  </div>
+                {/* Side Navigation Images */}
+                <div className="hidden md:flex flex-col gap-3 justify-center border-r border-stone-100 pr-4">
+                  {DEMO_IMAGES.map((img, idx) => (
+                    <button
+                      key={img.id}
+                      onClick={() => setDemoIndex(idx)}
+                      className={`relative w-14 h-14 rounded-xl overflow-hidden border-2 transition-all duration-200 group ${idx === demoIndex
+                        ? 'border-orange-500 scale-110 shadow-lg shadow-orange-200'
+                        : 'border-stone-100 opacity-40 hover:opacity-100 hover:border-stone-300'
+                        }`}
+                    >
+                      <img src={img.src} alt={img.title} className="w-full h-full object-cover" />
+                      <div className={`absolute inset-0 bg-orange-500/10 transition-opacity ${idx === demoIndex ? 'opacity-100' : 'opacity-0'}`} />
+
+                      {/* Tooltip */}
+                      <span className="absolute left-full ml-4 px-2 py-1 bg-stone-800 text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
+                        {img.title}
+                      </span>
+                    </button>
+                  ))}
                 </div>
 
-                {/* Bottom control bar */}
-                <div className="mt-6 flex items-center justify-between bg-stone-50 rounded-xl px-6 py-4 border-2 border-stone-200">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
-                    <span className="text-sm font-medium text-stone-700">Annotation</span>
+                <div className="flex-1">
+                  {/* Main Content Area */}
+                  <div
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                    className="bg-stone-100 rounded-2xl aspect-[4/3] relative overflow-hidden border-2 border-stone-200 group/demo"
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={demoIndex}
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="absolute inset-0"
+                      >
+                        <img
+                          src={DEMO_IMAGES[demoIndex].src}
+                          alt={DEMO_IMAGES[demoIndex].title}
+                          className="w-full h-full object-cover"
+                        />
+
+                        {/* Overlay Gradient for better label readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+
+                        {DEMO_IMAGES[demoIndex].boxes.map((box, bIdx) => (
+                          <motion.div
+                            key={box.id}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: 0.3 + (bIdx * 0.1), type: "spring", stiffness: 100 }}
+                            className="absolute border-2 rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.2)]"
+                            style={{
+                              top: box.top,
+                              left: box.left,
+                              width: box.width,
+                              height: box.height,
+                              borderColor: box.color,
+                              backgroundColor: `${box.color}10`
+                            }}
+                          >
+                            <div
+                              className="absolute -top-7 left-0 px-2 py-1 rounded text-[10px] text-white font-bold shadow-lg backdrop-blur-sm"
+                              style={{ backgroundColor: box.color }}
+                            >
+                              {box.label}
+                            </div>
+
+                            {/* Corner accents */}
+                            <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-white/50" />
+                            <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-white/50" />
+                          </motion.div>
+                        ))}
+
+                        {/* Scanline effect */}
+                        <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(139,92,246,0.05)_50%,transparent_100%)] bg-[size:100%_4px] h-20 w-full animate-scan pointer-events-none" />
+                      </motion.div>
+                    </AnimatePresence>
+
+                    {/* Image Title Overlay */}
+                    <div className="absolute bottom-4 left-4 z-10 flex items-center gap-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                      <span className="text-white text-xs font-bold tracking-wider uppercase drop-shadow-md">
+                        {DEMO_IMAGES[demoIndex].title}
+                      </span>
+                    </div>
                   </div>
-                  <div className="text-sm font-medium text-stone-500">Frame 1 / 100</div>
                 </div>
               </div>
             </div>
@@ -285,7 +418,7 @@ export default function Home() {
             Join thousands of teams transforming their visual data into insights
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="group w-full sm:w-64 h-20 px-10 bg-white hover:bg-stone-50 hover:scale-110 active:scale-95 text-stone-900 rounded-2xl transition-all duration-300 font-bold text-xl flex items-center justify-center gap-2 shadow-2xl">
+            <button className="group w-full sm:w-64 h-20 px-10 bg-white hover:bg-stone-50 hover:scale-110 text-stone-900 rounded-2xl transition-all duration-300 font-bold text-xl flex items-center justify-center gap-2 shadow-2xl">
               <span>Start Free Trial</span>
               <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -375,7 +508,11 @@ export default function Home() {
 
             {/* View Applications Button */}
             <div className="mt-16 flex justify-center">
-              <button className="group w-full sm:w-70 h-16 px-8 bg-gradient-to-r from-[#FF7300] to-[#F1A222] hover:scale-105 active:scale-95 text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex items-center justify-center gap-2 shadow-xl shadow-orange-500/30 animate-hue">
+              <button className="group w-full sm:w-70 h-16 px-8 
+                                  bg-gradient-to-r from-orange-600 to-orange-400 
+                                  hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
+                                  text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
+                                  items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
                 <span>Explore Applications</span>
                 <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />

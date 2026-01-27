@@ -160,8 +160,8 @@ export default function Header() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-gradient-to-r from-[#FF7300] to-[#F1A222]
-                                        hover:from-[#E66700] hover:to-[#D9911C]
+                            className="bg-gradient-to-r from-orange-600 to-orange-400
+                                        hover:from-orange-400 hover:to-orange-300 
                                         text-white px-3 py-2 rounded-lg
                                         transition-all duration-300
                                         flex items-center space-x-1

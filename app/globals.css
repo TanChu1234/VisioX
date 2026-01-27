@@ -33,4 +33,18 @@ body {
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
   }
+
+  @keyframes scan {
+    from {
+      transform: translateY(-100%);
+    }
+
+    to {
+      transform: translateY(400%);
+    }
+  }
+
+  .animate-scan {
+    animation: scan 3s linear infinite;
+  }
 }
