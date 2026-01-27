@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VisionX - Intelligent Computer Vision Platform",
+  title: "VisioX - Intelligent Computer Vision Platform",
   description: "Transform your visual data into actionable insights with cutting-edge AI-powered annotation tools",
 };
 

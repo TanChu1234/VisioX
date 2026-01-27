@@ -29,14 +29,14 @@ function getTemplate(title) {
         '      <main className="flex-grow pt-32 pb-20 px-6 lg:px-8">\n' +
         '        <div className="max-w-7xl mx-auto">\n' +
         '          <div className="inline-block px-4 py-2 bg-orange-100 border border-orange-200 rounded-full mb-8">\n' +
-        '            <span className="text-orange-700 text-sm font-medium">VisionX Solutions</span>\n' +
+        '            <span className="text-orange-700 text-sm font-medium">VisioX Solutions</span>\n' +
         '          </div>\n' +
         '          <h1 className="text-5xl font-bold text-stone-900 mb-8 leading-tight">\n' +
         '            ' + title + '\n' +
         '          </h1>\n' +
         '          <div className="bg-white rounded-2xl p-8 border border-stone-200 shadow-xl">\n' +
         '            <p className="text-xl text-stone-600 leading-relaxed max-w-3xl">\n' +
-        '              Explore our ' + title + ' solutions. VisionX provides cutting-edge AI-powered tools tailored for professional computer vision workflows.\n' +
+        '              Explore our ' + title + ' solutions. VisioX provides cutting-edge AI-powered tools tailored for professional computer vision workflows.\n' +
         '            </p>\n' +
         '            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">\n' +
         '              <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">\n' +

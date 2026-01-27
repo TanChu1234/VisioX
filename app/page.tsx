@@ -1,10 +1,50 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const slideNames = ["Hero", "Features", "Impact", "CTA", "Partners"];
+
   return (
-    <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+    <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth relative">
+      {/* Side Navigation Dots */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-6 p-4 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-2xl">
+        <div className="absolute top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-orange-500/30 to-transparent" />
+        {slideNames.map((name, index) => (
+          <div key={index} className="relative group">
+            <button
+              onClick={() => {
+                const element = document.getElementById(`slide-${index}`);
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className={`w-3 h-3 rounded-full transition-all duration-500 relative z-10 ${activeSlide === index
+                ? 'bg-gradient-to-r from-[#FF7300] to-[#F1A222] scale-150 shadow-[0_0_15px_rgba(255,115,0,0.5)]'
+                : 'bg-stone-500 scale-100 hover:bg-orange-400'
+                }`}
+              aria-label={`Go to slide ${name}`}
+            />
+            <span className="absolute right-10 top-1/2 -translate-y-1/2 px-3 py-1 bg-stone-900 text-white text-[10px] font-bold tracking-widest uppercase rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-white/10">
+              {name}
+            </span>
+          </div>
+        ))}
+      </div>
+
       {/* Slide 1 - Hero */}
-      <section className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden">
+      <motion.section
+        id="slide-0"
+        onViewportEnter={() => setActiveSlide(0)}
+        layout
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.5 }}
+        className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
+      >
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 right-20 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-20 left-20 w-80 h-80 bg-stone-200/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
@@ -101,10 +141,19 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </div>
-      </section>
+      </motion.section>
 
       {/* Slide 2 - Advanced Capabilities */}
-      <section className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden pt-16">
+      <motion.section
+        id="slide-1"
+        onViewportEnter={() => setActiveSlide(1)}
+        layout
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.5 }}
+        className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden pt-16"
+      >
         <div className="max-w-7xl mx-auto w-full text-center">
           <div className="mb-10">
             <h2 className="text-5xl lg:text-6xl font-bold text-stone-900 mb-3">
@@ -183,39 +232,62 @@ export default function Home() {
 
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Slide 3 - Stats Impact */}
-      <section className="h-screen snap-start bg-stone-900 flex items-center justify-center px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-transparent"></div>
-        <div className="max-w-6xl mx-auto text-center z-10">
-          <h2 className="text-6xl lg:text-8xl font-bold text-white mb-20">
-            Trusted by teams
-            <br />
-            <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
-              worldwide
-            </span>
-          </h2>
+      {/* Slide 3 - Stats Impact & Applications Content */}
+      <motion.section
+        id="slide-2"
+        onViewportEnter={() => setActiveSlide(2)}
+        layout
+        initial={{ opacity: 0, scale: 1.05 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.5 }}
+        className="h-screen snap-start bg-stone-900 flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-900/40 via-stone-900 to-black"></div>
+        <div className="max-w-7xl mx-auto text-center z-10 w-full px-4">
+          <div className="mb-16">
+            <h2 className="text-6xl lg:text-8xl font-bold text-white mb-6">
+              Global Scale,
+              <br />
+              <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
+                Proven Impact
+              </span>
+            </h2>
+            <p className="text-xl text-stone-400 max-w-2xl mx-auto font-medium">
+              Join 50K+ innovators transforming industries with our high-fidelity vision intelligence.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-3 gap-16">
-            <div className="group">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20 px-8">
+            <div className="group p-10 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 hover:bg-white/10 hover:border-orange-500/50 transition-all duration-500">
               <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">50K+</div>
-              <div className="text-xl text-stone-400 font-medium">Active Users</div>
+              <div className="text-lg text-orange-500/80 font-bold tracking-widest uppercase">Global Users</div>
             </div>
-            <div className="group">
+            <div className="group p-10 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 hover:bg-white/10 hover:border-orange-500/50 transition-all duration-500">
               <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">1M+</div>
-              <div className="text-xl text-stone-400 font-medium">Annotations</div>
+              <div className="text-lg text-orange-500/80 font-bold tracking-widest uppercase">Annotations</div>
             </div>
-            <div className="group">
-              <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">99.9%</div>
-              <div className="text-xl text-stone-400 font-medium">Uptime</div>
+            <div className="group p-10 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 hover:bg-white/10 hover:border-orange-500/50 transition-all duration-500">
+              <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">99.9</div>
+              <div className="text-lg text-orange-500/80 font-bold tracking-widest uppercase">% Uptime</div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Slide 4 - CTA */}
-      <section className="h-screen snap-start bg-gradient-to-br from-[#FF7300] via-[#E66700] to-[#F1A222] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden">
+      <motion.section
+        id="slide-3"
+        onViewportEnter={() => setActiveSlide(3)}
+        layout
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.5 }}
+        className="h-screen snap-start bg-gradient-to-br from-[#FF7300] via-[#E66700] to-[#F1A222] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
+      >
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
@@ -242,15 +314,23 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Slide 5 - Partners + Footer */}
-      <section className="h-screen snap-start bg-[#f5f2ed] flex flex-col pt-16 overflow-hidden">
+      <motion.section
+        id="slide-4"
+        onViewportEnter={() => setActiveSlide(4)}
+        layout
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.4 }}
+        className="h-screen snap-start bg-[#f5f2ed] flex flex-col pt-8 overflow-hidden"
+      >
         <div className="flex-grow flex items-center justify-center px-6 lg:px-8 overflow-hidden">
-          <div className="max-w-7xl mx-auto w-full py-16 text-center">
+          <div className="max-w-7xl mx-auto w-full py-8 text-center">
 
             {/* Title */}
-            <div className="mb-14">
+            <div className="mb-8">
               <h2 className="text-5xl lg:text-6xl font-bold text-stone-900 mb-4">
                 Trusted by{" "}
                 <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
@@ -293,25 +373,32 @@ export default function Home() {
 
             {/* Secondary Partners */}
             <div className="mt-20 flex flex-wrap justify-center items-center gap-12 lg:gap-16">
-              {[
-                "yaskawa",
-                "siemens",
-                "abb",
-                "bosch",
-              ].map((logo) => (
-                <img
-                  key={logo}
-                  src={`/logos/${logo}.svg`}
-                  alt={logo}
-                  className="
-                    h-8 lg:h-9
-                    opacity-40 grayscale
-                    transition-all duration-500
-                    hover:opacity-90
-                    hover:grayscale-0
-                  "
-                />
+              {["yaskawa", "siemens", "abb", "bosch"].map((logo) => (
+                <div key={logo} className="group flex items-center justify-center">
+                  <img
+                    src={`/logos/${logo}.svg`}
+                    alt={logo}
+                    className="
+                      h-8 lg:h-9
+                      opacity-40 grayscale
+                      transition-all duration-500
+                      group-hover:opacity-90
+                      group-hover:grayscale-0
+                      group-hover:scale-110
+                    "
+                  />
+                </div>
               ))}
+            </div>
+
+            {/* View Applications Button */}
+            <div className="mt-16 flex justify-center">
+              <button className="group w-full sm:w-70 h-16 px-8 bg-gradient-to-r from-[#FF7300] to-[#F1A222] hover:scale-105 active:scale-95 text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex items-center justify-center gap-2 shadow-xl shadow-orange-500/30 animate-hue">
+                <span>Explore Applications</span>
+                <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </button>
             </div>
 
           </div>
@@ -320,7 +407,7 @@ export default function Home() {
         <div className="mt-auto">
           <Footer />
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

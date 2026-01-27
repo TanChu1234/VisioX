@@ -54,7 +54,7 @@ export default function Header() {
                             <div className="w-8 h-8 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-lg flex items-center justify-center">
                                 <span className="text-white font-bold text-xl">V</span>
                             </div>
-                            <span className="text-stone-900 font-bold text-xl">VisionX</span>
+                            <span className="text-stone-900 font-bold text-xl">VisioX</span>
                         </motion.div>
                     </Link>
 
