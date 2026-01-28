@@ -11,7 +11,7 @@ import {
     ArrowRight,
     Maximize,
     Move,
-    CheckDouble
+    CheckCircle
 } from "lucide-react";
 
 const capabilities = [
