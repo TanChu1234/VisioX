@@ -99,10 +99,12 @@ export default function Header() {
 
                         {/* Solution Dropdown */}
                         <div className="relative group" onMouseEnter={() => setActiveDropdown('solution')}>
-                            <span className="text-stone-600 hover:text-[#FF7300] transition-colors cursor-pointer font-medium flex items-center gap-1">
-                                Solution
-                                <svg className={`w-4 h-4 transition-transform ${activeDropdown === 'solution' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                            </span>
+                            <Link href="/solutions">
+                                <span className="text-stone-600 group-hover:text-[#FF7300] transition-colors cursor-pointer font-medium flex items-center gap-1">
+                                    Solution
+                                    <svg className={`w-4 h-4 transition-transform ${activeDropdown === 'solution' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                </span>
+                            </Link>
                             {activeDropdown === 'solution' && (
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}

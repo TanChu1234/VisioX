@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -24,12 +25,12 @@ export default function Home() {
       title: "Agriculture",
       src: "/demo/agriculture.png",
       boxes: [
-        { id: 1, label: "Apple", top: "4%", left: "22.5%", width: "7%", height: "9%", color: "#4ADE80" },
-        { id: 2, label: "Apple", top: "12%", left: "3%", width: "9%", height: "13%", color: "#4ADE80" },
-        { id: 3, label: "Apple", top: "42%", left: "7%", width: "9%", height: "12%", color: "#4ADE80" },
-        { id: 4, label: "Apple", top: "30%", left: "30%", width: "7%", height: "12%", color: "#4ADE80" },
-        { id: 5, label: "Apple", top: "12%", left: "59%", width: "9%", height: "12%", color: "#4ADE80" },
-        { id: 6, label: "Apple", top: "57%", left: "2%", width: "8%", height: "11%", color: "#4ADE80" },
+        { id: 1, label: "Apple", top: "4%", left: "22.5%", width: "7%", height: "9%", color: "#00ff4cff" },
+        { id: 2, label: "Apple", top: "12%", left: "3%", width: "9%", height: "13%", color: "#00ff4cff" },
+        { id: 3, label: "Apple", top: "42%", left: "7%", width: "9%", height: "12%", color: "#00ff4cff" },
+        { id: 4, label: "Apple", top: "30%", left: "30%", width: "7%", height: "12%", color: "#00ff4cff" },
+        { id: 5, label: "Apple", top: "12%", left: "59%", width: "9%", height: "12%", color: "#00ff4cff" },
+        { id: 6, label: "Apple", top: "57%", left: "2%", width: "8%", height: "11%", color: "#00ff4cff" },
       ]
     },
     {
@@ -48,15 +49,22 @@ export default function Home() {
       src: "/demo/manufacturing.png",
       boxes: [
         { id: 1, label: "Blister Pack", top: "7%", left: "14%", width: "73%", height: "84%", color: "#4866ecff" },
-        { id: 2, label: "OK", top: "20%", left: "18%", width: "11%", height: "7%", color: "#10B981" },
-        { id: 3, label: "OK", top: "34%", left: "18%", width: "11%", height: "7%", color: "#10B981" },
-        { id: 4, label: "OK", top: "48%", left: "18.7%", width: "11%", height: "7%", color: "#10B981" },
-        { id: 5, label: "OK", top: "62.5%", left: "18.5%", width: "11%", height: "7%", color: "#10B981" },
-        { id: 6, label: "OK", top: "76%", left: "19%", width: "11%", height: "7%", color: "#10B981" },
-        { id: 7, label: "OK", top: "76%", left: "36%", width: "11%", height: "7%", color: "#10B981" },
-        { id: 8, label: "OK", top: "19%", left: "35%", width: "11%", height: "7%", color: "#10B981" },
-        { id: 9, label: "OK", top: "19%", left: "50%", width: "11%", height: "7%", color: "#10B981" },
-
+        { id: 2, label: "OK", top: "20%", left: "18%", width: "11%", height: "7%", color: "#00ff4cff" },
+        { id: 3, label: "OK", top: "34%", left: "18%", width: "11%", height: "7%", color: "#00ff4cff" },
+        { id: 4, label: "OK", top: "48%", left: "18.7%", width: "11%", height: "7%", color: "#00ff4cff" },
+        { id: 5, label: "OK", top: "62.5%", left: "18.5%", width: "11%", height: "7%", color: "#00ff4cff" },
+        { id: 6, label: "OK", top: "76%", left: "19%", width: "11%", height: "7%", color: "#00ff4cff" },
+        { id: 7, label: "OK", top: "76%", left: "36%", width: "11%", height: "7%", color: "#00ff4cff" },
+        { id: 8, label: "OK", top: "19%", left: "35%", width: "11%", height: "7%", color: "#00ff4cff" },
+        { id: 9, label: "OK", top: "19%", left: "52.6%", width: "10.5%", height: "7%", color: "#00ff4cff" },
+        { id: 10, label: "OK", top: "33.5%", left: "52.6%", width: "10.5%", height: "7%", color: "#00ff4cff" },
+        { id: 11, label: "OK", top: "61.5%", left: "52.6%", width: "10.5%", height: "7%", color: "#00ff4cff" },
+        { id: 12, label: "OK", top: "75.7%", left: "52.8%", width: "10.5%", height: "7%", color: "#00ff4cff" },
+        { id: 13, label: "OK", top: "19%", left: "70%", width: "10.5%", height: "7%", color: "#00ff4cff" },
+        { id: 14, label: "OK", top: "33%", left: "70.2%", width: "10.5%", height: "7%", color: "#00ff4cff" },
+        { id: 15, label: "OK", top: "47.3%", left: "70.5%", width: "10.5%", height: "7%", color: "#00ff4cff" },
+        { id: 16, label: "OK", top: "61.6%", left: "70.5%", width: "10.5%", height: "7%", color: "#00ff4cff" },
+        { id: 17, label: "OK", top: "75.8%", left: "70.5%", width: "10.5%", height: "7%", color: "#00ff4cff" },
       ]
     },
     {
@@ -64,9 +72,13 @@ export default function Home() {
       title: "Transportation",
       src: "/demo/transportation.png",
       boxes: [
-        { id: 1, label: "Truck", top: "35%", left: "20%", width: "25%", height: "30%", color: "#3B82F6" },
-        { id: 2, label: "Traffic Light", top: "10%", left: "75%", width: "8%", height: "15%", color: "#EF4444" },
-        { id: 3, label: "Pedestrian", top: "60%", left: "55%", width: "10%", height: "20%", color: "#F59E0B" }
+        { id: 1, label: "Car", top: "44%", left: "16%", width: "10%", height: "8%", color: "#f63b3bff" },
+        { id: 2, label: "Car", top: "50%", left: "32.7%", width: "8%", height: "11.5%", color: "#f63b3bff" },
+        { id: 3, label: "Car", top: "69%", left: "56%", width: "13.5%", height: "17%", color: "#f63b3bff" },
+        { id: 4, label: "Car", top: "68%", left: "70.5%", width: "15%", height: "20%", color: "#f63b3bff" },
+        { id: 5, label: "Car", top: "10%", left: "75%", width: "8%", height: "15%", color: "#f63b3bff" },
+        { id: 6, label: "Car", top: "10%", left: "75%", width: "8%", height: "15%", color: "#f63b3bff" },
+
       ]
     }
   ];
@@ -516,16 +528,18 @@ export default function Home() {
 
             {/* View Applications Button */}
             <div className="mt-20 flex justify-center">
-              <button className="group w-full sm:w-70 h-16 px-8 
-                                  bg-gradient-to-r from-orange-600 to-orange-400 
-                                  hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
-                                  text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
-                                  items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
-                <span>Explore Applications</span>
-                <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </button>
+              <Link href="/solutions">
+                <button className="group w-full sm:w-70 h-16 px-8 
+                                    bg-gradient-to-r from-orange-600 to-orange-400 
+                                    hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
+                                    text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
+                                    items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
+                  <span>Explore Applications</span>
+                  <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </button>
+              </Link>
             </div>
 
           </div>
