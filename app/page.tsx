@@ -488,18 +488,28 @@ export default function Home() {
                 "apple",
                 "google",
                 "microsoft",
-              ].map((logo) => (
+              ].map((logo, index) => (
                 <div key={logo} className="group flex items-center justify-center">
-                  <img
+                  <motion.img
                     src={`/logos/${logo}.svg`}
                     alt={logo}
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      opacity: [0.6, 1, 0.6],
+                      filter: ["grayscale(100%)", "grayscale(0%)", "grayscale(100%)"],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: index * 1,
+                      ease: "easeInOut",
+                    }}
                     className="
                       h-10 lg:h-12
-                      opacity-60 grayscale
                       transition-all duration-500
+                      group-hover:scale-110
                       group-hover:opacity-100
                       group-hover:grayscale-0
-                      group-hover:scale-110
                     "
                   />
                 </div>
@@ -508,18 +518,28 @@ export default function Home() {
 
             {/* Secondary Partners */}
             <div className="mt-20 flex flex-wrap justify-center items-center gap-12 lg:gap-16">
-              {["yaskawa", "siemens", "abb", "bosch"].map((logo) => (
+              {["yaskawa", "siemens", "abb", "bosch"].map((logo, index) => (
                 <div key={logo} className="group flex items-center justify-center">
-                  <img
+                  <motion.img
                     src={`/logos/${logo}.svg`}
                     alt={logo}
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      opacity: [0.4, 0.9, 0.4],
+                      filter: ["grayscale(100%)", "grayscale(0%)", "grayscale(100%)"],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: (index + 5) * 0.8,
+                      ease: "easeInOut",
+                    }}
                     className="
                       h-8 lg:h-9
-                      opacity-40 grayscale
                       transition-all duration-500
+                      group-hover:scale-110
                       group-hover:opacity-90
                       group-hover:grayscale-0
-                      group-hover:scale-110
                     "
                   />
                 </div>
