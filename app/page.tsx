@@ -97,7 +97,7 @@ export default function Home() {
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth relative">
       {/* Side Navigation Dots */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-6 p-4 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-2xl">
-        <div className="absolute top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-orange-500/30 to-transparent" />
+        <div className="absolute top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-orange-600/30 to-transparent" />
         {slideNames.map((name, index) => (
           <div key={index} className="relative group">
             <button
@@ -106,8 +106,8 @@ export default function Home() {
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
               className={`w-3 h-3 rounded-full transition-all duration-500 relative z-10 ${activeSlide === index
-                ? 'bg-gradient-to-r from-[#FF7300] to-[#F1A222] scale-150 shadow-[0_0_15px_rgba(255,115,0,0.5)]'
-                : 'bg-stone-500 scale-100 hover:bg-orange-400'
+                ? 'bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 scale-150 shadow-[0_0_15px_rgba(234,88,12,0.5)]'
+                : 'bg-stone-500 scale-100 hover:bg-orange-500'
                 }`}
               aria-label={`Go to slide ${name}`}
             />
@@ -130,7 +130,7 @@ export default function Home() {
         className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
       >
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-20 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-20 right-20 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-20 left-20 w-80 h-80 bg-stone-200/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
 
@@ -139,11 +139,11 @@ export default function Home() {
             {/* Left Content */}
             <div className="lg:col-span-5 space-y-8">
               <div className="inline-block mt-8 px-4 py-2 bg-orange-100 border border-orange-200 rounded-full">
-                <span className="text-orange-700 text-sm font-medium">✨ Next-Gen Visual Platform</span>
+                <span className="text-orange-600 text-sm font-medium">✨ Next-Gen Visual Platform</span>
               </div>
 
               <h1 className="text-6xl lg:text-7xl font-bold leading-tight text-stone-900">
-                <span className="bg-gradient-to-r from-[#E66700] via-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
                   Intelligent Computer Vision Platform
                 </span>
               </h1>
@@ -152,19 +152,11 @@ export default function Home() {
                 Transform your visual data into actionable insights with our cutting-edge AI-powered annotation and analysis tools.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="group w-full sm:w-56 h-16 px-8 
-                                  bg-gradient-to-r from-orange-600 to-orange-400 
-                                  hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
-                                  text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
-                                  items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
-                  <span>Start Free Trial</span>
-                  <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
+              <div className="flex flex-col sm:flex-row gap-6 pt-4">
+                <button className="px-12 py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 hover:scale-105 active:scale-95 text-white rounded-full transition-all duration-300 font-bold shadow-xl shadow-orange-600/30 text-center">
+                  Start Free Trial
                 </button>
-
-                <button className="w-full sm:w-56 h-16 px-8 bg-white hover:bg-gray-100 hover:scale-105 active:scale-95 text-stone-900 rounded-2xl transition-all duration-300 font-semibold text-lg border-2 border-stone-200 backdrop-blur-sm">
+                <button className="px-12 py-5 bg-white hover:bg-stone-50 hover:scale-105 active:scale-95 text-stone-900 rounded-full transition-all duration-300 font-bold border border-stone-200 shadow-sm text-center">
                   Watch Demo
                 </button>
               </div>
@@ -181,7 +173,7 @@ export default function Home() {
                       key={img.id}
                       onClick={() => setDemoIndex(idx)}
                       className={`relative w-14 h-14 rounded-xl overflow-hidden border-2 transition-all duration-200 group ${idx === demoIndex
-                        ? 'border-orange-500 scale-110 shadow-lg shadow-orange-200'
+                        ? 'border-orange-600 scale-110 shadow-lg shadow-orange-100'
                         : 'border-stone-100 opacity-40 hover:opacity-100 hover:border-stone-300'
                         }`}
                     >
@@ -292,8 +284,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto w-full text-center">
           <div className="mb-10">
             <h2 className="text-5xl lg:text-6xl font-bold text-stone-900 mb-3">
-              <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">Powerful</span> Features,
-              <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent"> Advanced</span> Capabilities
+              <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">Powerful</span> Features,
+              <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent"> Advanced</span> Capabilities
             </h2>
             <p className="text-stone-600 text-xl font-medium">Everything you need for professional computer vision projects</p>
           </div>
@@ -386,8 +378,8 @@ export default function Home() {
             <h2 className="text-6xl lg:text-8xl font-bold text-white mb-6">
               Global Scale,
               <br />
-              <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
-                Proven Impact
+              <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+                Everywhere.
               </span>
             </h2>
             <p className="text-xl text-stone-400 max-w-2xl mx-auto font-medium">
@@ -438,13 +430,10 @@ export default function Home() {
             Join thousands of teams transforming their visual data into insights
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="group w-full sm:w-64 h-20 px-10 bg-white hover:bg-stone-50 hover:scale-110 text-stone-900 rounded-2xl transition-all duration-300 font-bold text-xl flex items-center justify-center gap-2 shadow-2xl">
-              <span>Start Free Trial</span>
-              <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+            <button className="px-12 py-5 bg-white hover:bg-stone-50 hover:scale-105 text-stone-900 rounded-full transition-all duration-300 font-bold shadow-xl w-full sm:w-auto">
+              Start Free Trial
             </button>
-            <button className="w-full sm:w-64 h-20 px-10 bg-white/10 hover:bg-white/20 backdrop-blur-lg hover:scale-110 active:scale-95 text-white rounded-2xl transition-all duration-300 font-bold text-xl border-2 border-white/30">
+            <button className="px-12 py-5 bg-white/10 hover:bg-white/20 backdrop-blur-lg hover:scale-105 text-white rounded-full transition-all duration-300 font-bold border border-white/30 w-full sm:w-auto">
               Contact Sales
             </button>
           </div>
@@ -468,7 +457,7 @@ export default function Home() {
             <div className="mb-8">
               <h2 className="text-5xl lg:text-6xl font-bold text-stone-900 mb-4">
                 Trusted by{" "}
-                <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
                   leading partners
                 </span>
               </h2>

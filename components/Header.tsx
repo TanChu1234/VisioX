@@ -71,12 +71,12 @@ export default function Header() {
                     {/* Menu Items */}
                     <div className="hidden md:flex items-center space-x-8">
                         <Link href="/">
-                            <span className="text-stone-600 hover:text-[#FF7300] transition-colors cursor-pointer font-medium">Home</span>
+                            <span className="text-stone-600 hover:text-orange-600 transition-colors cursor-pointer font-medium">Home</span>
                         </Link>
 
                         {/* Product Dropdown */}
                         <div className="relative group" onMouseEnter={() => setActiveDropdown('product')}>
-                            <span className="text-stone-600 hover:text-[#FF7300] transition-colors cursor-pointer font-medium flex items-center gap-1">
+                            <span className="text-stone-600 hover:text-orange-600 transition-colors cursor-pointer font-medium flex items-center gap-1">
                                 Product
                                 <svg className={`w-4 h-4 transition-transform ${activeDropdown === 'product' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </span>
@@ -88,7 +88,7 @@ export default function Header() {
                                 >
                                     {productLinks.map((link) => (
                                         <Link key={link.name} href={link.href}>
-                                            <span className="block px-4 py-2 text-sm text-stone-600 hover:bg-orange-50 hover:text-[#FF7300] rounded-lg transition-colors cursor-pointer">
+                                            <span className="block px-4 py-2 text-sm text-stone-600 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors cursor-pointer">
                                                 {link.name}
                                             </span>
                                         </Link>
@@ -100,7 +100,7 @@ export default function Header() {
                         {/* Solution Dropdown */}
                         <div className="relative group" onMouseEnter={() => setActiveDropdown('solution')}>
                             <Link href="/solutions">
-                                <span className="text-stone-600 group-hover:text-[#FF7300] transition-colors cursor-pointer font-medium flex items-center gap-1">
+                                <span className="text-stone-600 group-hover:text-orange-600 transition-colors cursor-pointer font-medium flex items-center gap-1">
                                     Solution
                                     <svg className={`w-4 h-4 transition-transform ${activeDropdown === 'solution' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                                 </span>
@@ -114,7 +114,7 @@ export default function Header() {
                                     <div className="grid grid-cols-1 gap-1">
                                         {solutionLinks.map((link) => (
                                             <Link key={link.name} href={link.href}>
-                                                <span className="block px-4 py-2 text-sm text-stone-600 hover:bg-orange-50 hover:text-[#FF7300] rounded-lg transition-colors cursor-pointer">
+                                                <span className="block px-4 py-2 text-sm text-stone-600 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors cursor-pointer">
                                                     {link.name}
                                                 </span>
                                             </Link>
@@ -126,7 +126,7 @@ export default function Header() {
 
                         {/* About Us Dropdown */}
                         <div className="relative group" onMouseEnter={() => setActiveDropdown('about')}>
-                            <span className="text-stone-600 hover:text-[#FF7300] transition-colors cursor-pointer font-medium flex items-center gap-1">
+                            <span className="text-stone-600 hover:text-orange-600 transition-colors cursor-pointer font-medium flex items-center gap-1">
                                 About Us
                                 <svg className={`w-4 h-4 transition-transform ${activeDropdown === 'about' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </span>
@@ -138,7 +138,7 @@ export default function Header() {
                                 >
                                     {aboutLinks.map((link) => (
                                         <Link key={link.name} href={link.href}>
-                                            <span className="block px-4 py-2 text-sm text-stone-600 hover:bg-orange-50 hover:text-[#FF7300] rounded-lg transition-colors cursor-pointer">
+                                            <span className="block px-4 py-2 text-sm text-stone-600 hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors cursor-pointer">
                                                 {link.name}
                                             </span>
                                         </Link>
@@ -155,19 +155,19 @@ export default function Header() {
                         transition={{ delay: 0.2, duration: 0.5 }}
                         className="flex items-center space-x-6"
                     >
-                        <button className="hidden md:block text-stone-600 hover:text-[#FF7300] transition-colors">
+                        <button className="hidden md:block text-stone-600 hover:text-orange-600 transition-colors">
                             Sign In
                         </button>
 
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-gradient-to-r from-orange-600 to-orange-400
-                                        hover:from-orange-400 hover:to-orange-300 
-                                        text-white px-3 py-2 rounded-lg
+                            className="bg-gradient-to-r from-orange-600 to-amber-600
+                                        hover:shadow-lg hover:shadow-orange-600/30
+                                        text-white px-6 py-2.5 rounded-full
                                         transition-all duration-300
-                                        flex items-center space-x-1
-                                        shadow-md shadow-orange-500/20"
+                                        flex items-center gap-2
+                                        font-bold text-sm"
                         >
                             <span>Get Started</span>
                             <svg
@@ -176,7 +176,7 @@ export default function Header() {
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
                             >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
                         </motion.button>
                     </motion.div>

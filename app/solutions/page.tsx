@@ -74,7 +74,7 @@ export default function SolutionsPage() {
     return (
         <div className="min-h-screen bg-[#fcfaf7]">
             {/* Hero Section */}
-            <section className="pt-32 pb-20 px-6 lg:px-8 bg-white border-b border-stone-100 relative overflow-hidden">
+            <section className="min-h-[80vh] flex items-center px-6 lg:px-8 bg-white border-b border-stone-100 relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                     <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-stone-50 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
@@ -89,16 +89,24 @@ export default function SolutionsPage() {
                         <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-orange-600 uppercase bg-orange-50 rounded-full border border-orange-100">
                             Industry Applications
                         </span>
-                        <h1 className="text-5xl lg:text-7xl font-bold text-stone-900 mb-6 tracking-tight">
+                        <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-stone-900 mb-8 tracking-tight leading-tight">
                             Intelligent Solutions for{" "}
-                            <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
+                            <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
                                 Every Sector
                             </span>
                         </h1>
-                        <p className="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
+                        <p className="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed mb-12">
                             Explore how VisioX's cutting-edge computer vision platform transforms industries,
                             automates complex tasks, and unlocks unprecedented visual insights.
                         </p>
+                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                            <Link href="/demo" className="px-12 py-5 bg-stone-900 text-white rounded-full font-bold transition-all hover:-translate-y-1 shadow-2xl text-center w-full sm:w-auto">
+                                Book a Demo
+                            </Link>
+                            <Link href="/contact" className="px-12 py-5 bg-white text-stone-900 border border-stone-200 rounded-full font-bold hover:bg-stone-50 transition-all shadow-sm text-center w-full sm:w-auto">
+                                Contact Sales
+                            </Link>
+                        </div>
                     </motion.div>
                 </div>
             </section>
@@ -143,7 +151,7 @@ export default function SolutionsPage() {
                                     </div>
 
                                     <div className="p-8">
-                                        <h3 className="text-2xl font-bold text-stone-900 mb-3 group-hover:text-orange-600 transition-colors">
+                                        <h3 className="text-xl font-bold text-stone-900 mb-3 group-hover:text-orange-600 transition-colors">
                                             {solution.title}
                                         </h3>
                                         <p className="text-stone-600 leading-relaxed mb-6">
@@ -165,18 +173,18 @@ export default function SolutionsPage() {
 
             {/* CTA Section */}
             <section className="py-20 px-6 lg:px-8 bg-stone-900">
-                <div className="max-max-w-7xl mx-auto rounded-3xl bg-gradient-to-r from-orange-600 to-orange-400 p-12 lg:p-20 text-center text-white relative overflow-hidden">
+                <div className="max-max-w-7xl mx-auto rounded-3xl bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 p-12 lg:p-20 text-center text-white relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                     <div className="relative z-10 max-w-2xl mx-auto">
-                        <h2 className="text-4xl lg:text-5xl font-bold mb-6">Didn't find what you're looking for?</h2>
+                        <h2 className="text-3xl lg:text-4xl font-bold mb-6">Didn't find what you're looking for?</h2>
                         <p className="text-xl mb-10 text-white/90">
                             Our platform is highly customizable. Contact our team to discuss your specific industry needs.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link href="/contact" className="px-8 py-4 bg-white text-orange-600 rounded-xl font-bold hover:bg-stone-50 transition-colors shadow-xl">
+                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                            <Link href="/contact" className="px-12 py-5 bg-white text-orange-600 rounded-full font-bold hover:bg-stone-50 transition-all shadow-xl w-full sm:w-auto text-center">
                                 Contact Sales
                             </Link>
-                            <Link href="/demo" className="px-8 py-4 bg-orange-700 text-white rounded-xl font-bold hover:bg-orange-800 transition-colors border border-orange-500">
+                            <Link href="/demo" className="px-12 py-5 bg-orange-600/20 text-white rounded-full font-bold hover:bg-orange-600/30 transition-all border border-white/20 w-full sm:w-auto text-center">
                                 Book a Demo
                             </Link>
                         </div>
