@@ -153,7 +153,7 @@ export default function Header() {
                         initial={{ x: 20, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        className="flex items-center space-x-6"
+                        className="flex items-center space-x-4"
                     >
                         <button className="hidden md:block text-stone-600 hover:text-orange-600 transition-colors">
                             Sign In
@@ -162,9 +162,9 @@ export default function Header() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-gradient-to-r from-orange-600 to-amber-600
-                                        hover:shadow-lg hover:shadow-orange-600/30
-                                        text-white px-6 py-2.5 rounded-full
+                            className="bg-gradient-to-r from-orange-600 to-orange-400 
+                                        hover:from-orange-400 hover:to-orange-300 
+                                        text-white px-4 py-2.5 rounded-full
                                         transition-all duration-300
                                         flex items-center gap-2
                                         font-bold text-sm"

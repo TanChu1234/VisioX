@@ -1,14 +1,40 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useSpring, useTransform } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+
+function StatCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const springValue = useSpring(0, {
+    stiffness: 40,
+    damping: 15,
+    restDelta: 0.1
+  });
+
+
+  useEffect(() => {
+    springValue.set(value);
+  }, [value, springValue]);
+
+  const displayValue = useTransform(springValue, (latest) => {
+    const hasDecimals = value % 1 !== 0;
+    const formatted = hasDecimals
+      ? latest.toFixed(1)
+      : Intl.NumberFormat("en-US").format(Math.floor(latest));
+    return formatted + suffix;
+  });
+
+  return <motion.span style={{ fontVariantNumeric: 'tabular-nums' }}>{displayValue}</motion.span>;
+}
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [demoIndex, setDemoIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+
+  const INDUSTRIES = ["Manufacturing", "Healthcare", "Agriculture", "Security", "Logistics", "Retail", "Robotics", "Automotive", "Transportation", "Entertainments"];
+
 
   const DEMO_IMAGES = [
     {
@@ -142,8 +168,8 @@ export default function Home() {
                 <span className="text-orange-600 text-sm font-medium">✨ Next-Gen Visual Platform</span>
               </div>
 
-              <h1 className="text-6xl lg:text-7xl font-bold leading-tight text-stone-900">
-                <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+              <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
+                <span className="bg-gradient-to-r from-orange-600 to-orange-400  bg-clip-text text-transparent">
                   Intelligent Computer Vision Platform
                 </span>
               </h1>
@@ -153,10 +179,15 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-6 pt-4">
-                <button className="px-12 py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 hover:scale-105 active:scale-95 text-white rounded-full transition-all duration-300 font-bold shadow-xl shadow-orange-600/30 text-center">
+                <button className="px-10 py-4 bg-gradient-to-r from-orange-600 to-orange-400 
+                                    hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
+                                    text-white rounded-full transition-all duration-300 font-bold 
+                                    shadow-xl shadow-orange-600/30 text-center">
                   Start Free Trial
                 </button>
-                <button className="px-12 py-5 bg-white hover:bg-stone-50 hover:scale-105 active:scale-95 text-stone-900 rounded-full transition-all duration-300 font-bold border border-stone-200 shadow-sm text-center">
+                <button className="px-10 py-4 bg-white hover:bg-stone-100 hover:scale-105 active:scale-95 
+                                    text-stone-900 rounded-full transition-all duration-300 font-bold 
+                                    border border-stone-200 shadow-sm text-center">
                   Watch Demo
                 </button>
               </div>
@@ -282,7 +313,7 @@ export default function Home() {
         className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden pt-16"
       >
         <div className="max-w-7xl mx-auto w-full text-center">
-          <div className="mb-10">
+          <div className="mb-20">
             <h2 className="text-5xl lg:text-6xl font-bold text-stone-900 mb-3">
               <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">Powerful</span> Features,
               <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent"> Advanced</span> Capabilities
@@ -291,6 +322,29 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {/* Capability 1 */}
+            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Realtime Analytics</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Monitor and analyze visual data streams in real-time with ultra-low latency processing.</p>
+            </div>
+
+            {/* Capability 6 */}
+            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Smart Annotation</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">AI-assisted tools that speed up your workflow with intelligent suggestions and auto-labeling.</p>
+            </div>
+
             {/* Capability 4 */}
             <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
               <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
@@ -313,37 +367,15 @@ export default function Home() {
               <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Enterprise-grade security with data encryption and compliance standards for all data.</p>
             </div>
 
-            {/* Capability 6 */}
-            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-stone-900 mb-2">Smart Annotation</h3>
-              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">AI-assisted tools that speed up your workflow with intelligent suggestions and auto-labeling.</p>
-            </div>
-
-            {/* Capability 1 */}
-            <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-stone-900 mb-2">Real-time Analytics</h3>
-              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Monitor and analyze visual data streams in real-time with ultra-low latency processing.</p>
-            </div>
-
             {/* Capability 2 */}
             <div className="bg-white border border-stone-200 rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-500 group">
               <div className="w-14 h-14 bg-gradient-to-br from-[#FF7300] to-[#F1A222] rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-stone-900 mb-2">Multi-Modal Support</h3>
-              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Seamlessly handle image, video, and 3D point cloud data within a single unified environment.</p>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Easy Deployment</h3>
+              <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Deploy your models instantly to the edge, cloud, or on-premise with a single click.</p>
             </div>
 
             {/* Capability 3 */}
@@ -353,7 +385,7 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-stone-900 mb-2">Global Scalability</h3>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Scalability</h3>
               <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">Architected to support massive datasets and high-concurrency workflows for teams worldwide.</p>
             </div>
 
@@ -365,44 +397,71 @@ export default function Home() {
       <motion.section
         id="slide-2"
         onViewportEnter={() => setActiveSlide(2)}
-        layout
-        initial={{ opacity: 0, scale: 1.05 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
+
         viewport={{ once: false, amount: 0.5 }}
-        className="h-screen snap-start bg-stone-900 flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
+        className="h-screen snap-start bg-[#0a0a0a] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-900/40 via-stone-900 to-black"></div>
-        <div className="max-w-7xl mx-auto text-center z-10 w-full px-4">
-          <div className="mb-16">
-            <h2 className="text-6xl lg:text-8xl font-bold text-white mb-6">
-              Global Scale,
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-600/10 via-stone-900 to-black"></div>
+
+        {/* Background Decorative Text */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none">
+          <h2 className="text-[30vw] font-black tracking-tighter text-white">VISIOX</h2>
+        </div>
+
+        <div className="max-w-screen-2xl mx-auto w-full z-10 px-4 lg:px-12 text-center h-full flex flex-col justify-center py-20">
+          {/* Header Section */}
+          <div className="mb-12">
+            <h2 className="text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              Global Impact,
               <br />
               <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
-                Everywhere.
+                Every Industry.
               </span>
             </h2>
-            <p className="text-xl text-stone-400 max-w-2xl mx-auto font-medium">
-              Join 50K+ innovators transforming industries with our high-fidelity vision intelligence.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20 px-8">
-            <div className="group p-10 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 hover:bg-white/10 hover:border-orange-500/50 transition-all duration-500">
-              <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">50K+</div>
-              <div className="text-lg text-orange-500/80 font-bold tracking-widest uppercase">Global Users</div>
-            </div>
-            <div className="group p-10 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 hover:bg-white/10 hover:border-orange-500/50 transition-all duration-500">
-              <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">1M+</div>
-              <div className="text-lg text-orange-500/80 font-bold tracking-widest uppercase">Annotations</div>
-            </div>
-            <div className="group p-10 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 hover:bg-white/10 hover:border-orange-500/50 transition-all duration-500">
-              <div className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform">99.9</div>
-              <div className="text-lg text-orange-500/80 font-bold tracking-widest uppercase">% Uptime</div>
-            </div>
+          {/* Industries Section */}
+          <div className="flex flex-wrap justify-center gap-3 mb-16 max-w-5xl mx-auto px-4">
+            {INDUSTRIES.map((industry, i) => (
+              <motion.span
+                key={industry}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: i * 0.05, duration: 0.5 }}
+                className="px-6 py-2.5 bg-white/5 border border-white/10 rounded-full text-white/70 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-orange-600/20 hover:text-orange-400 hover:border-orange-600/50 transition-all cursor-default shadow-sm backdrop-blur-sm"
+              >
+                {industry}
+              </motion.span>
+            ))}
+          </div>
+
+          {/* Stats Section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 px-4 lg:px-12 max-w-7xl mx-auto w-full">
+            {[
+              { label: "Users", value: 5000, suffix: "+" },
+              { label: "Annotations", value: 10000, suffix: "+" },
+              { label: "Uptime Speed", value: 99.9, suffix: "%" }
+            ].map((stat, i) => (
+              <div
+                key={stat.label}
+                className="group p-10 bg-white/5 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 hover:border-orange-600/50 hover:bg-white/10 transition-all duration-500 relative overflow-hidden"
+              >
+                <div className="text-7xl font-bold text-white mb-2 tracking-tight">
+                  <StatCounter value={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-sm text-orange-600 font-black tracking-[0.2em] uppercase">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+
       </motion.section>
+
 
       {/* Slide 4 - CTA */}
       <motion.section
@@ -430,10 +489,10 @@ export default function Home() {
             Join thousands of teams transforming their visual data into insights
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="px-12 py-5 bg-white hover:bg-stone-50 hover:scale-105 text-stone-900 rounded-full transition-all duration-300 font-bold shadow-xl w-full sm:w-auto">
+            <button className="px-10 py-4 bg-white hover:bg-stone-50 hover:scale-105 text-stone-900 rounded-full transition-all duration-300 font-bold shadow-xl w-full sm:w-auto">
               Start Free Trial
             </button>
-            <button className="px-12 py-5 bg-white/10 hover:bg-white/20 backdrop-blur-lg hover:scale-105 text-white rounded-full transition-all duration-300 font-bold border border-white/30 w-full sm:w-auto">
+            <button className="px-10 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-lg hover:scale-105 text-white rounded-full transition-all duration-300 font-bold border border-white/30 w-full sm:w-auto">
               Contact Sales
             </button>
           </div>
@@ -541,7 +600,7 @@ export default function Home() {
                 <button className="group w-full sm:w-70 h-16 px-8 
                                     bg-gradient-to-r from-orange-600 to-orange-400 
                                     hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
-                                    text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
+                                    text-white rounded-full transition-all duration-300 font-semibold text-lg flex 
                                     items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
                   <span>Explore Applications</span>
                   <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
