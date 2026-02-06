@@ -26,7 +26,7 @@ interface UseCase {
     metric: string;
 }
 
-type ColorTheme = "violet" | "blue" | "emerald" | "orange" | "rose" | "cyan";
+type ColorTheme = "orange";
 
 interface SolutionLayoutProps {
     colorTheme?: ColorTheme;
@@ -63,84 +63,29 @@ interface SolutionLayoutProps {
     };
 }
 
-const themeStyles = {
-    violet: {
-        accent: "violet",
-        bgGradient: "from-violet-100/50",
-        blob: "bg-purple-100/30",
-        textGradient: "from-violet-600 via-purple-600 to-fuchsia-600",
-        button: "bg-gradient-to-r from-violet-600 to-purple-500 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(139,92,246,0.2)]",
-        border: "border-violet-200",
-        iconBg: "bg-violet-50",
-        iconText: "text-violet-600",
-        subText: "text-violet-600",
-    },
-    blue: {
-        accent: "blue",
-        bgGradient: "from-blue-100/50",
-        blob: "bg-sky-100/30",
-        textGradient: "from-blue-600 via-cyan-600 to-sky-600",
-        button: "bg-blue-600 hover:bg-blue-500 shadow-[0_10px_30px_rgba(37,99,235,0.2)]",
-        border: "border-blue-200",
-        iconBg: "bg-blue-50",
-        iconText: "text-blue-600",
-        subText: "text-blue-600",
-    },
-    emerald: {
-        accent: "emerald",
-        bgGradient: "from-emerald-100/50",
-        blob: "bg-teal-100/30",
-        textGradient: "from-emerald-600 via-teal-600 to-green-600",
-        button: "bg-gradient-to-r from-emerald-600 to-teal-500 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(16,185,129,0.2)]",
-        border: "border-emerald-200",
-        iconBg: "bg-emerald-50",
-        iconText: "text-emerald-600",
-        subText: "text-emerald-600",
-    },
+const themeStyles: Record<ColorTheme, any> = {
     orange: {
         accent: "orange",
         bgGradient: "from-orange-100/50",
         blob: "bg-amber-100/30",
         textGradient: "from-orange-600 via-amber-600 to-yellow-600",
-        button: "bg-gradient-to-r from-orange-600 to-orange-400 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(249,115,22,0.2)]",
+        button: "bg-gradient-to-r from-orange-600 to-orange-400 hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300",
         border: "border-orange-200",
         iconBg: "bg-orange-50",
         iconText: "text-orange-600",
         subText: "text-orange-600",
     },
-    rose: {
-        accent: "rose",
-        bgGradient: "from-rose-100/50",
-        blob: "bg-pink-100/30",
-        textGradient: "from-rose-600 via-pink-600 to-red-600",
-        button: "bg-gradient-to-r from-rose-600 to-pink-500 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(225,29,72,0.2)]",
-        border: "border-rose-200",
-        iconBg: "bg-rose-50",
-        iconText: "text-rose-600",
-        subText: "text-rose-600",
-    },
-    cyan: {
-        accent: "cyan",
-        bgGradient: "from-cyan-100/50",
-        blob: "bg-blue-100/30",
-        textGradient: "from-cyan-600 via-blue-600 to-indigo-600",
-        button: "bg-gradient-to-r from-cyan-600 to-blue-500 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(8,145,178,0.2)]",
-        border: "border-cyan-200",
-        iconBg: "bg-cyan-50",
-        iconText: "text-cyan-600",
-        subText: "text-cyan-600",
-    },
 };
 
-
 export default function SolutionLayout({
-    colorTheme = "violet",
+    colorTheme = "orange",
     hero,
     capabilities,
     useCases,
     cta,
 }: SolutionLayoutProps) {
     const theme = themeStyles[colorTheme];
+
 
     return (
         <div className="min-h-screen bg-[#fafafa] text-stone-900 overflow-x-hidden selection:bg-stone-900/10">
@@ -175,13 +120,15 @@ export default function SolutionLayout({
                             <div className="flex flex-col sm:flex-row gap-6">
                                 <Link
                                     href={hero.ctaButtons.primary.href}
-                                    className={`px-12 py-5 ${theme.button} text-white rounded-full font-bold transition-all hover:-translate-y-1 shadow-2xl text-center`}
+                                    className={`px-12 py-5 ${theme.button} text-white rounded-full transition-all duration-300 font-bold shadow-xl shadow-orange-600/30 text-center`}
                                 >
                                     {hero.ctaButtons.primary.text}
                                 </Link>
                                 <Link
                                     href={hero.ctaButtons.secondary.href}
-                                    className="px-12 py-5 bg-white text-stone-900 border border-stone-200 rounded-full font-bold hover:bg-stone-50 transition-all shadow-sm text-center"
+                                    className="px-12 py-5 bg-white hover:bg-stone-100 hover:scale-105 active:scale-95 
+                                    text-stone-900 rounded-full transition-all duration-300 font-bold 
+                                    border border-stone-200 shadow-sm text-center"
                                 >
                                     {hero.ctaButtons.secondary.text}
                                 </Link>
@@ -247,10 +194,10 @@ export default function SolutionLayout({
             </section>
 
             {/* Capabilities Section */}
-            <section className="py-32 px-6 lg:px-8 relative overflow-hidden">
+            <section className="py-26 px-6 lg:px-8 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-24">
-                        <h2 className={`text-3xl lg:text-6xl font-bold mb-6 tracking-tight underline decoration-${theme.accent}-600 decoration-8 underline-offset-8 transition-colors`}>
+                        <h2 className={`text-3xl lg:text-6xl font-bold mb-6 tracking-tight decoration-${theme.accent}-600 decoration-8 underline-offset-8 transition-colors`}>
                             {capabilities.title || "Core Intelligence"}
                         </h2>
                         <p className="text-xl text-stone-500 max-w-2xl mx-auto">
@@ -272,7 +219,7 @@ export default function SolutionLayout({
                     </div>
                 </div>
             </section>
-
+``
             {/* Use Cases Section */}
             <section className="py-32 px-6 lg:px-8 bg-stone-100/50 relative">
                 <div className="max-w-7xl mx-auto">
