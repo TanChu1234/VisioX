@@ -29,7 +29,7 @@ export default function HealthcarePage() {
           secondary: { text: "Clinical Trial Data", href: "/contact" }
         }
       }}
-      capabilities={{
+      applications={{
         title: "Clinical Intelligence",
         description: "Advanced visual analysis for high-stakes medical environments.",
         items: [
@@ -52,33 +52,30 @@ export default function HealthcarePage() {
             title: "Workflow Audit",
             description: "Monitor hand-hygiene compliance and sterile procedure protocols automatically.",
             icon: <ClipboardList className="w-6 h-6" />
-          }
-        ]
-      }}
-      useCases={{
-        title: "Medical Projects",
-        description: "Technology saving lives in hospitals and labs.",
-        items: [
+          },
           {
             title: "Oncology Slide Analysis",
-            tech: "Histopathology",
             description: "Automated screening of thousands of biopsy slides to prioritize urgent cases for pathologists.",
+            icon: <Microscope className="w-6 h-6" />,
             image: "/solutions/use-cases/pathology-ai.png",
-            metric: "98% Sensitivity"
+            metric: "98% Sensitivity",
+            tag: "Histopathology"
           },
           {
             title: "Smart Operating Rooms",
-            tech: "Computer-Aided Surgery",
             description: "Real-time guidance and instrument verification during complex laparoscopic procedures.",
+            icon: <Beaker className="w-6 h-6" />,
             image: "/solutions/use-cases/surgical-ai.png",
-            metric: "Zero Retained Items"
+            metric: "Zero Retained Items",
+            tag: "Computer-Aided Surgery"
           },
           {
             title: "Senior Care Fall Detection",
-            tech: "Patient Monitoring",
             description: "Non-intrusive monitoring in nursing facilities that has prevented severe injury in 50+ cases.",
+            icon: <Heart className="w-6 h-6" />,
             image: "/solutions/use-cases/fall-detection.png",
-            metric: "Immediate Response"
+            metric: "Immediate Response",
+            tag: "Patient Monitoring"
           }
         ]
       }}

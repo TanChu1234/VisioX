@@ -29,7 +29,7 @@ export default function RetailPage() {
           secondary: { text: "Retail Case Studies", href: "/contact" }
         }
       }}
-      capabilities={{
+      applications={{
         title: "Commerce Intelligence",
         description: "Deep insights into shopper behavior and inventory health.",
         items: [
@@ -52,33 +52,30 @@ export default function RetailPage() {
             title: "Smart Check-out",
             description: "Enable friction-less shopping with automated product identification and lane-status monitoring.",
             icon: <Zap className="w-6 h-6" />
-          }
-        ]
-      }}
-      useCases={{
-        title: "Retail Projects",
-        description: "How top brands are reinventing the shopping experience.",
-        items: [
+          },
           {
             title: "Interactive Shelf Management",
-            tech: "Inventory AI",
             description: "Automated inventory tracking for 500+ SKU pharmacy chains with 99% accuracy.",
+            icon: <Search className="w-6 h-6" />,
             image: "/solutions/use-cases/retail-shelf.png",
-            metric: "No Stockouts"
+            metric: "No Stockouts",
+            tag: "Inventory AI"
           },
           {
             title: "Boutique Layout Optimization",
-            tech: "Shopper Analytics",
             description: "Visual heat-maps led to a 25% increase in seasonal item sales through better placement.",
+            icon: <Users className="w-6 h-6" />,
             image: "/solutions/use-cases/retail-heatmap.png",
-            metric: "25% Higher Sales"
+            metric: "25% Higher Sales",
+            tag: "Shopper Analytics"
           },
           {
             title: "Autonomous Grocery Store",
-            tech: "Edge Vision",
             description: "Full store coverage for 'grab and go' shopping experience with real-time bill generation.",
+            icon: <Zap className="w-6 h-6" />,
             image: "/solutions/use-cases/retail-checkout.png",
-            metric: "99.2% Bill Accuracy"
+            metric: "99.2% Bill Accuracy",
+            tag: "Edge Vision"
           }
         ]
       }}

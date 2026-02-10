@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+
 import { ReactNode } from "react";
 
 interface Stat {
@@ -11,19 +11,13 @@ interface Stat {
     value: string;
 }
 
-interface Capability {
+interface Application {
     title: string;
     description: string;
     icon: ReactNode;
-}
-
-interface UseCase {
-    title: string;
-    tech?: string; // specific to robotics style
-    industry?: string; // alternative label
-    description: string;
-    image: string;
-    metric: string;
+    image?: string;
+    metric?: string;
+    tag?: string;
 }
 
 type ColorTheme = "orange";
@@ -32,25 +26,20 @@ interface SolutionLayoutProps {
     colorTheme?: ColorTheme;
     hero: {
         badge: string;
-        title: ReactNode; // Allows gradient spans
+        title: ReactNode;
         description: string;
         image: string;
-        videoUrl?: string; // New field for background video
+        videoUrl?: string;
         stats: Stat[];
         ctaButtons: {
             primary: { text: string; href: string };
             secondary: { text: string; href: string };
         };
     };
-    capabilities: {
+    applications: {
         title?: string;
         description?: string;
-        items: Capability[];
-    };
-    useCases: {
-        title?: string;
-        description?: string;
-        items: UseCase[];
+        items: Application[];
     };
     cta: {
         icon: ReactNode;
@@ -80,11 +69,12 @@ const themeStyles: Record<ColorTheme, any> = {
 export default function SolutionLayout({
     colorTheme = "orange",
     hero,
-    capabilities,
-    useCases,
+    applications,
     cta,
 }: SolutionLayoutProps) {
     const theme = themeStyles[colorTheme];
+
+
 
 
     return (
@@ -193,69 +183,61 @@ export default function SolutionLayout({
                 </div>
             </section>
 
-            {/* Capabilities Section */}
-            <section className="py-26 px-6 lg:px-8 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-24">
-                        <h2 className={`text-3xl lg:text-6xl font-bold mb-6 tracking-tight decoration-${theme.accent}-600 decoration-8 underline-offset-8 transition-colors`}>
-                            {capabilities.title || "Core Intelligence"}
-                        </h2>
-                        <p className="text-xl text-stone-500 max-w-2xl mx-auto">
-                            {capabilities.description}
-                        </p>
-
-                    </div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
-                        {capabilities.items.map((item, i) => (
-                            <div key={i} className={`group p-10 bg-white rounded-[3rem] border border-stone-100 hover:border-${theme.accent}-500/30 hover:shadow-2xl hover:shadow-stone-200/50 transition-all duration-500`}>
-                                <div className={`mb-8 w-16 h-16 ${theme.iconBg} rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform`}>
-                                    <div className={`${theme.iconText} transition-colors`}>{item.icon}</div>
-                                </div>
-                                <h3 className={`text-xl font-bold mb-4 group-hover:${theme.iconText} transition-colors uppercase tracking-tight text-stone-900`}>{item.title}</h3>
-                                <p className="text-stone-600 text-sm leading-relaxed">{item.description}</p>
-                            </div>
-                        ))}
-                    </div>
+            {/* Applications Section */}
+            <section className="py-32 px-6 lg:px-8 relative overflow-hidden">
+                {/* Subtle background accents */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className={`absolute bottom-0 right-0 w-[800px] h-[800px] ${theme.bgGradient} rounded-full blur-[200px] translate-y-1/2 translate-x-1/4 opacity-40`} />
                 </div>
-            </section>
-``
-            {/* Use Cases Section */}
-            <section className="py-32 px-6 lg:px-8 bg-stone-100/50 relative">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex justify-between items-end mb-20">
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    {/* Section Header */}
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-16">
                         <div>
-                            <h2 className="text-3xl lg:text-5xl font-bold tracking-tight">{useCases.title || "Success Stories"}</h2>
-                            <p className="text-stone-500 mt-4">{useCases.description || "Deployments across the globe."}</p>
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className={`w-10 h-px bg-${theme.accent}-500`} />
+                                <span className={`text-xs font-bold uppercase tracking-[0.25em] ${theme.subText}`}>Applications</span>
+                            </div>
+                            <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-stone-900 leading-tight">
+                                {applications.title || "Core Intelligence"}
+                            </h2>
+                            <p className="text-lg text-stone-500 mt-4 max-w-4xl">
+                                {applications.description}
+                            </p>
                         </div>
-                        <Link href="/contact" className={`hidden md:flex items-center gap-2 ${theme.subText} font-bold hover:gap-4 transition-all`}>
-                            Request Case Brief <ArrowRight className="w-5 h-5" />
-                        </Link>
+
                     </div>
 
-                    <div className="grid lg:grid-cols-3 gap-12">
-                        {useCases.items.map((useCase, i) => (
-                            <div key={i} className={`group flex flex-col bg-white rounded-[3rem] overflow-hidden border border-stone-200/50 hover:shadow-2xl transition-all`}>
-                                <div className="relative h-64 overflow-hidden">
-                                    <div className={`absolute inset-0 bg-${theme.accent}-900/10 group-hover:bg-transparent transition-colors z-10`} />
+                    {/* Application Cards Grid */}
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {applications.items.map((item, i) => (
+                            <motion.div
+                                key={`app-${i}`}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1, duration: 0.5 }}
+                                className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-stone-200/60 hover:border-orange-300/50 hover:shadow-2xl hover:shadow-stone-200/60 transition-all duration-500"
+                            >
+                                {/* Visual Header: Image with Icon Overlay */}
+                                <div className="relative h-56 overflow-hidden bg-stone-100">
                                     <img
-                                        src={useCase.image}
-                                        alt={useCase.title}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                                        src={item.image || hero.image}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                     />
-                                    <div className={`absolute top-6 left-6 z-20 px-4 py-2 bg-white/90 backdrop-blur rounded-full text-[10px] font-black tracking-widest ${theme.subText} border border-stone-200 uppercase`}>
-                                        {useCase.tech || useCase.industry}
-                                    </div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent" />
+
+
                                 </div>
-                                <div className="p-10">
-                                    <h3 className="text-xl font-bold mb-4 text-stone-900">{useCase.title}</h3>
-                                    <p className="text-stone-600 text-sm mb-10 leading-relaxed">{useCase.description}</p>
-                                    <div className="flex items-center gap-4 py-6 border-t border-stone-100">
-                                        <CheckCircle2 className={`w-6 h-6 text-${theme.accent}-500`} />
-                                        <div className="text-xl font-bold text-stone-900">{useCase.metric}</div>
-                                    </div>
+
+                                {/* Content */}
+                                <div className="flex flex-col flex-1 p-7 lg:p-8">
+                                    <h3 className="text-xl font-bold text-stone-900 mb-3 leading-snug">{item.title}</h3>
+                                    <p className="text-sm text-stone-500 leading-relaxed mb-6 flex-1">{item.description}</p>
+
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>

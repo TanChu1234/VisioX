@@ -29,14 +29,16 @@ export default function TransportationPage() {
           secondary: { text: "Urban Planning", href: "/contact" }
         }
       }}
-      capabilities={{
+      applications={{
         title: "Urban Intelligence",
         description: "Smart data for smarter city planning and real-time response.",
         items: [
           {
             title: "Traffic Flow Analysis",
             description: "Real-time vehicle counting and classification (cars, trucks, buses, cyclists) for signal optimization.",
-            icon: <Signal className="w-6 h-6" />
+            icon: <Signal className="w-6 h-6" />,
+            // Added image as requested (reusing hero asset for demo due to generation limits)
+            image: "/solutions/transportation.png"
           },
           {
             title: "Smart Parking",
@@ -50,35 +52,32 @@ export default function TransportationPage() {
           },
           {
             title: "Mobility Insights",
-            description: "Analyze pedestrian patterns and mult-modal transit usage to improve public spaces.",
+            description: "Analyze pedestrian patterns and multi-modal transit usage to improve public spaces.",
             icon: <Map className="w-6 h-6" />
-          }
-        ]
-      }}
-      useCases={{
-        title: "Smart City Projects",
-        description: "Deployments driving the next generation of urban living.",
-        items: [
+          },
           {
             title: "Adaptive Traffic Control",
-            industry: "Municipal",
             description: "AI-linked traffic signals that adjust in real-time based on vehicle density at 40 intersections.",
+            icon: <Signal className="w-6 h-6" />,
             image: "/solutions/use-cases/traffic-control.png",
-            metric: "15% Lower Emissions"
+            metric: "15% Lower Emissions",
+            tag: "Municipal"
           },
           {
             title: "Automated Toll Processing",
-            industry: "Highways",
             description: "High-speed license plate recognition for toll bridges operating at 120km/h.",
+            icon: <Truck className="w-6 h-6" />,
             image: "/solutions/use-cases/toll-recognition.png",
-            metric: "Zero Latency"
+            metric: "Zero Latency",
+            tag: "Highways"
           },
           {
             title: "Public Transit Occupancy",
-            industry: "Transit",
             description: "Real-time passenger counting for buses to optimize schedules and route frequency.",
+            icon: <Navigation className="w-6 h-6" />,
             image: "/solutions/use-cases/bus-occupancy.png",
-            metric: "30% Efficiency Gain"
+            metric: "30% Efficiency Gain",
+            tag: "Transit"
           }
         ]
       }}

@@ -29,7 +29,7 @@ export default function SportsPage() {
                     secondary: { text: "Sports AI Specs", href: "/contact" }
                 }
             }}
-            capabilities={{
+            applications={{
                 title: "Sports Intelligence",
                 description: "Turning every frame into a data point for coaches and fans alike.",
                 items: [
@@ -40,11 +40,11 @@ export default function SportsPage() {
                     },
                     {
                         title: "Automated Highlights",
-                        description: "AI-powered detection of key moments (goals, fouls, home runs) to generate instant সামাজিক মিডিয়া clips.",
+                        description: "AI-powered detection of key moments (goals, fouls, home runs) to generate instant social media clips.",
                         icon: <Play className="w-6 h-6" />
                     },
                     {
-                        title: "Shopper Experience",
+                        title: "Fan Experience",
                         description: "In-stadium AR paths and queue monitoring to improve fan flow and food/beverage sales.",
                         icon: <Users className="w-6 h-6" />
                     },
@@ -52,33 +52,30 @@ export default function SportsPage() {
                         title: "Performance Analytics",
                         description: "Deep-dive biomechanical analysis for professional training and injury prevention.",
                         icon: <BarChart3 className="w-6 h-6" />
-                    }
-                ]
-            }}
-            useCases={{
-                title: "Fan-Centric Projects",
-                description: "How leading leagues are using AI to redefine the game.",
-                items: [
+                    },
                     {
                         title: "Football Tactical Analysis",
-                        industry: "European Leagues",
                         description: "Real-time tactical overlays for live broadcasts showing formation shifts and passing lanes.",
+                        icon: <Presentation className="w-6 h-6" />,
                         image: "/solutions/use-cases/football-ai.png",
-                        metric: "99% Tracking Accuracy"
+                        metric: "99% Tracking Accuracy",
+                        tag: "European Leagues"
                     },
                     {
                         title: "Automated Tennis Court Audit",
-                        industry: "Grand Slams",
                         description: "Instant 'In/Out' calls and ball trajectory mapping using multi-camera synchronization.",
+                        icon: <Trophy className="w-6 h-6" />,
                         image: "/solutions/use-cases/tennis-ai.png",
-                        metric: "<10ms Decision"
+                        metric: "<10ms Decision",
+                        tag: "Grand Slams"
                     },
                     {
                         title: "Immersive Home Viewing",
-                        industry: "Basketball",
                         description: "Interactive AR player stats available to home viewers via mobile app synchronized with live feed.",
+                        icon: <Users className="w-6 h-6" />,
                         image: "/solutions/use-cases/basketball-ar.png",
-                        metric: "+30% App Retention"
+                        metric: "+30% App Retention",
+                        tag: "Basketball"
                     }
                 ]
             }}

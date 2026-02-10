@@ -29,7 +29,7 @@ export default function AgriculturePage() {
           secondary: { text: "Farmer Case Studies", href: "/contact" }
         }
       }}
-      capabilities={{
+      applications={{
         title: "Agricultural Intelligence",
         description: "Next-generation tools for the modern grower.",
         items: [
@@ -52,33 +52,30 @@ export default function AgriculturePage() {
             title: "Irrigation Optimization",
             description: "Detect water stress in plants visually to automate precision irrigation and conserve water.",
             icon: <Droplets className="w-6 h-6" />
-          }
-        ]
-      }}
-      useCases={{
-        title: "Harvest Projects",
-        description: "AI deployments transforming the future of food security.",
-        items: [
+          },
           {
             title: "Autonomous Vineyard Spraying",
-            industry: "Grapes",
             description: "Precision spraying that reduced chemical usage by 75% across 200 acres of vineyard.",
+            icon: <Tractor className="w-6 h-6" />,
             image: "/solutions/use-cases/farm-sprayer.png",
-            metric: "75% Less Chemical"
+            metric: "75% Less Chemical",
+            tag: "Grapes"
           },
           {
             title: "Drone Crop Monitoring",
-            industry: "Corn & Soy",
             description: "Weekly drone-based scouting that identified leaf rust 2 weeks faster than manual inspection.",
+            icon: <Search className="w-6 h-6" />,
             image: "/solutions/use-cases/farm-drone.png",
-            metric: "Faster Detection"
+            metric: "Faster Detection",
+            tag: "Corn & Soy"
           },
           {
             title: "Livestock Health Tracking",
-            industry: "Dairy",
             description: "Automated monitoring of 1,000+ head of cattle to detect early signs of illness or distress.",
+            icon: <Sprout className="w-6 h-6" />,
             image: "/solutions/use-cases/cow-monitor.png",
-            metric: "100% Tracking"
+            metric: "100% Tracking",
+            tag: "Dairy"
           }
         ]
       }}

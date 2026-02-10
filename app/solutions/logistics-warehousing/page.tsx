@@ -29,7 +29,7 @@ export default function LogisticsPage() {
           secondary: { text: "Logistics Data Sheet", href: "/contact" }
         }
       }}
-      capabilities={{
+      applications={{
         title: "Logistics Intelligence",
         description: "Full visibility from the docking bay to the final delivery.",
         items: [
@@ -52,33 +52,30 @@ export default function LogisticsPage() {
             title: "Inventory Auditing",
             description: "Drone or vehicle-mounted cameras that scan shelf tags and count items 10x faster than manual counts.",
             icon: <BarChart className="w-6 h-6" />
-          }
-        ]
-      }}
-      useCases={{
-        title: "Warehouse Projects",
-        description: "Deployments streamlining global supply chains.",
-        items: [
+          },
           {
             title: "Automated Parcel Audit",
-            industry: "Express Delivery",
             description: "Real-time quality checks for 50k+ packages per day on sorting lines.",
+            icon: <Package className="w-6 h-6" />,
             image: "/solutions/use-cases/parcel-inspection.png",
-            metric: "90% Error Reduction"
+            metric: "90% Error Reduction",
+            tag: "Express Delivery"
           },
           {
             title: "Smart Forklift Safety",
-            industry: "Distribution",
             description: "Retrofitting 50 forklifts with AI collision-avoidance that alerts drivers to nearby pedestrians.",
+            icon: <Truck className="w-6 h-6" />,
             image: "/solutions/use-cases/forklift-safety.png",
-            metric: "Zero Incidents"
+            metric: "Zero Incidents",
+            tag: "Distribution"
           },
           {
             title: "3D Pallet Dimensioning",
-            industry: "Air Cargo",
             description: "Instant volume calculation for incoming air freight to maximize aircraft belly space.",
+            icon: <Box className="w-6 h-6" />,
             image: "/solutions/use-cases/pallet-3d.png",
-            metric: "15% More Cargo"
+            metric: "15% More Cargo",
+            tag: "Air Cargo"
           }
         ]
       }}

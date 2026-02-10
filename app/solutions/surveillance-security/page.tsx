@@ -29,7 +29,7 @@ export default function SecurityPage() {
           secondary: { text: "Security Audit", href: "/contact" }
         }
       }}
-      capabilities={{
+      applications={{
         title: "Advanced Protection",
         description: "Beyond simple recording—intelligent analysis for critical infrastructure.",
         items: [
@@ -52,33 +52,30 @@ export default function SecurityPage() {
             title: "Object Tracking",
             description: "Multi-camera handoff to follow subjects of interest across large complexes autonomously.",
             icon: <Search className="w-6 h-6" />
-          }
-        ]
-      }}
-      useCases={{
-        title: "Security Projects",
-        description: "Real-world implementations in high-security environments.",
-        items: [
+          },
           {
             title: "Mass Transit Perimeter Security",
-            tech: "Perimeter Protection",
             description: "Automated monitoring of 15km of rail tracks to prevent trespassing and theft.",
+            icon: <AlertTriangle className="w-6 h-6" />,
             image: "/solutions/use-cases/rail-security.png",
-            metric: "90% Cost Saving"
+            metric: "90% Cost Saving",
+            tag: "Perimeter Protection"
           },
           {
             title: "Public Space Threat Detection",
-            tech: "AI Surveillance",
             description: "City-wide weapon detection and crowd density monitoring for major public events.",
+            icon: <Eye className="w-6 h-6" />,
             image: "/solutions/use-cases/city-security.png",
-            metric: "Real-time Alerts"
+            metric: "Real-time Alerts",
+            tag: "AI Surveillance"
           },
           {
             title: "Logistics Hub Access Control",
-            tech: "LPR & ID",
             description: "Automated gate entry using license plate recognition and driver face verification.",
+            icon: <Lock className="w-6 h-6" />,
             image: "/solutions/use-cases/gate-security.png",
-            metric: "3x Faster Entry"
+            metric: "3x Faster Entry",
+            tag: "LPR & ID"
           }
         ]
       }}

@@ -1,7 +1,7 @@
 "use client";
 
 import SolutionLayout from "@/components/SolutionLayout";
-import { Bot, Cpu, Move, Zap, Settings, Target } from "lucide-react";
+import { Bot, Cpu, Move, Zap, Target } from "lucide-react";
 
 export default function RoboticsPage() {
   return (
@@ -29,7 +29,7 @@ export default function RoboticsPage() {
           secondary: { text: "Robotics SDK Docs", href: "/contact" }
         }
       }}
-      capabilities={{
+      applications={{
         title: "Robotic Intelligence",
         description: "Providing the 'eyes' and 'brain' for advanced automated systems.",
         items: [
@@ -52,33 +52,30 @@ export default function RoboticsPage() {
             title: "Quality Assurance",
             description: "Instant verification of robotic tasks (e.g., screw torque, glue alignment) directly at the point of assembly.",
             icon: <Zap className="w-6 h-6" />
-          }
-        ]
-      }}
-      useCases={{
-        title: "Automation Projects",
-        description: "AI-driven robotics solving complex labor challenges.",
-        items: [
+          },
           {
             title: "E-commerce Fulfillment",
-            industry: "Logistics",
             description: "Autonomous robots picking 1,200 unique items per hour across a 500k sq. ft. warehouse.",
+            icon: <Zap className="w-6 h-6" />,
             image: "/solutions/use-cases/robot-picking.png",
-            metric: "1,200 picks/hour"
+            metric: "1,200 picks/hour",
+            tag: "Logistics"
           },
           {
             title: "PCB Micro-Assembly",
-            industry: "Electronics",
             description: "Visual guidance for high-speed placement of capacitors and chips on multi-layer boards.",
+            icon: <Cpu className="w-6 h-6" />,
             image: "/solutions/use-cases/robot-circuit.png",
-            metric: "99.9% Precision"
+            metric: "99.9% Precision",
+            tag: "Electronics"
           },
           {
             title: "Hospital Service Robots",
-            industry: "Medical",
             description: "Autonomous delivery of meals and linens through crowded hospital corridors without human intervention.",
+            icon: <Bot className="w-6 h-6" />,
             image: "/solutions/use-cases/hospital-robot.png",
-            metric: "24/7 Autonomy"
+            metric: "24/7 Autonomy",
+            tag: "Medical"
           }
         ]
       }}
