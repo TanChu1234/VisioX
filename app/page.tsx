@@ -4,11 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import { useAuth } from "@/lib/auth";
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [demoIndex, setDemoIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const DEMO_IMAGES = [
     {
@@ -153,16 +155,18 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="group w-full sm:w-56 h-16 px-8 
-                                  bg-gradient-to-r from-orange-600 to-orange-400 
-                                  hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
-                                  text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
-                                  items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
-                  <span>Start Free Trial</span>
-                  <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </button>
+                <Link href={isLoggedIn ? "/overview" : "/login"} className="w-full sm:w-auto">
+                    <button className="group w-full sm:w-56 h-16 px-8 
+                                    bg-gradient-to-r from-orange-600 to-orange-400 
+                                    hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
+                                    text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
+                                    items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
+                    <span>{isLoggedIn ? "Go to Workspace" : "Start Free Trial"}</span>
+                    <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                    </button>
+                </Link>
 
                 <button className="w-full sm:w-56 h-16 px-8 bg-white hover:bg-gray-100 hover:scale-105 active:scale-95 text-stone-900 rounded-2xl transition-all duration-300 font-semibold text-lg border-2 border-stone-200 backdrop-blur-sm">
                   Watch Demo

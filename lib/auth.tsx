@@ -1,32 +1,33 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
-interface AuthContextValue {
+interface AuthContextType {
   isLoggedIn: boolean;
   login: (email: string, password: string) => Promise<{ ok: boolean; error?: string }>;
   logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  // Restore session from localStorage on mount.
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem("visiox_auth") === "true");
+    // Check local storage for existing session
+    const auth = localStorage.getItem("visiox_auth");
+    if (auth === "true") {
+      setIsLoggedIn(true);
+    }
   }, []);
 
   const login = async (email: string, password: string) => {
-    // ── Frontend-only mock auth ──────────────────────────────────
-    // Replace with a real API call (fetch /api/auth/login) when backend is ready.
+    // Simulated login - in a real app, this would be a fetch to /api/auth/login
     if (email && password.length >= 6) {
       localStorage.setItem("visiox_auth", "true");
       setIsLoggedIn(true);
-      router.push("/overview");
       return { ok: true };
     }
     return { ok: false, error: "Invalid credentials. Use any email + 6+ char password." };

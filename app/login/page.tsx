@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Fingerprint, ArrowRight, Loader2 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { login } = useAuth();
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,9 +23,11 @@ export default function LoginPage() {
     await new Promise((r) => setTimeout(r, 1000));
 
     const res = await login(email, password);
-    if (!res.ok && res.error) {
-      setError(res.error);
-      setLoading(false);
+    if (res.ok) {
+       router.push("/overview");
+    } else if (res.error) {
+       setError(res.error);
+       setLoading(false);
     }
   };
 

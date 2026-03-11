@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
+import { useAuth } from "@/lib/auth";
 
 export default function Header() {
+    const { isLoggedIn } = useAuth();
     const productLinks = [
         { name: "DataHub", href: "/products/datahub" },
         { name: "Annotation", href: "/products/annotation" },
@@ -155,30 +157,42 @@ export default function Header() {
                         transition={{ delay: 0.2, duration: 0.5 }}
                         className="flex items-center space-x-6"
                     >
-                        <button className="hidden md:block text-stone-600 hover:text-[#FF7300] transition-colors">
-                            Sign In
-                        </button>
+                        {isLoggedIn ? (
+                            <Link href="/overview">
+                                <span className="hidden md:block text-[#FF7300] hover:text-stone-900 transition-colors font-bold cursor-pointer">
+                                    Go to Workspace
+                                </span>
+                            </Link>
+                        ) : (
+                            <Link href="/login">
+                                <span className="hidden md:block text-stone-600 hover:text-[#FF7300] transition-colors cursor-pointer">
+                                    Sign In
+                                </span>
+                            </Link>
+                        )}
 
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-gradient-to-r from-orange-600 to-orange-400
-                                        hover:from-orange-400 hover:to-orange-300 
-                                        text-white px-3 py-2 rounded-lg
-                                        transition-all duration-300
-                                        flex items-center space-x-1
-                                        shadow-md shadow-orange-500/20"
-                        >
-                            <span>Get Started</span>
-                            <svg
-                                className="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                        <Link href={isLoggedIn ? "/overview" : "/login"}>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-gradient-to-r from-orange-600 to-orange-400
+                                            hover:from-orange-400 hover:to-orange-300 
+                                            text-white px-4 py-2 rounded-xl
+                                            transition-all duration-300
+                                            flex items-center space-x-1
+                                            shadow-md shadow-orange-500/20 font-bold"
                             >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </motion.button>
+                                <span>{isLoggedIn ? "Dashboard" : "Get Started"}</span>
+                                <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </motion.button>
+                        </Link>
                     </motion.div>
                 </div>
             </div>
