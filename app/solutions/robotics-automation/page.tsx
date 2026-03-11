@@ -1,248 +1,128 @@
+
 "use client";
 
+import BlueprintGrid from "@/components/BlueprintGrid";
 import { motion } from "framer-motion";
+import { ArrowUpRight, CheckCircle2, Zap, Shield, Target, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import Footer from "@/components/Footer";
-import {
-    Bot,
-    Box,
-    Cpu,
-    Orbit,
-    ArrowRight,
-    Maximize,
-    Move,
-    CheckCircle
-} from "lucide-react";
 
-const capabilities = [
-    {
-        title: "6D Pose Estimation",
-        description: "Precisely identify the position and orientation of parts for reliable robotic grasping.",
-        icon: <Orbit className="w-6 h-6 text-violet-400" />
-    },
-    {
-        title: "Random Bin Picking",
-        description: "Enable robots to pick unsorted, overlapping parts from deep bins with collision avoidance.",
-        icon: <Box className="w-6 h-6 text-violet-400" />
-    },
-    {
-        title: "Autonomous Navigation",
-        description: "Vision-based SLAM and obstacle detection for mobile robots in dynamic environments.",
-        icon: <Move className="w-6 h-6 text-violet-400" />
-    },
-    {
-        title: "Path Optimization",
-        description: "Real-time recalculation of robotic trajectories to avoid obstacles and reduce cycle time.",
-        icon: <Maximize className="w-6 h-6 text-violet-400" />
-    }
-];
+export default function Page() {
+  return (
+    <div className="relative flex-1 flex flex-col overflow-hidden bg-[#fcfaf7]">
+      <BlueprintGrid />
+      
+      <main className="flex-grow p-8 z-10">
+        <div className="max-w-6xl mx-auto">
+          {/* Breadcrumbs */}
+          <div className="flex items-center gap-2 text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-8">
+            <Link href="/" className="hover:text-stone-900 transition-colors">Workspace</Link>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-stone-900">Solutions</span>
+          </div>
 
-const useCases = [
-    {
-        title: "AI Bin Picking",
-        tech: "SolVision / Mech-Mind",
-        description: "Robots picking complex metal parts from deep bins for production lines.",
-        image: "/solutions/usecases/robotic-bin.jpg",
-        metric: "99.9% Pick Success"
-    },
-    {
-        title: "Palletizing Automation",
-        tech: "3D Multi-Camera",
-        description: "Intelligent stacking of mixed-size boxes on pallets for optimized logistics.",
-        image: "/solutions/usecases/palletizing.jpg",
-        metric: "-50% Labor Task"
-    },
-    {
-        title: "SMT Line Assembly",
-        tech: "High-Speed Inspection",
-        description: "Guided placement of microscopic electronic components on PCBs.",
-        image: "/solutions/usecases/smt-line.jpg",
-        metric: "<10ms Latency"
-    }
-];
+          {/* Hero Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="flex items-center gap-2 text-orange-600 text-[10px] font-bold uppercase tracking-widest mb-4">
+                <Zap className="w-4 h-4" />
+                <span>Industry Solution</span>
+              </div>
+              <h1 className="text-5xl font-bold text-stone-900 leading-[1.1] mb-6">
+                Optimizing <br /><span className="text-[#6735E0]">Robotics & Automation</span> <br />with Vision AI.
+              </h1>
+              <p className="text-xl text-stone-600 leading-relaxed mb-8 max-w-lg">
+                VisioX provides the critical intelligence layer for robotics & automation, transforming visual data into actionable operational insights.
+              </p>
+              <div className="flex gap-4">
+                <button className="px-8 py-4 bg-[#1c1917] text-white rounded-2xl font-bold hover:scale-105 transition-all shadow-xl">
+                  Get Started
+                </button>
+                <button className="px-8 py-4 bg-white border border-stone-200 text-stone-900 rounded-2xl font-bold hover:bg-stone-50 transition-all flex items-center gap-2">
+                  View Demo <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+            </motion.div>
 
-export default function RoboticsPage() {
-    return (
-        <div className="min-h-screen bg-[#0a0a0c] text-white overflow-x-hidden">
-            {/* Hero Section */}
-            <section className="relative pt-32 pb-24 px-6 lg:px-8 overflow-hidden">
-                {/* Dynamic Background */}
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-violet-600/20 rounded-full blur-[160px] -translate-y-1/2 translate-x-1/2" />
-                    <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[140px] -translate-x-1/2" />
-                    {/* Grid Pattern */}
-                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #fff 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+              className="relative aspect-[4/3] rounded-[48px] overflow-hidden shadow-2xl border-8 border-white group"
+            >
+              <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800" alt="Robotics & Automation" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-white italic text-sm">
+                "VisioX has fundamentally changed how we monitor our robotics & automation environments."
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Impact Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            {[
+              { label: "Efficiency Boost", value: "+38%", icon: Zap },
+              { label: "AI Precision", value: "99.4%", icon: Target },
+              { label: "Compliance", value: "SOC2", icon: Shield },
+            ].map((stat, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 + (i * 0.1) }}
+                className="bg-white p-8 rounded-[40px] border border-stone-100 shadow-sm text-center"
+              >
+                <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-orange-500 mx-auto mb-4">
+                  <stat.icon className="w-6 h-6" />
                 </div>
+                <h3 className="text-3xl font-bold text-stone-900 mb-1">{stat.value}</h3>
+                <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
 
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="grid lg:grid-cols-2 gap-20 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <div className="flex items-center gap-3 mb-8">
-                                <div className="w-12 h-px bg-violet-500" />
-                                <span className="text-sm font-black uppercase tracking-[0.3em] text-violet-400">Next-Gen Automation</span>
-                            </div>
-                            <h1 className="text-6xl lg:text-8xl font-black mb-8 leading-[0.9] tracking-tighter">
-                                Visual Brain for <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400">
-                                    Autonomous Robots
-                                </span>
-                            </h1>
-                            <p className="text-xl text-stone-400 mb-12 leading-relaxed max-w-xl">
-                                Equip your robotic systems with human-like visual perception.
-                                From bin picking to complex assembly, VisioX provides the precision needed
-                                to automate the unautomatable.
-                            </p>
-                            <div className="flex flex-wrap gap-6">
-                                <button className="px-10 py-5 bg-violet-600 text-white rounded-full font-bold hover:bg-violet-500 transition-all shadow-[0_0_30px_rgba(139,92,246,0.4)] hover:-translate-y-1">
-                                    Request Solution Arch
-                                </button>
-                                <button className="px-10 py-5 bg-transparent text-white border border-stone-800 rounded-full font-bold hover:bg-stone-900 transition-all">
-                                    Watch Tech Demo
-                                </button>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8 }}
-                            className="relative"
-                        >
-                            <div className="aspect-square rounded-[4rem] border border-violet-500/30 bg-violet-950/20 p-8 backdrop-blur-3xl overflow-hidden group">
-                                <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
-                                    <img
-                                        src="/solutions/robotics-automation.jpg"
-                                        alt="Robotic Vision System"
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-violet-950/60 via-transparent to-transparent" />
-                                    {/* UI Elements */}
-                                    <div className="absolute inset-0 border-[20px] border-black/10" />
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-violet-400/50 rounded-full animate-ping opacity-20" />
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-violet-500 rounded-full shadow-[0_0_20px_#8b5cf6]" />
-                                </div>
-                            </div>
-                            {/* Data Floating Elements */}
-                            <div className="absolute top-12 -right-6 p-6 bg-stone-900/80 backdrop-blur border border-stone-800 rounded-3xl shadow-2xl space-y-2">
-                                <div className="text-[10px] font-bold text-violet-400">LATENCY</div>
-                                <div className="text-2xl font-black">12ms</div>
-                            </div>
-                            <div className="absolute -bottom-6 left-12 p-6 bg-stone-900/80 backdrop-blur border border-stone-800 rounded-3xl shadow-2xl flex gap-6">
-                                <div>
-                                    <div className="text-[10px] font-bold text-violet-400 text-center">UPTIME</div>
-                                    <div className="text-2xl font-black">99.9%</div>
-                                </div>
-                                <div className="w-px h-10 bg-stone-700 mt-2" />
-                                <div>
-                                    <div className="text-[10px] font-bold text-violet-400 text-center">PRECISION</div>
-                                    <div className="text-2xl font-black">0.5mm</div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Capabilities Section */}
-            <section className="py-32 px-6 lg:px-8 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-24">
-                        <h2 className="text-4xl lg:text-7xl font-black mb-6 italic tracking-tight underline decoration-violet-600 decoration-8 underline-offset-8">Core Intelligence</h2>
-                        <p className="text-xl text-stone-500 max-w-2xl mx-auto">
-                            Our software stack interfaces with any industrial robot brand (FANUC, ABB, KUKA, Universal Robots).
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
-                        {capabilities.map((item, i) => (
-                            <div key={i} className="group p-10 bg-white/5 rounded-[3rem] border border-white/10 hover:border-violet-500/50 hover:bg-white/10 transition-all duration-500">
-                                <div className="mb-8 w-16 h-16 bg-violet-600/20 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform">{item.icon}</div>
-                                <h3 className="text-2xl font-bold mb-4 group-hover:text-violet-400 transition-colors uppercase tracking-tight">{item.title}</h3>
-                                <p className="text-stone-400 text-sm leading-relaxed">{item.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Use Cases Dark */}
-            <section className="py-32 px-6 lg:px-8 bg-black relative">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex justify-between items-end mb-20">
-                        <div>
-                            <h2 className="text-4xl lg:text-6xl font-black">Success Stories</h2>
-                            <p className="text-stone-500 mt-4">Industry-tested vision algorithms across thousands of nodes.</p>
+          {/* Features */}
+          <div className="bg-[#1c1917] rounded-[56px] p-16 text-white relative overflow-hidden">
+             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-20">
+                <div>
+                   <h2 className="text-4xl font-bold mb-8">Core Capabilities</h2>
+                   <div className="space-y-6">
+                      {[
+                        "Continuous real-time visual monitoring",
+                        "High-accuracy anomaly detection engines",
+                        "Multi-tenant data isolation and privacy",
+                        "One-click edge device synchronization",
+                      ].map((feature, i) => (
+                        <div key={i} className="flex items-start gap-4">
+                           <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center grow-0 shrink-0 mt-1">
+                              <CheckCircle2 className="w-4 h-4 text-green-500" />
+                           </div>
+                           <p className="text-stone-300 font-medium leading-relaxed">{feature}</p>
                         </div>
-                        <Link href="/contact" className="hidden md:flex items-center gap-2 text-violet-400 font-bold hover:gap-4 transition-all">
-                            Request Case Brief <ArrowRight className="w-5 h-5" />
-                        </Link>
-                    </div>
-
-                    <div className="grid lg:grid-cols-3 gap-12">
-                        {useCases.map((useCase, i) => (
-                            <div key={i} className="group flex flex-col bg-stone-900/40 rounded-[3rem] overflow-hidden border border-white/5 hover:border-violet-500/30 transition-all">
-                                <div className="relative h-64 overflow-hidden">
-                                    <div className="absolute inset-0 bg-violet-900/20 group-hover:bg-transparent transition-colors z-10" />
-                                    <img src={useCase.image} alt={useCase.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
-                                    <div className="absolute top-6 left-6 z-20 px-4 py-2 bg-black/80 backdrop-blur rounded-full text-[10px] font-black tracking-widest text-violet-400 border border-violet-500/30 uppercase">
-                                        {useCase.tech}
-                                    </div>
-                                </div>
-                                <div className="p-10">
-                                    <h3 className="text-2xl font-bold mb-4">{useCase.title}</h3>
-                                    <p className="text-stone-500 text-sm mb-10 leading-relaxed">{useCase.description}</p>
-                                    <div className="flex items-center gap-4 py-6 border-t border-white/10">
-                                        <CheckDouble className="w-6 h-6 text-violet-500" />
-                                        <div className="text-xl font-black text-stone-200">{useCase.metric}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                      ))}
+                   </div>
                 </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="py-40 px-6 relative">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl bg-violet-600/20 rounded-full blur-[200px] pointer-events-none" />
-                <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <Bot className="w-20 h-20 text-violet-500 mx-auto mb-12" />
-                    <h2 className="text-5xl lg:text-8xl font-black mb-12 tracking-tight">Automate the <br />Unpredictable.</h2>
-                    <p className="text-2xl text-stone-400 mb-16 leading-relaxed">
-                        Bring high-performance 3D vision to your robotic cells today.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <button className="px-16 py-6 bg-white text-black rounded-full font-black text-lg hover:bg-violet-500 hover:text-white transition-all">Start Your Project</button>
-                        <button className="px-16 py-6 bg-transparent text-white border border-stone-800 rounded-full font-black text-lg hover:bg-stone-900 transition-all">Talk to a Robot Expert</button>
-                    </div>
+                <div className="flex flex-col justify-center">
+                   <div className="p-10 bg-white/5 border border-white/10 rounded-[40px] backdrop-blur-sm">
+                      <p className="text-stone-400 text-sm mb-8 leading-relaxed">
+                        Ready to accelerate your robotics & automation digital transformation? 
+                        Speak with our industry experts today.
+                      </p>
+                      <button className="w-full py-4 bg-orange-500 rounded-2xl font-bold hover:bg-orange-600 hover:scale-[1.02] transition-all shadow-xl shadow-orange-500/10">
+                        Request Strategy Session
+                      </button>
+                   </div>
                 </div>
-            </section>
-
-            <Footer />
+             </div>
+             
+             {/* Decorative Background */}
+             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#6735E0]/5 rounded-full blur-[120px] -mr-64 -mt-64" />
+          </div>
         </div>
-    );
-}
-
-function CheckDouble(props: any) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M7 13l5 5 10-10" />
-            <path d="M2 13l5 5 4-4" />
-        </svg>
-    );
+      </main>
+    </div>
+  );
 }

@@ -2,82 +2,167 @@ const fs = require('fs');
 const path = require('path');
 
 const pages = [
-    { path: 'app/products/datahub/page.tsx', title: 'DataHub' },
-    { path: 'app/products/annotation/page.tsx', title: 'Annotation' },
-    { path: 'app/products/model-train/page.tsx', title: 'Model Train' },
-    { path: 'app/products/workflows/page.tsx', title: 'Workflows' },
-    { path: 'app/products/deploy/page.tsx', title: 'Deploy' },
-    { path: 'app/solutions/manufacturing-industrial/page.tsx', title: 'Manufacturing & Industrial' },
-    { path: 'app/solutions/surveillance-security/page.tsx', title: 'Surveillance & Security' },
-    { path: 'app/solutions/transportation-smart-cities/page.tsx', title: 'Transportation & Smart Cities' },
-    { path: 'app/solutions/healthcare-medical/page.tsx', title: 'Healthcare & Medical' },
-    { path: 'app/solutions/retail-commerce/page.tsx', title: 'Retail & Commerce' },
-    { path: 'app/solutions/smart-agriculture/page.tsx', title: 'Smart Agriculture' },
-    { path: 'app/solutions/robotics-automation/page.tsx', title: 'Robotics & Automation' },
-    { path: 'app/solutions/logistics-warehousing/page.tsx', title: 'Logistics & Warehousing' },
-    { path: 'app/solutions/entertainment-sports/page.tsx', title: 'Entertainment & Sports' },
-    { path: 'app/about/company/page.tsx', title: 'Company' },
-    { path: 'app/about/blog/page.tsx', title: 'Blog' },
-    { path: 'app/about/contact/page.tsx', title: 'Contact' },
+    // Core Hubs
+    { path: 'app/datasets/page.tsx', title: 'Datasets', category: 'Workspace' },
+    { path: 'app/workflows/page.tsx', title: 'Workflows', category: 'Workspace' },
+    { path: 'app/train/page.tsx', title: 'Train', category: 'Workspace' },
+    { path: 'app/deploy/page.tsx', title: 'Deploy', category: 'Workspace' },
+    
+    // Solutions - All
+    { path: 'app/solutions/manufacturing-industrial/page.tsx', title: 'Manufacturing & Industrial', category: 'Solution', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800' },
+    { path: 'app/solutions/surveillance-security/page.tsx', title: 'Surveillance & Security', category: 'Solution', image: 'https://images.unsplash.com/photo-1557597774-9d2739f85a94?q=80&w=800' },
+    { path: 'app/solutions/transportation-smart-cities/page.tsx', title: 'Transportation & Smart Cities', category: 'Solution', image: 'https://images.unsplash.com/photo-1519003300449-424ad0405323?q=80&w=800' },
+    { path: 'app/solutions/healthcare-medical/page.tsx', title: 'Healthcare & Medical', category: 'Solution', image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=800' },
+    { path: 'app/solutions/retail-commerce/page.tsx', title: 'Retail & Commerce', category: 'Solution', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800' },
+    { path: 'app/solutions/smart-agriculture/page.tsx', title: 'Smart Agriculture', category: 'Solution', image: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=800' },
+    { path: 'app/solutions/entertainment-sports/page.tsx', title: 'Entertainment & Sports', category: 'Solution', image: 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?q=80&w=800' },
+    { path: 'app/solutions/logistics-warehousing/page.tsx', title: 'Logistics & Warehousing', category: 'Solution', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800' },
+    { path: 'app/solutions/robotics-automation/page.tsx', title: 'Robotics & Automation', category: 'Solution', image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800' },
 ];
 
-function getTemplate(title) {
-    return 'import Footer from "@/components/Footer";\n\n' +
-        'export default function Page() {\n' +
-        '  return (\n' +
-        '    <div className="bg-[#fcfaf7] min-h-screen flex flex-col">\n' +
-        '      <main className="flex-grow pt-32 pb-20 px-6 lg:px-8">\n' +
-        '        <div className="max-w-7xl mx-auto">\n' +
-        '          <div className="inline-block px-4 py-2 bg-orange-100 border border-orange-200 rounded-full mb-8">\n' +
-        '            <span className="text-orange-700 text-sm font-medium">VisioX Solutions</span>\n' +
-        '          </div>\n' +
-        '          <h1 className="text-5xl font-bold text-stone-900 mb-8 leading-tight">\n' +
-        '            ' + title + '\n' +
-        '          </h1>\n' +
-        '          <div className="bg-white rounded-2xl p-8 border border-stone-200 shadow-xl">\n' +
-        '            <p className="text-xl text-stone-600 leading-relaxed max-w-3xl">\n' +
-        '              Explore our ' + title + ' solutions. VisioX provides cutting-edge AI-powered tools tailored for professional computer vision workflows.\n' +
-        '            </p>\n' +
-        '            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">\n' +
-        '              <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">\n' +
-        '                <div className="flex items-center gap-3 mb-4">\n' +
-        '                  <div className="w-8 h-8 bg-orange-100 text-[#FF7300] rounded-lg flex items-center justify-center">\n' +
-        '                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n' +
-        '                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />\n' +
-        '                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />\n' +
-        '                    </svg>\n' +
-        '                  </div>\n' +
-        '                  <h3 className="text-xl font-bold text-stone-900">Overview</h3>\n' +
-        '                </div>\n' +
-        '                <p className="text-stone-600">Comprehensive features designed to optimize your ' + title + ' processes with high efficiency and accuracy.</p>\n' +
-        '              </div>\n' +
-        '              <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">\n' +
-        '                <div className="flex items-center gap-3 mb-4">\n' +
-        '                  <div className="w-8 h-8 bg-orange-100 text-[#FF7300] rounded-lg flex items-center justify-center">\n' +
-        '                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n' +
-        '                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />\n' +
-        '                    </svg>\n' +
-        '                  </div>\n' +
-        '                  <h3 className="text-xl font-bold text-stone-900">Key Benefits</h3>\n' +
-        '                </div>\n' +
-        '                <p className="text-stone-600">Scalable architecture, seamless integration, and advanced AI models tailored for your specific needs.</p>\n' +
-        '              </div>\n' +
-        '            </div>\n' +
-        '          </div>\n' +
-        '        </div>\n' +
-        '      </main>\n' +
-        '      <Footer />\n' +
-        '    </div>\n' +
-        '  );\n' +
-        '}\n';
+function getTemplate(title, category, imageUrl) {
+    if (category === 'Workspace') return null; // We already built these manually
+    
+    return `
+"use client";
+
+import BlueprintGrid from "@/components/BlueprintGrid";
+import { motion } from "framer-motion";
+import { ArrowUpRight, CheckCircle2, Zap, Shield, Target, ChevronRight } from "lucide-react";
+import Link from "next/link";
+
+export default function Page() {
+  return (
+    <div className="relative flex-1 flex flex-col overflow-hidden bg-[#fcfaf7]">
+      <BlueprintGrid />
+      
+      <main className="flex-grow p-8 z-10">
+        <div className="max-w-6xl mx-auto">
+          {/* Breadcrumbs */}
+          <div className="flex items-center gap-2 text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-8">
+            <Link href="/" className="hover:text-stone-900 transition-colors">Workspace</Link>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-stone-900">Solutions</span>
+          </div>
+
+          {/* Hero Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="flex items-center gap-2 text-orange-600 text-[10px] font-bold uppercase tracking-widest mb-4">
+                <Zap className="w-4 h-4" />
+                <span>Industry Solution</span>
+              </div>
+              <h1 className="text-5xl font-bold text-stone-900 leading-[1.1] mb-6">
+                Optimizing <br /><span className="text-[#6735E0]">${title}</span> <br />with Vision AI.
+              </h1>
+              <p className="text-xl text-stone-600 leading-relaxed mb-8 max-w-lg">
+                VisioX provides the critical intelligence layer for ${title.toLowerCase()}, transforming visual data into actionable operational insights.
+              </p>
+              <div className="flex gap-4">
+                <button className="px-8 py-4 bg-[#1c1917] text-white rounded-2xl font-bold hover:scale-105 transition-all shadow-xl">
+                  Get Started
+                </button>
+                <button className="px-8 py-4 bg-white border border-stone-200 text-stone-900 rounded-2xl font-bold hover:bg-stone-50 transition-all flex items-center gap-2">
+                  View Demo <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+              className="relative aspect-[4/3] rounded-[48px] overflow-hidden shadow-2xl border-8 border-white group"
+            >
+              <img src="${imageUrl}" alt="${title}" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-white italic text-sm">
+                "VisioX has fundamentally changed how we monitor our ${title.toLowerCase()} environments."
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Impact Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            {[
+              { label: "Efficiency Boost", value: "+38%", icon: Zap },
+              { label: "AI Precision", value: "99.4%", icon: Target },
+              { label: "Compliance", value: "SOC2", icon: Shield },
+            ].map((stat, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 + (i * 0.1) }}
+                className="bg-white p-8 rounded-[40px] border border-stone-100 shadow-sm text-center"
+              >
+                <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-orange-500 mx-auto mb-4">
+                  <stat.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-3xl font-bold text-stone-900 mb-1">{stat.value}</h3>
+                <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Features */}
+          <div className="bg-[#1c1917] rounded-[56px] p-16 text-white relative overflow-hidden">
+             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-20">
+                <div>
+                   <h2 className="text-4xl font-bold mb-8">Core Capabilities</h2>
+                   <div className="space-y-6">
+                      {[
+                        "Continuous real-time visual monitoring",
+                        "High-accuracy anomaly detection engines",
+                        "Multi-tenant data isolation and privacy",
+                        "One-click edge device synchronization",
+                      ].map((feature, i) => (
+                        <div key={i} className="flex items-start gap-4">
+                           <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center grow-0 shrink-0 mt-1">
+                              <CheckCircle2 className="w-4 h-4 text-green-500" />
+                           </div>
+                           <p className="text-stone-300 font-medium leading-relaxed">{feature}</p>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+                <div className="flex flex-col justify-center">
+                   <div className="p-10 bg-white/5 border border-white/10 rounded-[40px] backdrop-blur-sm">
+                      <p className="text-stone-400 text-sm mb-8 leading-relaxed">
+                        Ready to accelerate your ${title.toLowerCase()} digital transformation? 
+                        Speak with our industry experts today.
+                      </p>
+                      <button className="w-full py-4 bg-orange-500 rounded-2xl font-bold hover:bg-orange-600 hover:scale-[1.02] transition-all shadow-xl shadow-orange-500/10">
+                        Request Strategy Session
+                      </button>
+                   </div>
+                </div>
+             </div>
+             
+             {/* Decorative Background */}
+             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#6735E0]/5 rounded-full blur-[120px] -mr-64 -mt-64" />
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+`;
 }
 
 pages.forEach(page => {
+    const template = getTemplate(page.title, page.category, page.image);
+    if (!template) return;
+
     const fullPath = path.join(__dirname, page.path);
     const dir = path.dirname(fullPath);
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
     }
-    fs.writeFileSync(fullPath, getTemplate(page.title));
-    console.log('Created ' + page.path);
+    fs.writeFileSync(fullPath, template);
+    console.log('Created ' + page.path + ' for ' + page.title);
 });

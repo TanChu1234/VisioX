@@ -1,4 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VisioX - Intelligent Computer Vision Workspace
+
+VisioX is a high-fidelity platform for managing computer vision workflows, from data annotation to edge deployment. Inspired by modern CV hubs like Roboflow, it provides a workspace-dense environment with a focus on performance and precision.
+
+## ✨ Premium Features
+
+- **Integrated Workspace Hub**: A unified sidebar navigation for Datasets, Workflows, Training, and Deployment.
+- **Visual Workflow Builder**: An interactive, node-based canvas for designing CV pipelines with real-time feedback.
+- **Dataset Intelligence**: High-density image libraries with class distribution analytics and sampling tools.
+- **Live Training Monitor**: Real-time metric visualization (mAP, Loss, Accuracy) with hardware-level monitoring (GPU/CPU/Temp).
+- **Pro Deployment Dashboard**: Instant REST/WebSocket endpoints with auto-generated code snippets for Python, Node, and C++.
+
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS 4
+- **Animation**: Framer Motion 12
+- **Icons**: Lucide React
 
 ## Getting Started
 
