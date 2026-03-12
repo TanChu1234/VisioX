@@ -13,11 +13,12 @@ permissions:
   contents: read
   deployments: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -27,11 +28,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Verify Secrets
+      - name: Verify Vercel Secrets
         run: |
-          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then echo "❌ VERCEL_TOKEN is missing"; exit 1; fi
-          if [ -z "${{ secrets.VERCEL_ORG_ID }}" ]; then echo "❌ VERCEL_ORG_ID is missing"; exit 1; fi
-          if [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then echo "❌ VERCEL_PROJECT_ID is missing"; exit 1; fi
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then echo "❌ VERCEL_TOKEN is missing in GitHub Secrets"; exit 1; fi
+          if [ -z "${{ secrets.VERCEL_ORG_ID }}" ]; then echo "❌ VERCEL_ORG_ID is missing in GitHub Secrets"; exit 1; fi
+          if [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then echo "❌ VERCEL_PROJECT_ID is missing in GitHub Secrets"; exit 1; fi
           echo "✅ All secrets are present"
 
       - name: Setup pnpm (via Corepack)
