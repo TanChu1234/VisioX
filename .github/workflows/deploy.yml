@@ -1,0 +1,63 @@
+name: Vercel Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - 001-roboflow-ui
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  deployments: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify Vercel Secrets
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then echo "❌ VERCEL_TOKEN is missing in GitHub Secrets"; exit 1; fi
+          if [ -z "${{ secrets.VERCEL_ORG_ID }}" ]; then echo "❌ VERCEL_ORG_ID is missing in GitHub Secrets"; exit 1; fi
+          if [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then echo "❌ VERCEL_PROJECT_ID is missing in GitHub Secrets"; exit 1; fi
+          echo "✅ All secrets are present"
+
+      - name: Setup pnpm (via Corepack)
+        run: |
+          corepack enable
+          corepack prepare pnpm@9 --activate
+          pnpm config set store-dir ~/.pnpm-store
+
+      - name: Install Dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Pull Vercel Environment Information
+        run: npx vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build Project Artifacts
+        run: npx vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: npx vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
