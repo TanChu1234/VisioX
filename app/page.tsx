@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Footer from "@/components/Footer";
+import Badge from "@/components/Badge";
 import { useAuth } from "@/lib/auth";
 
 export default function Home() {
@@ -140,9 +140,9 @@ export default function Home() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
             {/* Left Content */}
             <div className="lg:col-span-5 space-y-8">
-              <div className="inline-block mt-8 px-4 py-2 bg-orange-100 border border-orange-200 rounded-full">
-                <span className="text-orange-700 text-sm font-medium">✨ Next-Gen Visual Platform</span>
-              </div>
+              <Badge className="mt-8">
+                ✨ Next-Gen Visual Platform
+              </Badge>
 
               <h1 className="text-6xl lg:text-7xl font-bold leading-tight text-stone-900">
                 <span className="bg-gradient-to-r from-[#E66700] via-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
@@ -549,8 +549,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-auto">
-          <Footer />
+        <div className="mt-auto hidden">
+          {/* Footer removed to avoid duplication with LayoutShell */}
         </div>
       </motion.section>
     </div>

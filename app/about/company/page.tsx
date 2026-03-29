@@ -1,34 +1,111 @@
-import Footer from "@/components/Footer";
+"use client";
 
-export default function Page() {
+import { motion } from "framer-motion";
+import { Users, Globe, Trophy, Cpu, Lightbulb, MapPin, Award, ArrowRight } from "lucide-react";
+import Link from 'next/link';
+
+export default function CompanyPage() {
+  const sections = [
+    {
+      title: "Origins and Expertise",
+      subtitle: "Pioneers in 3D Vision & Industrial AI",
+      content: "VisioX was founded with a clear mandate: to become a global leader in 3D vision, industrial AI, and augmented intelligence. We engineer industry-leading deep learning software platforms and advanced 3D camera pipelines for extreme industrial automation and process optimization. With our award-winning suite of AI-powered machine vision solutions, VisioX is committed to boosting productivity, profitability, and operational efficiency for our customers. As automation requirements become increasingly complex, our expertise in AI inspection and robotics positions us at the forefront of the industry.",
+      icon: <Lightbulb className="w-8 h-8 text-orange-500" />,
+      image: "/solutions/robotics-automation.jpg",
+      reverse: false
+    },
+    {
+      title: "Innovative Automation Solutions",
+      subtitle: "Empowering your project success",
+      content: "VisioX provides cutting-edge industrial AI solutions, supported by our international team of expert field application engineers. We offer a full range of project support services, from feasibility studies and free proof-of-concept deployments to guidance on complete automation challenges. Whether it's defect detection, vision-guided robotics, or bin picking, we ensure your success and help you achieve your project goals.",
+      icon: <Cpu className="w-8 h-8 text-orange-500" />,
+      image: "/solutions/manufacturing-industrial.jpg",
+      reverse: true
+    },
+    {
+      title: "Global Customer Support",
+      subtitle: "Worldwide Network",
+      content: "Headquartered in San Francisco, with branch offices and technical affiliates in North America, Europe, Latin America, and across the Asia-Pacific, VisioX delivers comprehensive AI and 3D vision solutions. We support our international customer base through a highly vetted global network of partners and systems integrators, ensuring you have local support no matter where your factories are located.",
+      icon: <MapPin className="w-8 h-8 text-orange-500" />,
+      image: "/solutions/transportation-smart-cities.jpg",
+      reverse: false
+    },
+    {
+      title: "Awards and Accolades",
+      subtitle: "Recognized for Innovation",
+      content: "Recognized for relentless innovation, VisioX has earned top-tier awards from global design and engineering councils for our AI and 3D vision solutions. We are dedicated to continuing to push the boundaries of what's possible, providing our world-leading industrial AI solutions to customers globally without compromising on quality or usability.",
+      icon: <Award className="w-8 h-8 text-orange-500" />,
+      image: "/solutions/healthcare-medical.jpg",
+      reverse: true
+    }
+  ];
+
   return (
-    <div className="bg-[#fcfaf7] min-h-screen flex flex-col">
-      <main className="flex-grow pt-32 pb-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-block px-4 py-2 bg-orange-100 border border-orange-200 rounded-full mb-8">
-            <span className="text-orange-700 text-sm font-medium">VisioX Solutions</span>
+    <div className="bg-[#fcfaf7] min-h-screen">
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-6 lg:px-8 max-w-7xl mx-auto border-b border-stone-200">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 border border-stone-200 rounded-full mb-8">
+            <span className="text-stone-700 text-sm font-bold uppercase tracking-widest">About Us</span>
           </div>
-          <h1 className="text-5xl font-bold text-stone-900 mb-8 leading-tight">
-            Company
+          <h1 className="text-5xl lg:text-7xl font-bold text-stone-900 mb-6 tracking-tight">
+            Democratizing <br />
+            <span className="bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent">Visual Intelligence</span>
           </h1>
-          <div className="bg-white rounded-2xl p-8 border border-stone-200 shadow-xl">
-            <p className="text-xl text-stone-600 leading-relaxed max-w-3xl">
-              Explore our Company solutions. VisioX provides cutting-edge AI-powered tools tailored for professional computer vision workflows.
-            </p>
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">
-                <h3 className="text-xl font-bold text-stone-900 mb-4">Overview</h3>
-                <p className="text-stone-600">Comprehensive features designed to optimize your Company processes with high efficiency and accuracy.</p>
+          <p className="text-xl text-stone-500 max-w-3xl mx-auto leading-relaxed mb-4">
+            Industrial AI and 3D Vision Systems redefining automation technology solutions for diverse industries globally.
+          </p>
+        </motion.div>
+      </section>
+      
+      {/* Dynamic Solomon-style Sections */}
+      <section className="py-24 px-6 lg:px-8 max-w-7xl mx-auto flex flex-col gap-32">
+        {sections.map((sec, idx) => (
+          <motion.div 
+            key={idx} 
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className={`flex flex-col lg:flex-row items-center gap-16 ${sec.reverse ? 'lg:flex-row-reverse' : ''}`}
+          >
+            <div className="flex-1 space-y-6">
+              <div className="w-16 h-16 bg-white border border-stone-200 shadow-sm rounded-2xl flex items-center justify-center mb-6">
+                {sec.icon}
               </div>
-              <div className="p-6 bg-stone-50 rounded-xl border border-stone-100">
-                <h3 className="text-xl font-bold text-stone-900 mb-4">Key Benefits</h3>
-                <p className="text-stone-600">Scalable architecture, seamless integration, and advanced AI models tailored for your specific needs.</p>
+              <h4 className="text-orange-600 font-bold tracking-widest uppercase text-sm">{sec.subtitle}</h4>
+              <h2 className="text-4xl font-bold text-stone-900 leading-tight">{sec.title}</h2>
+              <p className="text-lg text-stone-500 leading-relaxed">
+                {sec.content}
+              </p>
+            </div>
+            <div className="flex-1 w-full">
+              <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-stone-200 group">
+                <img 
+                  src={sec.image} 
+                  alt={sec.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent" />
               </div>
             </div>
-          </div>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* Solomon-style CTA Section */}
+      <section className="py-24 px-6 lg:px-8 bg-white border-t border-stone-200">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-stone-900 mb-6">Have any questions?</h2>
+          <p className="text-xl text-stone-500 mb-10 leading-relaxed">
+            Get in touch to find out how VisioX can support your project. Our experts are ready to assist with feasibility studies and POCs.
+          </p>
+          <Link href="/about/contact" className="inline-flex items-center px-8 py-4 bg-orange-600 hover:bg-orange-700 transition-colors text-white font-bold rounded-2xl shadow-xl shadow-orange-600/20 group">
+            Get in Touch
+            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
-      </main>
-      <Footer />
+      </section>
     </div>
   );
 }

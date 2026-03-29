@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Fingerprint, ArrowRight, Loader2 } from "lucide-react";
+import { Fingerprint, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
+import Badge from "@/components/Badge";
 import { useAuth } from "@/lib/auth";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -36,6 +38,11 @@ export default function LoginPage() {
       {/* Left Form Side */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-12 sm:px-24 xl:px-32 bg-white relative">
         <div className="max-w-md w-full mx-auto">
+          <Link href="/" className="group mb-12 inline-flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors text-sm font-medium">
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            Back to website
+          </Link>
+
           <div className="mb-10 flex items-center gap-3">
              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-900/20">
                <Fingerprint className="text-white w-6 h-6" />
@@ -109,9 +116,9 @@ export default function LoginPage() {
             transition={{ delay: 0.2 }}
             className="relative z-10 max-w-lg text-center"
          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-6 font-bold text-xs text-white uppercase tracking-widest">
+            <Badge className="mb-6" accentHex="#ffffff">
                Enterprise Grade
-            </div>
+            </Badge>
             <h3 className="text-4xl font-bold text-white mb-6 leading-tight">Secure. Fast. Infinite Scale.</h3>
             <p className="text-stone-400 text-lg leading-relaxed mb-12 px-8">
                VisioX's platform is designed to handle thousands of concurrent video streams with sub-millisecond latency.
