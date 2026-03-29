@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // UNCOMMENT the following line if your site will be hosted at https://username.github.io/repo-name
+  // NO basePath needed as this site is hosted at the root (tanchu1234.github.io)
   // basePath: "/repo-name",
 };
 
