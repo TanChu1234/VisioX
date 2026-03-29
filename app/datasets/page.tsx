@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import BlueprintGrid from "@/components/BlueprintGrid";
 import { 
   Plus, 
@@ -85,69 +86,70 @@ export default function DatasetsPage() {
         {/* Dataset Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10">
           {DATASETS.map((dataset, i) => (
-            <motion.div
-              key={dataset.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -8 }}
-              className="bg-white rounded-3xl border border-stone-200 p-2 group cursor-pointer shadow-sm hover:shadow-2xl hover:border-orange-500/20 transition-all duration-300 relative"
-            >
-              {/* Image Preview Container */}
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100 mb-4">
-                <img 
-                  src={dataset.preview} 
-                  alt={dataset.name} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                />
-                
-                {/* Overlay Icons */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                   <button className="p-3 bg-white text-stone-900 rounded-2xl hover:bg-orange-500 hover:text-white transition-all shadow-xl">
-                      <Download className="w-5 h-5" />
-                   </button>
-                   <button className="p-3 bg-white text-stone-900 rounded-2xl hover:bg-[#6735E0] hover:text-white transition-all shadow-xl">
-                      <Tag className="w-5 h-5" />
-                   </button>
+            <Link key={dataset.id} href={`/datasets/${dataset.id}`}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                whileHover={{ y: -8 }}
+                className="bg-white rounded-3xl border border-stone-200 p-2 group cursor-pointer shadow-sm hover:shadow-2xl hover:border-orange-500/20 transition-all duration-300 relative"
+              >
+                {/* Image Preview Container */}
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100 mb-4">
+                  <img 
+                    src={dataset.preview} 
+                    alt={dataset.name} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  />
+                  
+                  {/* Overlay Icons */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                     <button className="p-3 bg-white text-stone-900 rounded-2xl hover:bg-orange-500 hover:text-white transition-all shadow-xl">
+                        <Download className="w-5 h-5" />
+                     </button>
+                     <button className="p-3 bg-white text-stone-900 rounded-2xl hover:bg-[#6735E0] hover:text-white transition-all shadow-xl">
+                        <Tag className="w-5 h-5" />
+                     </button>
+                  </div>
+
+                  {/* Status Badge */}
+                  <div className="absolute top-3 left-3 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-[9px] font-bold text-stone-900 shadow-sm flex items-center gap-1.5 border border-white/40">
+                     <div className={`w-1.5 h-1.5 rounded-full ${dataset.status === 'Ready' ? 'bg-green-500' : dataset.status === 'Annotating' ? 'bg-[#6735E0] animate-pulse' : 'bg-stone-300'}`} />
+                     {dataset.status}
+                  </div>
                 </div>
 
-                {/* Status Badge */}
-                <div className="absolute top-3 left-3 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-[9px] font-bold text-stone-900 shadow-sm flex items-center gap-1.5 border border-white/40">
-                   <div className={`w-1.5 h-1.5 rounded-full ${dataset.status === 'Ready' ? 'bg-green-500' : dataset.status === 'Annotating' ? 'bg-[#6735E0] animate-pulse' : 'bg-stone-300'}`} />
-                   {dataset.status}
-                </div>
-              </div>
+                {/* Info Area */}
+                <div className="px-4 pb-4">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="font-bold text-stone-900 group-hover:text-orange-600 transition-colors truncate pr-2">{dataset.name}</h3>
+                    <MoreVertical className="w-4 h-4 text-stone-400 group-hover:text-stone-900" />
+                  </div>
 
-              {/* Info Area */}
-              <div className="px-4 pb-4">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="font-bold text-stone-900 group-hover:text-orange-600 transition-colors truncate pr-2">{dataset.name}</h3>
-                  <MoreVertical className="w-4 h-4 text-stone-400 group-hover:text-stone-900" />
+                  <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-stone-400">
+                     <div className="flex items-center gap-1.5">
+                        <ImageIcon className="w-3 h-3" />
+                        <span className="text-stone-900">{dataset.images.toLocaleString()}</span>
+                     </div>
+                     <div className="flex items-center gap-1.5">
+                        <Tag className="w-3 h-3" />
+                        <span className="text-stone-900">{dataset.classes} Classes</span>
+                     </div>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-stone-50 flex justify-between items-center">
+                     <div className="flex items-center gap-1.5">
+                        <Clock className="w-3 h-3 text-stone-400" />
+                        <span className="text-[10px] font-medium text-stone-500">Modified {dataset.lastModified}</span>
+                     </div>
+                     {dataset.status === 'Ready' && <CheckCircle2 className="w-4 h-4 text-green-500" />}
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-stone-400">
-                   <div className="flex items-center gap-1.5">
-                      <ImageIcon className="w-3 h-3" />
-                      <span className="text-stone-900">{dataset.images.toLocaleString()}</span>
-                   </div>
-                   <div className="flex items-center gap-1.5">
-                      <Tag className="w-3 h-3" />
-                      <span className="text-stone-900">{dataset.classes} Classes</span>
-                   </div>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-stone-50 flex justify-between items-center">
-                   <div className="flex items-center gap-1.5">
-                      <Clock className="w-3 h-3 text-stone-400" />
-                      <span className="text-[10px] font-medium text-stone-500">Modified {dataset.lastModified}</span>
-                   </div>
-                   {dataset.status === 'Ready' && <CheckCircle2 className="w-4 h-4 text-green-500" />}
-                </div>
-              </div>
-
-              {/* Interactive border effect */}
-              <div className="absolute inset-0 border-2 border-orange-500 rounded-3xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none" />
-            </motion.div>
+                {/* Interactive border effect */}
+                <div className="absolute inset-0 border-2 border-orange-500 rounded-3xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none" />
+              </motion.div>
+            </Link>
           ))}
           
           {/* Create New Card */}
