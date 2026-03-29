@@ -96,7 +96,7 @@ export default function Home() {
   const slideNames = ["Hero", "Features", "Impact", "CTA", "Partners"];
 
   return (
-    <div className="h-screen overflow-y-scroll snap-y snap-proximity scroll-smooth relative">
+    <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth relative">
       {/* Side Navigation Dots */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-6 p-4 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-2xl">
         <div className="absolute top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-orange-500/30 to-transparent" />
@@ -124,10 +124,11 @@ export default function Home() {
       <motion.section
         id="slide-0"
         onViewportEnter={() => setActiveSlide(0)}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: false, amount: 0.4 }}
+        layout
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.5 }}
         className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
       >
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -285,10 +286,11 @@ export default function Home() {
       <motion.section
         id="slide-1"
         onViewportEnter={() => setActiveSlide(1)}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: false, amount: 0.4 }}
+        layout
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.5 }}
         className="h-screen snap-start bg-[#fcfaf7] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden pt-16"
       >
         <div className="max-w-7xl mx-auto w-full text-center">
@@ -375,10 +377,11 @@ export default function Home() {
       <motion.section
         id="slide-2"
         onViewportEnter={() => setActiveSlide(2)}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: false, amount: 0.4 }}
+        layout
+        initial={{ opacity: 0, scale: 1.05 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.5 }}
         className="h-screen snap-start bg-stone-900 flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-orange-900/40 via-stone-900 to-black"></div>
@@ -417,10 +420,11 @@ export default function Home() {
       <motion.section
         id="slide-3"
         onViewportEnter={() => setActiveSlide(3)}
-        initial={{ opacity: 0, y: 24 }}
+        layout
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: false, amount: 0.4 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.5 }}
         className="h-screen snap-start bg-gradient-to-br from-[#FF7300] via-[#E66700] to-[#F1A222] flex items-center justify-center px-6 lg:px-8 relative overflow-hidden"
       >
         <div className="absolute inset-0">
@@ -454,10 +458,11 @@ export default function Home() {
       <motion.section
         id="slide-4"
         onViewportEnter={() => setActiveSlide(4)}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: false, amount: 0.35 }}
+        layout
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.4 }}
         className="h-screen snap-start bg-[#f5f2ed] flex flex-col pt-8 overflow-hidden"
       >
         <div className="flex-grow flex items-center justify-center px-6 lg:px-8 overflow-hidden">
