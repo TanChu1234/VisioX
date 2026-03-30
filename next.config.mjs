@@ -1,6 +1,5 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   // Enables statically exporting the application into the `/out` directory required for GitHub Pages
   output: "export",
   // GitHub Pages cannot run the Next.js image optimization server, so we must output raw images
