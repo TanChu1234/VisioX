@@ -516,7 +516,7 @@ export default function Home() {
               {["yaskawa", "siemens", "abb", "bosch"].map((logo) => (
                 <div key={logo} className="group flex items-center justify-center">
                   <img
-                    src={`/logos/${logo}.svg`}
+                    src={assetPath(`/logos/${logo}.svg`)}
                     alt={logo}
                     className="
                       h-8 lg:h-9
