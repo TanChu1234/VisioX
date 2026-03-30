@@ -6,12 +6,18 @@ import Link from "next/link";
 import Badge from "@/components/Badge";
 import { useAuth } from "@/lib/auth";
 import { assetPath } from "@/lib/assets";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [demoIndex, setDemoIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [hoveredPartner, setHoveredPartner] = useState<string | null>(null);
+  const [autoHoveredPartnerIndex, setAutoHoveredPartnerIndex] = useState(0);
   const { isLoggedIn } = useAuth();
+  const PRIMARY_PARTNERS = ["nvidia", "intel", "apple", "google", "microsoft"];
+  const SECONDARY_PARTNERS = ["yaskawa", "siemens", "abb", "bosch"];
+  const ALL_PARTNERS = [...PRIMARY_PARTNERS, ...SECONDARY_PARTNERS];
 
   const DEMO_IMAGES = [
     {
@@ -94,10 +100,18 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [DEMO_IMAGES.length, isPaused]);
 
+  useEffect(() => {
+    if (hoveredPartner) return;
+    const timer = setInterval(() => {
+      setAutoHoveredPartnerIndex((prev) => (prev + 1) % ALL_PARTNERS.length);
+    }, 1200);
+    return () => clearInterval(timer);
+  }, [ALL_PARTNERS.length, hoveredPartner]);
+
   const slideNames = ["Hero", "Features", "Impact", "CTA", "Partners"];
 
   return (
-    <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth relative">
+    <div className="h-screen overflow-y-scroll overflow-x-hidden snap-y snap-mandatory scroll-smooth relative w-full">
       {/* Side Navigation Dots */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-6 p-4 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-2xl">
         <div className="absolute top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-orange-500/30 to-transparent" />
@@ -157,16 +171,16 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link href={isLoggedIn ? "/overview" : "/login"} className="w-full sm:w-auto">
-                    <button className="group w-full sm:w-56 h-16 px-8 
+                  <button className="group w-full sm:w-56 h-16 px-8 
                                     bg-gradient-to-r from-orange-600 to-orange-400 
                                     hover:scale-105 active:scale-95 hover:from-orange-400 hover:to-orange-300 
                                     text-white rounded-2xl transition-all duration-300 font-semibold text-lg flex 
                                     items-center justify-center gap-2 shadow-xl shadow-orange-500/30">
                     <span>{isLoggedIn ? "Go to Workspace" : "Start Free Trial"}</span>
                     <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
-                    </button>
+                  </button>
                 </Link>
 
                 <button className="w-full sm:w-56 h-16 px-8 bg-white hover:bg-gray-100 hover:scale-105 active:scale-95 text-stone-900 rounded-2xl transition-all duration-300 font-semibold text-lg border-2 border-stone-200 backdrop-blur-sm">
@@ -464,9 +478,9 @@ export default function Home() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: false, amount: 0.4 }}
-        className="h-screen snap-start bg-[#f5f2ed] flex flex-col pt-8 overflow-hidden"
+        className="min-h-screen snap-start bg-[#f5f2ed] flex flex-col pt-8"
       >
-        <div className="flex-grow flex items-center justify-center px-6 lg:px-8 overflow-hidden">
+        <div className="flex-grow flex items-center justify-center px-6 lg:px-8 pb-12">
           <div className="max-w-7xl mx-auto w-full py-8 text-center">
 
             {/* Title */}
@@ -487,48 +501,58 @@ export default function Home() {
 
             {/* Primary Partners */}
             <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-20">
-              {[
-                "nvidia",
-                "intel",
-                "apple",
-                "google",
-                "microsoft",
-              ].map((logo) => (
-                <div key={logo} className="group flex items-center justify-center">
+              {PRIMARY_PARTNERS.map((logo) => {
+                const isActive = hoveredPartner ? hoveredPartner === logo : ALL_PARTNERS[autoHoveredPartnerIndex] === logo;
+
+                return (
+                <div
+                  key={logo}
+                  className="group flex items-center justify-center"
+                  onMouseEnter={() => setHoveredPartner(logo)}
+                  onMouseLeave={() => setHoveredPartner(null)}
+                >
                   <img
                     src={assetPath(`/logos/${logo}.svg`)}
                     alt={logo}
-                    className="
+                    className={`
                       h-10 lg:h-12
-                      opacity-60 grayscale
+                      ${isActive ? "opacity-100 grayscale-0 scale-110" : "opacity-60 grayscale"}
                       transition-all duration-500
                       group-hover:opacity-100
                       group-hover:grayscale-0
                       group-hover:scale-110
-                    "
+                    `}
                   />
                 </div>
-              ))}
+              )})}
             </div>
 
             {/* Secondary Partners */}
             <div className="mt-20 flex flex-wrap justify-center items-center gap-12 lg:gap-16">
-              {["yaskawa", "siemens", "abb", "bosch"].map((logo) => (
-                <div key={logo} className="group flex items-center justify-center">
+              {SECONDARY_PARTNERS.map((logo) => {
+                const isActive = hoveredPartner ? hoveredPartner === logo : ALL_PARTNERS[autoHoveredPartnerIndex] === logo;
+
+                return (
+                <div
+                  key={logo}
+                  className="group flex items-center justify-center"
+                  onMouseEnter={() => setHoveredPartner(logo)}
+                  onMouseLeave={() => setHoveredPartner(null)}
+                >
                   <img
                     src={assetPath(`/logos/${logo}.svg`)}
                     alt={logo}
-                    className="
+                    className={`
                       h-8 lg:h-9
-                      opacity-40 grayscale
+                      ${isActive ? "opacity-90 grayscale-0 scale-110" : "opacity-40 grayscale"}
                       transition-all duration-500
                       group-hover:opacity-90
                       group-hover:grayscale-0
                       group-hover:scale-110
-                    "
+                    `}
                   />
                 </div>
-              ))}
+              )})}
             </div>
 
             {/* View Applications Button */}
@@ -550,8 +574,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-auto hidden">
-          {/* Footer removed to avoid duplication with LayoutShell */}
+        <div className="mt-auto w-full">
+          <Footer />
         </div>
       </motion.section>
     </div>

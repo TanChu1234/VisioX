@@ -57,11 +57,14 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
   }
 
   // ── Public marketing pages — Header + Footer ───────────────────
+  // The home page has its own full-screen snap container and renders the Footer internally.
+  const isHomePage = pathname === "/" || pathname === "/VisioX" || pathname === "/VisioX/";
+
   return (
     <div className="flex flex-col min-h-screen bg-[#fcfaf7]">
       <Header />
       <main className="flex-grow">{children}</main>
-      <Footer />
+      {!isHomePage && <Footer />}
     </div>
   );
 }
