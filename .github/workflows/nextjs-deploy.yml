@@ -39,17 +39,18 @@ jobs:
           node-version: "20"
           cache: 'pnpm'
           
-      - name: Setup Pages
+      - name: Settings up Pages
         uses: actions/configure-pages@v4
+        with:
+          # Automatically inject basePath in your next.config.mjs based on the GitHub repository name
+          # This saves you from manually having to configure paths when deploying a project page
+          static_site_generator: next
           
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         
       - name: Build with Next.js
         run: pnpm run build
-        
-      - name: Debug Output
-        run: ls -la ./out || ls -la .
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -64,6 +65,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
