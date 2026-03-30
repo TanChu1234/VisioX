@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
+
+const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+const repo = isGithubActions ? process.env.GITHUB_REPOSITORY.split('/')[1] : "";
+const basePath = repo && !repo.endsWith('.github.io') ? `/${repo}` : "";
+
 const nextConfig = {
   // Enables statically exporting the application into the `/out` directory required for GitHub Pages
   output: "export",
@@ -6,8 +11,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // NO basePath needed as this site is hosted at the root (tanchu1234.github.io)
-  // basePath: "/repo-name",
+  // Automatically set the base path for GitHub Pages based on the repository name if in CI
+  basePath: basePath,
 };
 
 export default nextConfig;
