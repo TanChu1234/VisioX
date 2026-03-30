@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Footer from "@/components/Footer";
+import Badge from "@/components/Badge";
 
 const solutions = [
     {
@@ -10,63 +10,72 @@ const solutions = [
         description: "Streamline production lines with AI-powered inspection, assembly verification, and predictive maintenance.",
         image: "/solutions/manufacturing.png",
         href: "/solutions/manufacturing-industrial",
-        color: "from-blue-600 to-cyan-400"
+        color: "from-blue-600 to-cyan-400",
+        accentHex: "#2563EB"
     },
     {
         title: "Surveillance & Security",
         description: "Advanced threat detection, perimeter security, and real-time monitoring for safer environments.",
         image: "/solutions/surveillance.png",
         href: "/solutions/surveillance-security",
-        color: "from-slate-700 to-slate-900"
+        color: "from-slate-700 to-slate-900",
+        accentHex: "#334155"
     },
     {
         title: "Transportation & Smart Cities",
         description: "Optimize traffic flow, autonomous vehicle navigation, and intelligent public infrastructure monitoring.",
         image: "/solutions/transportation.png",
         href: "/solutions/transportation-smart-cities",
-        color: "from-orange-600 to-amber-400"
+        color: "from-orange-600 to-amber-400",
+        accentHex: "#EA580C"
     },
     {
         title: "Healthcare & Medical",
         description: "AI-assisted diagnostics, surgical robot guidance, and patient monitoring for improved health outcomes.",
         image: "/solutions/healthcare.png",
         href: "/solutions/healthcare-medical",
-        color: "from-emerald-500 to-teal-400"
+        color: "from-emerald-500 to-teal-400",
+        accentHex: "#10B981"
     },
     {
         title: "Retail & Commerce",
         description: "Transform shopping experiences with automated checkout, shelf-stock analysis, and customer insights.",
         image: "/solutions/retail.png",
         href: "/solutions/retail-commerce",
-        color: "from-rose-500 to-pink-400"
+        color: "from-rose-500 to-pink-400",
+        accentHex: "#E11D48"
     },
     {
         title: "Robotics & Automation",
         description: "Seamlessly integrate vision-guided robots for bin picking, palletizing, and warehouse logistics.",
         image: "/solutions/robotics.png",
         href: "/solutions/robotics-automation",
-        color: "from-violet-600 to-purple-400"
+        color: "from-violet-600 to-purple-400",
+        accentHex: "#8B5CF6"
     },
     {
         title: "Smart Agriculture",
         description: "Maximize yields with crop health monitoring, precision irrigation, and automated harvesting systems.",
         image: "/solutions/agriculture.png",
         href: "/solutions/smart-agriculture",
-        color: "from-green-600 to-lime-400"
+        color: "from-green-600 to-lime-400",
+        accentHex: "#16A34A"
     },
     {
         title: "Logistics & Warehousing",
         description: "Efficient sorting, package tracking, and automated storage and retrieval using intelligent vision.",
         image: "/solutions/logistics.png",
         href: "/solutions/logistics-warehousing",
-        color: "from-indigo-600 to-blue-400"
+        color: "from-indigo-600 to-blue-400",
+        accentHex: "#4F46E5"
     },
     {
         title: "Entertainment & Sports",
         description: "Enhanced viewer experiences through player tracking, AR broadcasts, and fan engagement tools.",
         image: "/solutions/entertainment.png",
         href: "/solutions/entertainment-sports",
-        color: "from-yellow-500 to-orange-400"
+        color: "from-yellow-500 to-orange-400",
+        accentHex: "#EAB308"
     }
 ];
 
@@ -86,9 +95,9 @@ export default function SolutionsPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-orange-600 uppercase bg-orange-50 rounded-full border border-orange-100">
+                        <Badge className="mb-6">
                             Industry Applications
-                        </span>
+                        </Badge>
                         <h1 className="text-5xl lg:text-7xl font-bold text-stone-900 mb-6 tracking-tight">
                             Intelligent Solutions for{" "}
                             <span className="bg-gradient-to-r from-[#FF7300] to-[#F1A222] bg-clip-text text-transparent">
@@ -136,9 +145,9 @@ export default function SolutionsPage() {
 
                                         {/* Tag */}
                                         <div className="absolute top-4 left-4">
-                                            <div className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-xs font-bold text-stone-900 shadow-sm border border-stone-100">
+                                            <Badge accentHex={solution.accentHex}>
                                                 {solution.title.split(' & ')[0]}
-                                            </div>
+                                            </Badge>
                                         </div>
                                     </div>
 
@@ -183,8 +192,6 @@ export default function SolutionsPage() {
                     </div>
                 </div>
             </section>
-
-            <Footer />
         </div>
     );
 }
