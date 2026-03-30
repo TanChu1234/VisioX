@@ -1,45 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Users, Globe, Trophy, Cpu, Lightbulb, MapPin, Award, ArrowRight } from "lucide-react";
+import React from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { Target, Cpu, Globe, ArrowRight } from 'lucide-react';
 
-export default function CompanyPage() {
-  const sections = [
-    {
-      title: "Origins and Expertise",
-      subtitle: "Pioneers in 3D Vision & Industrial AI",
-      content: "VisioX was founded with a clear mandate: to become a global leader in 3D vision, industrial AI, and augmented intelligence. We engineer industry-leading deep learning software platforms and advanced 3D camera pipelines for extreme industrial automation and process optimization. With our award-winning suite of AI-powered machine vision solutions, VisioX is committed to boosting productivity, profitability, and operational efficiency for our customers. As automation requirements become increasingly complex, our expertise in AI inspection and robotics positions us at the forefront of the industry.",
-      icon: <Lightbulb className="w-8 h-8 text-orange-500" />,
-      image: "/solutions/robotics-automation.jpg",
-      reverse: false
-    },
-    {
-      title: "Innovative Automation Solutions",
-      subtitle: "Empowering your project success",
-      content: "VisioX provides cutting-edge industrial AI solutions, supported by our international team of expert field application engineers. We offer a full range of project support services, from feasibility studies and free proof-of-concept deployments to guidance on complete automation challenges. Whether it's defect detection, vision-guided robotics, or bin picking, we ensure your success and help you achieve your project goals.",
-      icon: <Cpu className="w-8 h-8 text-orange-500" />,
-      image: "/solutions/manufacturing-industrial.jpg",
-      reverse: true
-    },
-    {
-      title: "Global Customer Support",
-      subtitle: "Worldwide Network",
-      content: "Headquartered in San Francisco, with branch offices and technical affiliates in North America, Europe, Latin America, and across the Asia-Pacific, VisioX delivers comprehensive AI and 3D vision solutions. We support our international customer base through a highly vetted global network of partners and systems integrators, ensuring you have local support no matter where your factories are located.",
-      icon: <MapPin className="w-8 h-8 text-orange-500" />,
-      image: "/solutions/transportation-smart-cities.jpg",
-      reverse: false
-    },
-    {
-      title: "Awards and Accolades",
-      subtitle: "Recognized for Innovation",
-      content: "Recognized for relentless innovation, VisioX has earned top-tier awards from global design and engineering councils for our AI and 3D vision solutions. We are dedicated to continuing to push the boundaries of what's possible, providing our world-leading industrial AI solutions to customers globally without compromising on quality or usability.",
-      icon: <Award className="w-8 h-8 text-orange-500" />,
-      image: "/solutions/healthcare-medical.jpg",
-      reverse: true
-    }
-  ];
+const sections = [
+  {
+    subtitle: "Our Mission",
+    title: "Intelligence for Every Vision",
+    content: "We believe that powerful computer vision shouldn't be restricted to tech giants. VisioX is building the infrastructure to make advanced visual AI accessible to engineers and innovators everywhere.",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200",
+    icon: <Target className="w-8 h-8 text-orange-600" />,
+    reverse: false
+  },
+  {
+    subtitle: "Technology",
+    title: "Built for Performance",
+    content: "Our platform leverages cutting-edge algorithms and GPU acceleration to provide real-time inference and seamless annotation of massive datasets, whether in the cloud or on the edge.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+    icon: <Cpu className="w-8 h-8 text-orange-600" />,
+    reverse: true
+  },
+  {
+    subtitle: "Global Reach",
+    title: "Scaling Automation Globally",
+    content: "From manufacturing plants in Asia to logistics hubs in Europe, VisioX powers vision systems that handle the world's most complex automation challenges.",
+    image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=80&w=1200",
+    icon: <Globe className="w-8 h-8 text-orange-600" />,
+    reverse: false
+  }
+];
 
+export default function Page() {
   return (
     <div className="bg-[#fcfaf7] min-h-screen">
       {/* Hero Section */}
