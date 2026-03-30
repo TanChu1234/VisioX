@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { assetPath } from "@/lib/assets";
 
 export default function Footer() {
     return (
@@ -11,7 +12,7 @@ export default function Footer() {
                         <Link href="/" className="inline-block">
                             <div className="flex items-center space-x-3 mb-6 group cursor-pointer animate-float hover:[animation-play-state:paused]">
                                 <img
-                                    src="/logos/visiox_text.png"
+                                    src={assetPath("/logos/visiox_text.png")}
                                     alt="VisioX Logo"
                                     className="
                                         h-12 w-auto object-contain

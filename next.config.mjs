@@ -13,6 +13,10 @@ const nextConfig = {
   },
   // Automatically set the base path for GitHub Pages based on the repository name if in CI
   basePath: basePath,
+  // Expose basePath to client-side code for <img> src prefixing
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 };
 
 export default nextConfig;

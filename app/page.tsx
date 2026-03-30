@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Badge from "@/components/Badge";
 import { useAuth } from "@/lib/auth";
+import { assetPath } from "@/lib/assets";
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -16,7 +17,7 @@ export default function Home() {
     {
       id: 1,
       title: "Surveillance",
-      src: "/demo/surveillance.png",
+      src: assetPath("/demo/surveillance.png"),
       boxes: [
         { id: 1, label: "OK", top: "28%", left: "19%", width: "16%", height: "44%", color: "#00ff4cff" },
         { id: 2, label: "No PPE", top: "30%", left: "80%", width: "13%", height: "42%", color: "#ff0000ff" }
@@ -25,7 +26,7 @@ export default function Home() {
     {
       id: 2,
       title: "Agriculture",
-      src: "/demo/agriculture.png",
+      src: assetPath("/demo/agriculture.png"),
       boxes: [
         { id: 1, label: "Apple", top: "4%", left: "22.5%", width: "7%", height: "9%", color: "#00ff4cff" },
         { id: 2, label: "Apple", top: "12%", left: "3%", width: "9%", height: "13%", color: "#00ff4cff" },
@@ -38,7 +39,7 @@ export default function Home() {
     {
       id: 3,
       title: "Robotics",
-      src: "/demo/robotics.png",
+      src: assetPath("/demo/robotics.png"),
       boxes: [
         { id: 1, label: "Baseball", top: "48%", left: "51%", width: "17%", height: "23%", color: "#FBBF24" },
         { id: 2, label: "Baseball", top: "68%", left: "42%", width: "19%", height: "24%", color: "#FBBF24" },
@@ -48,7 +49,7 @@ export default function Home() {
     {
       id: 4,
       title: "Manufacturing",
-      src: "/demo/manufacturing.png",
+      src: assetPath("/demo/manufacturing.png"),
       boxes: [
         { id: 1, label: "Blister Pack", top: "7%", left: "14%", width: "73%", height: "84%", color: "#4866ecff" },
         { id: 2, label: "OK", top: "20%", left: "18%", width: "11%", height: "7%", color: "#00ff4cff" },
@@ -72,7 +73,7 @@ export default function Home() {
     {
       id: 5,
       title: "Transportation",
-      src: "/demo/transportation.png",
+      src: assetPath("/demo/transportation.png"),
       boxes: [
         { id: 1, label: "Car", top: "44%", left: "16%", width: "10%", height: "8%", color: "#f63b3bff" },
         { id: 2, label: "Car", top: "50%", left: "32.7%", width: "8%", height: "11.5%", color: "#f63b3bff" },
@@ -495,7 +496,7 @@ export default function Home() {
               ].map((logo) => (
                 <div key={logo} className="group flex items-center justify-center">
                   <img
-                    src={`/logos/${logo}.svg`}
+                    src={assetPath(`/logos/${logo}.svg`)}
                     alt={logo}
                     className="
                       h-10 lg:h-12

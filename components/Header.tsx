@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
 import { useAuth } from "@/lib/auth";
+import { assetPath } from "@/lib/assets";
 
 export default function Header() {
     const { isLoggedIn } = useAuth();
@@ -54,7 +55,7 @@ export default function Header() {
                             className="flex items-center space-x-3 cursor-pointer"
                         >
                             <motion.img
-                                src="/logos/text.png"
+                                src={assetPath("/logos/text.png")}
                                 alt="VisioX Logo"
                                 className="h-15 w-auto object-contain"
                                 whileHover={{
