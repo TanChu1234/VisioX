@@ -1,4 +1,36 @@
-import Footer from "@/components/Footer";
+"use client";
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { Target, Cpu, Globe, ArrowRight } from 'lucide-react';
+
+const sections = [
+  {
+    subtitle: "Our Mission",
+    title: "Intelligence for Every Vision",
+    content: "We believe that powerful computer vision shouldn't be restricted to tech giants. VisioX is building the infrastructure to make advanced visual AI accessible to engineers and innovators everywhere.",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200",
+    icon: <Target className="w-8 h-8 text-orange-600" />,
+    reverse: false
+  },
+  {
+    subtitle: "Technology",
+    title: "Built for Performance",
+    content: "Our platform leverages cutting-edge algorithms and GPU acceleration to provide real-time inference and seamless annotation of massive datasets, whether in the cloud or on the edge.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+    icon: <Cpu className="w-8 h-8 text-orange-600" />,
+    reverse: true
+  },
+  {
+    subtitle: "Global Reach",
+    title: "Scaling Automation Globally",
+    content: "From manufacturing plants in Asia to logistics hubs in Europe, VisioX powers vision systems that handle the world's most complex automation challenges.",
+    image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=80&w=1200",
+    icon: <Globe className="w-8 h-8 text-orange-600" />,
+    reverse: false
+  }
+];
 
 export default function Page() {
   return (
