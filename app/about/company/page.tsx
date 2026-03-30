@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 
 export default function Page() {
+
   return (
     <div className="bg-[#fcfaf7] min-h-screen flex flex-col">
       <main className="flex-grow pt-32 pb-20 px-6 lg:px-8">
