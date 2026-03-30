@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Badge from "@/components/Badge";
+import { assetPath } from "@/lib/assets";
 
 const solutions = [
     {
         title: "Manufacturing & Industrial",
         description: "Streamline production lines with AI-powered inspection, assembly verification, and predictive maintenance.",
-        image: "/solutions/manufacturing.png",
+        image: assetPath("/solutions/manufacturing.png"),
         href: "/solutions/manufacturing-industrial",
         color: "from-blue-600 to-cyan-400",
         accentHex: "#2563EB"
@@ -16,7 +17,7 @@ const solutions = [
     {
         title: "Surveillance & Security",
         description: "Advanced threat detection, perimeter security, and real-time monitoring for safer environments.",
-        image: "/solutions/surveillance.png",
+        image: assetPath("/solutions/surveillance.png"),
         href: "/solutions/surveillance-security",
         color: "from-slate-700 to-slate-900",
         accentHex: "#334155"
@@ -24,7 +25,7 @@ const solutions = [
     {
         title: "Transportation & Smart Cities",
         description: "Optimize traffic flow, autonomous vehicle navigation, and intelligent public infrastructure monitoring.",
-        image: "/solutions/transportation.png",
+        image: assetPath("/solutions/transportation.png"),
         href: "/solutions/transportation-smart-cities",
         color: "from-orange-600 to-amber-400",
         accentHex: "#EA580C"
@@ -32,7 +33,7 @@ const solutions = [
     {
         title: "Healthcare & Medical",
         description: "AI-assisted diagnostics, surgical robot guidance, and patient monitoring for improved health outcomes.",
-        image: "/solutions/healthcare.png",
+        image: assetPath("/solutions/healthcare.png"),
         href: "/solutions/healthcare-medical",
         color: "from-emerald-500 to-teal-400",
         accentHex: "#10B981"
@@ -40,7 +41,7 @@ const solutions = [
     {
         title: "Retail & Commerce",
         description: "Transform shopping experiences with automated checkout, shelf-stock analysis, and customer insights.",
-        image: "/solutions/retail.png",
+        image: assetPath("/solutions/retail.png"),
         href: "/solutions/retail-commerce",
         color: "from-rose-500 to-pink-400",
         accentHex: "#E11D48"
@@ -48,7 +49,7 @@ const solutions = [
     {
         title: "Robotics & Automation",
         description: "Seamlessly integrate vision-guided robots for bin picking, palletizing, and warehouse logistics.",
-        image: "/solutions/robotics.png",
+        image: assetPath("/solutions/robotics.png"),
         href: "/solutions/robotics-automation",
         color: "from-violet-600 to-purple-400",
         accentHex: "#8B5CF6"
@@ -56,7 +57,7 @@ const solutions = [
     {
         title: "Smart Agriculture",
         description: "Maximize yields with crop health monitoring, precision irrigation, and automated harvesting systems.",
-        image: "/solutions/agriculture.png",
+        image: assetPath("/solutions/agriculture.png"),
         href: "/solutions/smart-agriculture",
         color: "from-green-600 to-lime-400",
         accentHex: "#16A34A"
@@ -64,7 +65,7 @@ const solutions = [
     {
         title: "Logistics & Warehousing",
         description: "Efficient sorting, package tracking, and automated storage and retrieval using intelligent vision.",
-        image: "/solutions/logistics.png",
+        image: assetPath("/solutions/logistics.png"),
         href: "/solutions/logistics-warehousing",
         color: "from-indigo-600 to-blue-400",
         accentHex: "#4F46E5"
@@ -72,7 +73,7 @@ const solutions = [
     {
         title: "Entertainment & Sports",
         description: "Enhanced viewer experiences through player tracking, AR broadcasts, and fan engagement tools.",
-        image: "/solutions/entertainment.png",
+        image: assetPath("/solutions/entertainment.png"),
         href: "/solutions/entertainment-sports",
         color: "from-yellow-500 to-orange-400",
         accentHex: "#EAB308"
