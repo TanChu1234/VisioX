@@ -39,12 +39,8 @@ jobs:
           node-version: "20"
           cache: 'pnpm'
           
-      - name: Settings up Pages
+      - name: Setup Pages
         uses: actions/configure-pages@v4
-        with:
-          # Automatically inject basePath in your next.config.mjs based on the GitHub repository name
-          # This saves you from manually having to configure paths when deploying a project page
-          static_site_generator: next
           
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
