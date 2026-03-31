@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Badge from "@/components/Badge";
 import { useAuth } from "@/lib/auth";
@@ -15,6 +15,7 @@ export default function Home() {
   const [hoveredPartner, setHoveredPartner] = useState<string | null>(null);
   const [autoHoveredPartnerIndex, setAutoHoveredPartnerIndex] = useState(0);
   const { isLoggedIn } = useAuth();
+  const containerRef = useRef<HTMLDivElement>(null);
   const PRIMARY_PARTNERS = ["nvidia", "intel", "apple", "google", "microsoft"];
   const SECONDARY_PARTNERS = ["yaskawa", "siemens", "abb", "bosch"];
   const ALL_PARTNERS = [...PRIMARY_PARTNERS, ...SECONDARY_PARTNERS];
@@ -100,13 +101,7 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [DEMO_IMAGES.length, isPaused]);
 
-  useEffect(() => {
-    if (hoveredPartner) return;
-    const timer = setInterval(() => {
-      setAutoHoveredPartnerIndex((prev) => (prev + 1) % ALL_PARTNERS.length);
-    }, 1200);
-    return () => clearInterval(timer);
-  }, [ALL_PARTNERS.length, hoveredPartner]);
+  // Removed timer-based auto hover in favor of position-based tracking in the roll
 
   const slideNames = ["Hero", "Features", "Impact", "CTA", "Partners"];
 
@@ -478,9 +473,9 @@ export default function Home() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: false, amount: 0.4 }}
-        className="min-h-screen snap-start bg-[#f5f2ed] flex flex-col pt-8"
+        className="min-h-screen snap-start bg-[#f5f2ed] flex flex-col pt-16"
       >
-        <div className="flex-grow flex items-center justify-center px-6 lg:px-8 pb-12">
+        <div className="flex-grow flex items-center justify-center px-6 lg:px-8">
           <div className="max-w-7xl mx-auto w-full py-8 text-center">
 
             {/* Title */}
@@ -499,60 +494,80 @@ export default function Home() {
             {/* Divider */}
             <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mb-14" />
 
-            {/* Primary Partners */}
-            <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-20">
-              {PRIMARY_PARTNERS.map((logo) => {
-                const isActive = hoveredPartner ? hoveredPartner === logo : ALL_PARTNERS[autoHoveredPartnerIndex] === logo;
+            {/* Partner Logo Roll */}
+            <div className="relative mt-20 w-full overflow-hidden py-10">
+              {/* Fade masks for left/right edges */}
+              <div className="absolute left-0 top-0 bottom-0 w-32 lg:w-48 bg-gradient-to-r from-[#f5f2ed] to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-32 lg:w-48 bg-gradient-to-l from-[#f5f2ed] to-transparent z-10 pointer-events-none" />
+              
+              <motion.div
+                ref={containerRef}
+                className="flex whitespace-nowrap gap-16 lg:gap-24 items-center w-max"
+                animate={{
+                  x: ["-50%", "0%"]
+                }}
+                onUpdate={(latest) => {
+                  if (typeof latest.x !== "string" || !containerRef.current) return;
+                  
+                  const container = containerRef.current;
+                  const rect = container.getBoundingClientRect();
+                  const centerLine = window.innerWidth / 2;
+                  
+                  const children = container.children;
+                  let closestVal = Infinity;
+                  let closestIndex = 0;
 
-                return (
-                <div
-                  key={logo}
-                  className="group flex items-center justify-center"
-                  onMouseEnter={() => setHoveredPartner(logo)}
-                  onMouseLeave={() => setHoveredPartner(null)}
-                >
-                  <img
-                    src={assetPath(`/logos/${logo}.svg`)}
-                    alt={logo}
-                    className={`
-                      h-10 lg:h-12
-                      ${isActive ? "opacity-100 grayscale-0 scale-110" : "opacity-60 grayscale"}
-                      transition-all duration-500
-                      group-hover:opacity-100
-                      group-hover:grayscale-0
-                      group-hover:scale-110
-                    `}
-                  />
-                </div>
-              )})}
-            </div>
+                  for (let i = 0; i < children.length; i++) {
+                    const childRect = children[i].getBoundingClientRect();
+                    const childCenter = childRect.left + childRect.width / 2;
+                    const distance = Math.abs(centerLine - childCenter);
+                    
+                    if (distance < closestVal) {
+                      closestVal = distance;
+                      closestIndex = i % 9; // Modulo by total partners (9)
+                    }
+                  }
 
-            {/* Secondary Partners */}
-            <div className="mt-20 flex flex-wrap justify-center items-center gap-12 lg:gap-16">
-              {SECONDARY_PARTNERS.map((logo) => {
-                const isActive = hoveredPartner ? hoveredPartner === logo : ALL_PARTNERS[autoHoveredPartnerIndex] === logo;
-
-                return (
-                <div
-                  key={logo}
-                  className="group flex items-center justify-center"
-                  onMouseEnter={() => setHoveredPartner(logo)}
-                  onMouseLeave={() => setHoveredPartner(null)}
-                >
-                  <img
-                    src={assetPath(`/logos/${logo}.svg`)}
-                    alt={logo}
-                    className={`
-                      h-8 lg:h-9
-                      ${isActive ? "opacity-90 grayscale-0 scale-110" : "opacity-40 grayscale"}
-                      transition-all duration-500
-                      group-hover:opacity-90
-                      group-hover:grayscale-0
-                      group-hover:scale-110
-                    `}
-                  />
-                </div>
-              )})}
+                  if (closestIndex !== autoHoveredPartnerIndex) {
+                    setAutoHoveredPartnerIndex(closestIndex);
+                  }
+                }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 40,
+                    ease: "linear"
+                  }
+                }}
+              >
+                {/* Repeated list for seamless loop */}
+                {[...ALL_PARTNERS, ...ALL_PARTNERS].map((logo, idx) => {
+                  const isActive = hoveredPartner ? hoveredPartner === logo : ALL_PARTNERS[autoHoveredPartnerIndex] === logo;
+                  
+                  return (
+                    <div
+                      key={`${logo}-${idx}`}
+                      className="flex-shrink-0 group flex items-center justify-center"
+                      onMouseEnter={() => setHoveredPartner(logo)}
+                      onMouseLeave={() => setHoveredPartner(null)}
+                    >
+                      <img
+                        src={assetPath(`/logos/${logo}.svg`)}
+                        alt={logo}
+                        className={`
+                          h-9 lg:h-11
+                          ${isActive ? "opacity-100 grayscale-0 scale-110" : "opacity-40 grayscale"}
+                          transition-all duration-500
+                          group-hover:opacity-100
+                          group-hover:grayscale-0
+                          group-hover:scale-110
+                        `}
+                      />
+                    </div>
+                  );
+                })}
+              </motion.div>
             </div>
 
             {/* View Applications Button */}
