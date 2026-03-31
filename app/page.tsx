@@ -16,9 +16,10 @@ export default function Home() {
   const [autoHoveredPartnerIndex, setAutoHoveredPartnerIndex] = useState(0);
   const { isLoggedIn } = useAuth();
   const containerRef = useRef<HTMLDivElement>(null);
-  const PRIMARY_PARTNERS = ["nvidia", "intel", "apple", "google", "microsoft"];
-  const SECONDARY_PARTNERS = ["yaskawa", "siemens", "abb", "bosch"];
-  const ALL_PARTNERS = [...PRIMARY_PARTNERS, ...SECONDARY_PARTNERS];
+  const ALL_PARTNERS = [
+    "nvidia", "intel", "apple", "google", "microsoft", // Primary
+    "yaskawa", "siemens", "abb", "bosch"               // Secondary
+  ];
 
   const DEMO_IMAGES = [
     {
@@ -495,11 +496,11 @@ export default function Home() {
             <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mb-14" />
 
             {/* Partner Logo Roll */}
-            <div className="relative mt-20 w-full overflow-hidden py-10">
+            <div className="relative mt-10 w-full overflow-hidden py-10">
               {/* Fade masks for left/right edges */}
               <div className="absolute left-0 top-0 bottom-0 w-32 lg:w-48 bg-gradient-to-r from-[#f5f2ed] to-transparent z-10 pointer-events-none" />
               <div className="absolute right-0 top-0 bottom-0 w-32 lg:w-48 bg-gradient-to-l from-[#f5f2ed] to-transparent z-10 pointer-events-none" />
-              
+
               <motion.div
                 ref={containerRef}
                 className="flex whitespace-nowrap gap-16 lg:gap-24 items-center w-max"
@@ -508,11 +509,11 @@ export default function Home() {
                 }}
                 onUpdate={(latest) => {
                   if (typeof latest.x !== "string" || !containerRef.current) return;
-                  
+
                   const container = containerRef.current;
                   const rect = container.getBoundingClientRect();
                   const centerLine = window.innerWidth / 2;
-                  
+
                   const children = container.children;
                   let closestVal = Infinity;
                   let closestIndex = 0;
@@ -521,7 +522,7 @@ export default function Home() {
                     const childRect = children[i].getBoundingClientRect();
                     const childCenter = childRect.left + childRect.width / 2;
                     const distance = Math.abs(centerLine - childCenter);
-                    
+
                     if (distance < closestVal) {
                       closestVal = distance;
                       closestIndex = i % 9; // Modulo by total partners (9)
@@ -544,7 +545,7 @@ export default function Home() {
                 {/* Repeated list for seamless loop */}
                 {[...ALL_PARTNERS, ...ALL_PARTNERS].map((logo, idx) => {
                   const isActive = hoveredPartner ? hoveredPartner === logo : ALL_PARTNERS[autoHoveredPartnerIndex] === logo;
-                  
+
                   return (
                     <div
                       key={`${logo}-${idx}`}
