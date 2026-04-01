@@ -16,14 +16,7 @@ import {
   CheckCircle2,
   Clock
 } from "lucide-react";
-import { assetPath } from "@/lib/assets";
-
-const DATASETS = [
-  { id: 1, name: "Industrial-Defect-v2", images: 12403, classes: 4, status: "Ready", lastModified: "2h ago", preview: assetPath("/demo/manufacturing.png") },
-  { id: 2, name: "Safety-PPE-Monitor", images: 8521, classes: 6, status: "Annotating", lastModified: "15m ago", preview: assetPath("/demo/surveillance.png") },
-  { id: 3, name: "Smart-Retail-Traffic", images: 1590, classes: 2, status: "Ready", lastModified: "1d ago", preview: assetPath("/demo/transportation.png") },
-  { id: 4, name: "Medical-Imaging-Test", images: 420, classes: 8, status: "Draft", lastModified: "3d ago", preview: assetPath("/demo/robotics.png") },
-];
+import { MOCK_DATASETS } from "@/lib/mocks/datasets";
 
 export default function DatasetsPage() {
   return (
@@ -84,9 +77,8 @@ export default function DatasetsPage() {
           </div>
         </div>
 
-        {/* Dataset Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10">
-          {DATASETS.map((dataset, i) => (
+          {MOCK_DATASETS.map((dataset, i) => (
             <Link key={dataset.id} href={`/datasets/${dataset.id}`}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}

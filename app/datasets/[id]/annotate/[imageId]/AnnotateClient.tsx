@@ -17,6 +17,8 @@ import {
 import AnnotationEditor from '@/components/annotate/AnnotationEditor';
 import BlueprintGrid from '@/components/BlueprintGrid';
 
+import { MOCK_ANNOTATIONS, getMockImageUrl } from '@/lib/mocks/annotate';
+
 interface AnnotateClientProps {
   id: string;
   imageId: string;
@@ -25,8 +27,8 @@ interface AnnotateClientProps {
 export default function AnnotateClient({ id, imageId }: AnnotateClientProps) {
   const router = useRouter();
 
-  // Mock image URL based on ID for demo
-  const imageUrl = `https://picsum.photos/seed/${imageId}/1200/800`;
+  // Fetch from mock util (ready for actual backend later)
+  const imageUrl = getMockImageUrl(imageId);
 
   return (
     <div className="relative flex-1 flex flex-col h-screen bg-stone-950 overflow-hidden">
@@ -101,12 +103,7 @@ export default function AnnotateClient({ id, imageId }: AnnotateClientProps) {
            </div>
 
            <div className="space-y-3">
-              {[
-                { label: "Defect_Crack", color: "text-red-400" },
-                { label: "Defect_Puncture", color: "text-red-400" },
-                { label: "Surface_Scratch", color: "text-blue-400" },
-                { label: "Surface_Scratch", color: "text-blue-400" },
-              ].map((obj, i) => (
+              {MOCK_ANNOTATIONS.map((obj, i) => (
                 <div key={i} className="group p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all cursor-pointer">
                    <div className="flex items-center justify-between">
                      <div className="flex items-center gap-3">
