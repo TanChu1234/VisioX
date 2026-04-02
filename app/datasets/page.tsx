@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import BlueprintGrid from "@/components/BlueprintGrid";
@@ -16,9 +17,75 @@ import {
   CheckCircle2,
   Clock
 } from "lucide-react";
-import { MOCK_DATASETS } from "@/lib/mocks/datasets";
+import { Dataset, fetchDatasets } from "@/lib/api";
+import { assetPath } from "@/lib/assets";
+
+const DATASET_PREVIEW_FALLBACKS = [
+  assetPath("/demo/manufacturing.png"),
+  assetPath("/demo/surveillance.png"),
+  assetPath("/demo/transportation.png"),
+  assetPath("/demo/robotics.png"),
+  assetPath("/demo/agriculture.png"),
+];
+
+function formatRelativeTimestamp(value: string): string {
+  const when = new Date(value);
+  if (Number.isNaN(when.getTime())) return "recently";
+
+  const diffMs = Date.now() - when.getTime();
+  const minuteMs = 60 * 1000;
+  const hourMs = 60 * minuteMs;
+  const dayMs = 24 * hourMs;
+
+  if (diffMs < minuteMs) return "just now";
+  if (diffMs < hourMs) return `${Math.floor(diffMs / minuteMs)}m ago`;
+  if (diffMs < dayMs) return `${Math.floor(diffMs / hourMs)}h ago`;
+  return `${Math.floor(diffMs / dayMs)}d ago`;
+}
+
+function mapStatus(status: string): "Ready" | "Annotating" | "Draft" {
+  const normalized = status.toLowerCase();
+  if (normalized.includes("annotat") || normalized.includes("processing")) return "Annotating";
+  if (normalized.includes("draft") || normalized.includes("new")) return "Draft";
+  return "Ready";
+}
 
 export default function DatasetsPage() {
+  const [datasets, setDatasets] = useState<Dataset[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const load = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const rows = await fetchDatasets();
+        if (!mounted) return;
+        setDatasets(rows);
+      } catch (err) {
+        if (!mounted) return;
+        const message = err instanceof Error ? err.message : "Failed to load datasets.";
+        setError(message);
+        setDatasets([]);
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    void load();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const visibleDatasets = useMemo(() => datasets, [datasets]);
+
   return (
     <div className="relative flex-1 flex flex-col min-h-screen">
       <BlueprintGrid />
@@ -77,9 +144,41 @@ export default function DatasetsPage() {
           </div>
         </div>
 
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 text-amber-700 px-4 py-3 text-sm font-medium"
+          >
+            {error} Showing local fallback when available.
+          </motion.div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10">
-          {MOCK_DATASETS.map((dataset, i) => (
-            <Link key={dataset.id} href={`/datasets/${dataset.id}`}>
+          {loading &&
+            Array.from({ length: 4 }).map((_, i) => (
+              <motion.div
+                key={`skeleton-${i}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="bg-white rounded-3xl border border-stone-200 p-2 animate-pulse"
+              >
+                <div className="aspect-[4/3] rounded-2xl bg-stone-100 mb-4" />
+                <div className="px-4 pb-4 space-y-3">
+                  <div className="h-4 bg-stone-100 rounded-lg w-2/3" />
+                  <div className="h-3 bg-stone-100 rounded-lg w-1/2" />
+                  <div className="h-3 bg-stone-100 rounded-lg w-1/3" />
+                </div>
+              </motion.div>
+            ))}
+
+          {!loading && visibleDatasets.map((dataset, i) => {
+            const status = mapStatus(dataset.status);
+            const preview = dataset.previewUrl || DATASET_PREVIEW_FALLBACKS[i % DATASET_PREVIEW_FALLBACKS.length];
+
+            return (
+            <Link key={dataset.id} href={`/datasets/${encodeURIComponent(dataset.id)}`}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -90,7 +189,7 @@ export default function DatasetsPage() {
                 {/* Image Preview Container */}
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100 mb-4">
                   <img 
-                    src={dataset.preview} 
+                    src={preview} 
                     alt={dataset.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
@@ -107,8 +206,8 @@ export default function DatasetsPage() {
 
                   {/* Status Badge */}
                   <div className="absolute top-3 left-3 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-[9px] font-bold text-stone-900 shadow-sm flex items-center gap-1.5 border border-white/40">
-                     <div className={`w-1.5 h-1.5 rounded-full ${dataset.status === 'Ready' ? 'bg-green-500' : dataset.status === 'Annotating' ? 'bg-[#6735E0] animate-pulse' : 'bg-stone-300'}`} />
-                     {dataset.status}
+                     <div className={`w-1.5 h-1.5 rounded-full ${status === "Ready" ? "bg-green-500" : status === "Annotating" ? "bg-[#6735E0] animate-pulse" : "bg-stone-300"}`} />
+                     {status}
                   </div>
                 </div>
 
@@ -122,20 +221,20 @@ export default function DatasetsPage() {
                   <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-stone-400">
                      <div className="flex items-center gap-1.5">
                         <ImageIcon className="w-3 h-3" />
-                        <span className="text-stone-900">{dataset.images.toLocaleString()}</span>
+                        <span className="text-stone-900">{dataset.imageCount.toLocaleString()}</span>
                      </div>
                      <div className="flex items-center gap-1.5">
                         <Tag className="w-3 h-3" />
-                        <span className="text-stone-900">{dataset.classes} Classes</span>
+                        <span className="text-stone-900">{dataset.classCount} Classes</span>
                      </div>
                   </div>
 
                   <div className="mt-4 pt-4 border-t border-stone-50 flex justify-between items-center">
                      <div className="flex items-center gap-1.5">
                         <Clock className="w-3 h-3 text-stone-400" />
-                        <span className="text-[10px] font-medium text-stone-500">Modified {dataset.lastModified}</span>
+                        <span className="text-[10px] font-medium text-stone-500">Modified {formatRelativeTimestamp(dataset.updatedAt)}</span>
                      </div>
-                     {dataset.status === 'Ready' && <CheckCircle2 className="w-4 h-4 text-green-500" />}
+                     {status === "Ready" && <CheckCircle2 className="w-4 h-4 text-green-500" />}
                   </div>
                 </div>
 
@@ -143,7 +242,15 @@ export default function DatasetsPage() {
                 <div className="absolute inset-0 border-2 border-orange-500 rounded-3xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none" />
               </motion.div>
             </Link>
-          ))}
+          );
+          })}
+
+          {!loading && visibleDatasets.length === 0 && (
+            <div className="col-span-full rounded-3xl border border-dashed border-stone-300 bg-white/70 p-12 text-center">
+              <p className="text-stone-900 font-bold text-lg">No datasets found</p>
+              <p className="text-stone-500 text-sm mt-2">Create your first dataset from backend or upload a new one.</p>
+            </div>
+          )}
           
           {/* Create New Card */}
           <motion.div

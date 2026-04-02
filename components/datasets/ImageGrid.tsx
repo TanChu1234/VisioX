@@ -41,7 +41,11 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images, columns = 6 }) => {
             <div className="p-2 h-full w-full">
               <motion.div
                 key={image.id}
-                onClick={() => router.push(`/datasets/${datasetId}/annotate/${image.id}`)}
+                onClick={() =>
+                  router.push(
+                    `/datasets/${encodeURIComponent(datasetId)}/annotate/${encodeURIComponent(image.id)}`,
+                  )
+                }
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="h-full w-full bg-white rounded-2xl border border-stone-200 overflow-hidden group relative shadow-sm hover:shadow-xl hover:border-orange-500/30 transition-all duration-300 cursor-pointer"

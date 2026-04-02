@@ -61,14 +61,14 @@ export default function LoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-2">Email Address</label>
+              <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-2">Username</label>
               <input
-                type="email"
+                type="text"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
-                placeholder="you@company.com"
+                placeholder="your-username"
               />
             </div>
             <div>
@@ -100,7 +100,7 @@ export default function LoginPage() {
           </form>
 
           <p className="mt-8 text-center text-sm text-stone-500">
-             Don't have an account? <a href="#" className="text-stone-900 font-bold hover:underline">Request Access</a>
+             Don&apos;t have an account? <a href="#" className="text-stone-900 font-bold hover:underline">Request Access</a>
           </p>
         </div>
       </div>
@@ -121,7 +121,7 @@ export default function LoginPage() {
             </Badge>
             <h3 className="text-4xl font-bold text-white mb-6 leading-tight">Secure. Fast. Infinite Scale.</h3>
             <p className="text-stone-400 text-lg leading-relaxed mb-12 px-8">
-               VisioX's platform is designed to handle thousands of concurrent video streams with sub-millisecond latency.
+               VisioX&apos;s platform is designed to handle thousands of concurrent video streams with sub-millisecond latency.
             </p>
             
             <div className="grid grid-cols-2 gap-4 text-left px-8">

@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { 
   ArrowLeft, 
   Settings, 
@@ -27,11 +26,40 @@ interface DatasetDetailClientProps {
   id: string;
 }
 
+function formatVersionCreated(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+
+  const diff = Date.now() - date.getTime();
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+
+  if (diff < minute) return "just now";
+  if (diff < hour) return `${Math.floor(diff / minute)}m ago`;
+  if (diff < day) return `${Math.floor(diff / hour)}h ago`;
+  return `${Math.floor(diff / day)}d ago`;
+}
+
 export default function DatasetDetailClient({ id }: DatasetDetailClientProps) {
   const router = useRouter();
-  const { images, versions, addImages, generateVersion } = useDataset(id);
+  const { dataset, images, versions, loading, error, generateVersion } = useDataset(id);
   const [isSlideoverOpen, setSlideoverOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'images' | 'versions'>('images');
+
+  const classDistribution =
+    dataset?.classDistribution && dataset.classDistribution.length > 0
+      ? dataset.classDistribution
+      : [
+          { name: "Crack", count: 4201, color: "#f87171" },
+          { name: "Scratch", count: 2190, color: "#60a5fa" },
+          { name: "Puncture", count: 1205, color: "#34d399" },
+          { name: "Dent", count: 890, color: "#fbbf24" },
+          { name: "Stain", count: 420, color: "#a78bfa" },
+        ];
+
+  const classMaxCount = Math.max(...classDistribution.map((item) => item.count), 1);
+  const annotatedPercent = dataset?.annotatedPercent || versions[0]?.annotations || 0;
 
   return (
     <div className="relative flex-1 flex flex-col min-h-screen bg-stone-50">
@@ -48,7 +76,7 @@ export default function DatasetDetailClient({ id }: DatasetDetailClientProps) {
           </button>
           <div className="h-6 w-[1px] bg-stone-200" />
           <div>
-            <h1 className="text-lg font-bold text-stone-900 leading-none">Industrial-Defect-v2</h1>
+            <h1 className="text-lg font-bold text-stone-900 leading-none">{dataset?.name || "Dataset Workspace"}</h1>
             <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mt-1">Dataset ID: {id}</p>
           </div>
         </div>
@@ -84,6 +112,12 @@ export default function DatasetDetailClient({ id }: DatasetDetailClientProps) {
       </nav>
 
       <main className="flex-grow flex p-6 gap-6 z-10 overflow-hidden">
+        {error && (
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-40 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-2 text-xs font-semibold text-amber-700">
+            {error}
+          </div>
+        )}
+
         {/* Left Sidebar - Stats & Info */}
         <aside className="w-80 flex flex-col gap-6 shrink-0">
           <section className="bg-white rounded-3xl border border-stone-200 p-6 shadow-sm">
@@ -93,27 +127,27 @@ export default function DatasetDetailClient({ id }: DatasetDetailClientProps) {
                 </div>
                 <div>
                    <p className="text-xs font-bold text-stone-400 uppercase tracking-tighter">Inventory</p>
-                   <p className="text-xl font-black text-stone-900">{images.length.toLocaleString()}</p>
+                   <p className="text-xl font-black text-stone-900">{loading ? "..." : images.length.toLocaleString()}</p>
                 </div>
              </div>
 
              <div className="space-y-4">
                 <div className="flex justify-between items-center text-xs">
                    <span className="text-stone-500 font-medium">Annotated</span>
-                   <span className="text-stone-900 font-bold">84%</span>
+                   <span className="text-stone-900 font-bold">{annotatedPercent}%</span>
                 </div>
                 <div className="w-full h-2 bg-stone-100 rounded-full overflow-hidden">
-                   <div className="w-[84%] h-full bg-orange-500" />
+                   <div className="h-full bg-orange-500" style={{ width: `${Math.min(100, annotatedPercent)}%` }} />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-3 pt-2">
                    <div className="p-3 bg-stone-50 rounded-2xl border border-stone-100">
                       <p className="text-[9px] font-bold text-stone-400 uppercase">Classes</p>
-                      <p className="text-lg font-bold text-stone-900">12</p>
+                      <p className="text-lg font-bold text-stone-900">{dataset?.classCount ?? classDistribution.length}</p>
                    </div>
                    <div className="p-3 bg-stone-50 rounded-2xl border border-stone-100">
                       <p className="text-[9px] font-bold text-stone-400 uppercase">Health</p>
-                      <p className="text-lg font-bold text-green-600">9.2</p>
+                      <p className="text-lg font-bold text-green-600">{dataset?.healthScore?.toFixed(1) ?? "9.2"}</p>
                    </div>
                 </div>
              </div>
@@ -125,20 +159,14 @@ export default function DatasetDetailClient({ id }: DatasetDetailClientProps) {
                 <Zap className="w-3.5 h-3.5 text-stone-300" />
              </div>
              <div className="space-y-3 flex-grow overflow-y-auto pr-2">
-                {[
-                  { name: "Crack", count: 4201, color: "bg-red-400" },
-                  { name: "Scratch", count: 2190, color: "bg-blue-400" },
-                  { name: "Puncture", count: 1205, color: "bg-emerald-400" },
-                  { name: "Dent", count: 890, color: "bg-amber-400" },
-                  { name: "Stain", count: 420, color: "bg-purple-400" },
-                ].map((cls) => (
+                {classDistribution.map((cls) => (
                   <div key={cls.name} className="flex flex-col gap-1.5">
                     <div className="flex justify-between text-[10px] font-bold">
                        <span className="text-stone-600">{cls.name}</span>
                        <span className="text-stone-400">{cls.count}</span>
                     </div>
                     <div className="w-full h-1.5 bg-stone-100 rounded-full overflow-hidden">
-                       <div className={`${cls.color} h-full`} style={{ width: `${(cls.count / 8000) * 100}%` }} />
+                       <div className="h-full" style={{ width: `${(cls.count / classMaxCount) * 100}%`, backgroundColor: cls.color }} />
                     </div>
                   </div>
                 ))}
@@ -184,19 +212,21 @@ export default function DatasetDetailClient({ id }: DatasetDetailClientProps) {
                 </div>
                 
                 <div className="space-y-4">
-                  {versions.map((version, i) => (
+                  {versions.map((version) => {
+                    const versionReady = version.status.toLowerCase() === "ready";
+                    return (
                     <div key={version.id} className="relative group">
                        <div className="absolute left-6 top-0 bottom-0 w-[2px] bg-stone-100 group-last:hidden" />
                        <div className="flex items-start gap-6 relative">
-                         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border-[3px] border-white shadow-sm z-10 ${version.status === 'Ready' ? 'bg-emerald-100 text-emerald-600' : 'bg-orange-100 text-orange-600 animate-pulse'}`}>
-                            {version.status === 'Ready' ? <CheckCircle2 className="w-5 h-5" /> : <Zap className="w-5 h-5 fill-current" />}
+                         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border-[3px] border-white shadow-sm z-10 ${versionReady ? 'bg-emerald-100 text-emerald-600' : 'bg-orange-100 text-orange-600 animate-pulse'}`}>
+                            {versionReady ? <CheckCircle2 className="w-5 h-5" /> : <Zap className="w-5 h-5 fill-current" />}
                          </div>
                          
                          <div className="flex-grow bg-stone-50 border border-stone-100 rounded-3xl p-6 group-hover:border-stone-300 transition-colors mb-6">
                             <div className="flex justify-between items-start mb-4">
-                               <div>
+                                <div>
                                   <h3 className="font-bold text-stone-900 text-lg">{version.name}</h3>
-                                  <p className="text-xs text-stone-500 font-medium">Created {version.created}</p>
+                                  <p className="text-xs text-stone-500 font-medium">Created {formatVersionCreated(version.created)}</p>
                                </div>
                                <button className="p-2 hover:bg-white rounded-xl transition-colors">
                                   <MoreVertical className="w-5 h-5 text-stone-400" />
@@ -220,16 +250,19 @@ export default function DatasetDetailClient({ id }: DatasetDetailClientProps) {
                                <div className="bg-white p-4 rounded-2xl border border-stone-100 shadow-sm col-span-2">
                                   <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Export Formats</p>
                                   <div className="flex gap-2 mt-2">
-                                     <span className="px-2 py-1 bg-stone-100 text-stone-600 rounded text-[10px] font-bold border border-stone-200">YOLOv8</span>
-                                     <span className="px-2 py-1 bg-stone-100 text-stone-600 rounded text-[10px] font-bold border border-stone-200">COCO</span>
-                                     <span className="px-2 py-1 bg-stone-100 text-stone-600 rounded text-[10px] font-bold border border-stone-200">Pascal VOC</span>
+                                     {version.exportFormats.map((format) => (
+                                       <span key={`${version.id}-${format}`} className="px-2 py-1 bg-stone-100 text-stone-600 rounded text-[10px] font-bold border border-stone-200">
+                                         {format}
+                                       </span>
+                                     ))}
                                   </div>
                                </div>
                             </div>
                          </div>
                        </div>
                     </div>
-                  ))}
+                  );
+                  })}
                 </div>
               </div>
             )}

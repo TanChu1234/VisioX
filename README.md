@@ -71,3 +71,25 @@ VisioX adheres to a **Premium Design System** characterized by:
 
 ---
 Built with ❤️ by the VisioX Team.
+
+## Backend API Setup
+
+VisioX UI reads backend endpoints from:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+Put this in `.env.local` (without committing secrets). The frontend currently maps to these Visiox backend routes:
+
+- `POST /api/auth/login/`
+- `POST /api/auth/logout/` (with `refresh_token`)
+- `GET /api/datasets/`
+- `GET /api/datasets/:datasetId/`
+- `GET /api/datasets/:datasetId/media/`
+- `POST /api/datasets/:datasetId/new_version/`
+- `GET /api/classes/?project=:projectId`
+- `POST /api/classes/`
+- `GET /api/annotations/?media=:mediaId`
+- `DELETE /api/annotations/bulk-delete/`
+- `POST /api/annotations/bulk/`

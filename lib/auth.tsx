@@ -1,7 +1,14 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import {
+  clearAuthSession,
+  hasPersistedSession,
+  loginWithPassword,
+  logoutFromApi,
+  persistAuthSession,
+} from "@/lib/api";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -12,30 +19,29 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => hasPersistedSession());
   const router = useRouter();
 
-  useEffect(() => {
-    // Check local storage for existing session
-    const auth = localStorage.getItem("visiox_auth");
-    if (auth === "true") {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
   const login = async (email: string, password: string) => {
-    // Simulated login - in a real app, this would be a fetch to /api/auth/login
-    if (email && password.length >= 6) {
-      localStorage.setItem("visiox_auth", "true");
+    if (!email || password.length < 6) {
+      return { ok: false, error: "Invalid credentials. Use a valid username and 6+ character password." };
+    }
+
+    try {
+      const session = await loginWithPassword(email, password);
+      persistAuthSession(session);
       setIsLoggedIn(true);
       return { ok: true };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to sign in.";
+      return { ok: false, error: message };
     }
-    return { ok: false, error: "Invalid credentials. Use any email + 6+ char password." };
   };
 
   const logout = () => {
-    localStorage.removeItem("visiox_auth");
+    clearAuthSession();
     setIsLoggedIn(false);
+    void logoutFromApi();
     router.push("/");
   };
 
